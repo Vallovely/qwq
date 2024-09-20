@@ -1,0 +1,20 @@
+var x0 = npc.getX(), y0 = npc.getY() + 1, z0 = npc.getZ(), r = 0.2;
+//r控制初始距离，即第一个粒子（最下面的）距离NPC的水平距离
+//其他的不要动
+var type = 3;
+//type控制外观，个人测试20内的质数比较好，但是设置个一两百貌似也没问题
+for (var times = 0; times < 1800; times++)//times的最大值控制粒子数量
+{
+	r += 0.004 * (900 - times) / 240;
+	/*
+	0.004控制球体半径膨胀速率
+	900是times最大值的一半，你也可以研究不是一半时发生什么
+	240和0.004配合使用，否则小数点后0太多
+	*/
+	y0 += 0.009;
+	//0.009控制球体总高度
+	var hudu = ( type * Math.Pi / 360 * 353 * times )%360; // 360不能改，353用于控制外观（和type类似）
+	var x1 = x0 + Math.sin(hudu) * r;//这行不要动
+	var z1 = z0 - Math.cos(hudu) * r;//这行不要动
+	world.spawnParticle("flame", x1, y0, z1, 0, 0, 0, 0, 2);//这行除了引号内的flame不要动
+}

@@ -1,0 +1,1391 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 2.0f,
+        "Explosion": 2.0f,
+        "Knockback": 2.0f,
+        "Melee": 2.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 1,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "//更新钩子
+var p = world.getAllServerPlayers()
+for(a in p){
+	var player = p[a]
+	var leijie = player.getTempData(\"leijie\")
+	var sl = world.getScoreboard().getPlayerScore(player.getName(),\"Soul_Level\",\"dummy\")
+	var ljdamage = shanghai(sl)
+	if(leijie > 0){
+		world.thunderStrike(player.x,player.y,player.z)
+		damage(player,\"player\",ljdamage,\"DamageCreative\",npc)
+		leijie -= 1
+		player.setTempData(\"leijie\",leijie)
+		if(leijie == 1){
+			if (player.getHealth() > 0){
+				var sll = sl+1
+player.setTempData(\"leijie\",-1)
+				message(\"§4§l[公告]§r§l恭喜魂师§a§l\"+player.getName()+\"§r§l成功吸收三级神祇之心，踏入了\"+sll+\"级。\")
+				player.setPosition(npc.x+2,npc.y,npc.z)
+				npc.executeCommand(\"scoreboard players add \"+player.getName()+\" Soul_Level 1\")
+				var health = healths(sl)
+				var damage = health*2
+				npc.executeCommand(\"scoreboard players add \"+player.getName()+\" attackDamage1 \"+damage)
+				npc.executeCommand(\"scoreboard players add \"+player.getName()+\" maxHealth1 \"+health)
+			}else{
+				message(\"§4§l[公告]§r§l恭喜魂师§a§l\"+player.getName()+\"§r§l吸收三级神祇之心失败，爆体而亡。\")
+			}
+		}
+	}
+}
+function damage(target,type,amount,data,form){
+Array.prototype.equals = function (obj) {
+for(x in this){
+if(obj==this[x]){
+return true;
+ }
+}
+return false;
+}
+var DamageSource=(form!=null)? Java.type(\"net.minecraft.util.EntityDamageSource\"):Java.type(\"net.minecraft.util.DamageSource\")
+damageSource=(form!=null)? new DamageSource(\"\"+type,form.getMCEntity()):new DamageSource(\"\"+type)
+if(data!=null){
+if(data.equals(\"DamageCreative\")){damageSource.func_76359_i()}//伤害创造(让伤害可以伤害创造玩家)
+if(data.equals(\"BypassesArmor\")){damageSource.func_76348_h()}//破甲(无视护甲的伤害)
+if(data.equals(\"DamageAbsolute\")){damageSource.func_151518_m()}//真伤(绝对的伤害)
+if(data.equals(\"DifficultyScaled\")){damageSource.func_76351_m()}//难度影响(受游戏难度影响(简单 普通 困难))
+if(data.equals(\"Explosion\")){damageSource.func_94540_d()}//爆炸伤害
+if(data.equals(\"Fire\")){damageSource.func_76361_j()}//火焰伤害
+if(data.equals(\"Magic\")){damageSource.func_82726_p()}//魔法伤害
+if(data.equals(\"Projectile\")){damageSource.func_76349_b()}//抛射物
+//注:魔法伤害不自带破甲 请使用预设MAGIC或您自己添加属性(这些不是预设 而是独立的属性)
+}
+target.getMCEntity().func_70097_a(damageSource,amount)
+//伤害某实体
+/*
+*ScriptEntity target:目标实体
+*String type:伤害类型
+*int amount:伤害值
+*String[] data:属性
+*ScriptEntity form:攻击者
+*/
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}
+function healths(level){
+	if(level == 111){
+	     ddd = 20000
+	}
+	if(level == 112){
+		ddd = 35000
+	}
+	if(level == 113){
+		ddd = 40000
+	}
+	if(level == 114){
+		ddd = 45000
+	}
+	if(level == 115){
+		ddd = 50000
+	}
+	if(level == 116){
+		ddd = 60000
+	}
+	if(level == 117){
+		ddd = 65000
+	}
+	if(level == 118){
+		ddd = 75000
+	}
+	if(level == 119){
+		ddd = 100000
+	}
+	return ddd;
+}
+function shanghai(level){
+	    if(level == 111){
+		var Max = 1500000
+        var Min = 500000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 112){
+		var Max = 1800000
+        var Min = 800000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 113){
+		var Max = 1900000
+        var Min = 900000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 114){
+		var Max = 2000000
+        var Min = 1000000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 115){
+		var Max = 2300000
+        var Min = 1300000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 116){
+		var Max = 2500000
+        var Min = 1500000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 117){
+		var Max = 2800000
+        var Min = 1800000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 118){
+		var Max = 4000000
+        var Min = 2000000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+		if(level == 119){
+		var Max = 5000000
+        var Min = 2500000
+        var i = Math.floor(Math.random() * (Max - Min) + Min)
+	}
+    return i;
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "//对话钩子
+var sl = world.getScoreboard().getPlayerScore(player.getName(),\"Soul_Level\",\"dummy\")
+var sl1 = 111
+var sl2 = 119
+//可以通过雷劫升级的等级
+if(sl >= sl1 && sl <= sl2){
+	sll = sl-110
+	var lj = 10+sll
+	//雷劫次数
+	var held = player.getHeldItem()
+	if(held !== null){
+		var name = held.getDisplayName()
+		if(name == \"§a§l三级§e§l神祇§c§l之心\"){
+			if(player.getTempData(\"leijie\") <= 0){
+            player.setTempData(\"leijie\",lj)
+            var size = held.getStackSize()
+            message(\"&4&l[公告]&r&l魂师\"+player.getName()+\"开始了渡劫，他要承受\"+lj+\"道雷劫，让我们拭目以待吧\")
+            player.setPosition(1183,186,583)
+            if(size > 1){
+            	held.setStackSize(size-1)
+            }else{
+            	player.setHeldItem(null)
+            }
+        }else{
+        	player.sendMessage(\"&c&l你当前正在渡劫\")
+        }
+		}else{
+			player.sendMessage(\"&c&l你手中的不是§a§l三级§e§l神祇§c§l之心\")
+		}
+	}else{
+		player.sendMessage(\"&c&l你手中的不是§a§l三级§e§l神祇§c§l之心\")
+	}
+}else{
+	player.sendMessage(\"&c&l你并不是三级神\")
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "TraderSold": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[符文]",
+                            "§4§l攻击伤害: +150000",
+                            "§a§l最大生命: +300000",
+                            "§6§l伤害加成: +2%",
+                            "§2§l生命加成: +4%",
+                            "§9§l每秒回血: +2500",
+                            "§1§l伤害吸收: +10000"
+                        ],
+                        "Name": "§c§l半神之体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "customnpcs:npcAirElement",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a可用于在神界突破三级神祇111-119魂力等级",
+                            "§6蕴含着三级神祇之力"
+                        ],
+                        "Name": "§a§l三级§e§l神祇§c§l之心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 2b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§c§l三级§d§l神祇§6§l之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a右键神界的符文师即可开启"
+                        ],
+                        "Name": "§r§l神灵符文"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 5b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§r§l可借助此能源突破斗铠品质为§c§l三级§d§l神祇§6§l§6§l之体"
+                        ],
+                        "Name": "§c§l三级§d§l神祇§6§l能源"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 1927077352
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 0b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +423456",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +956789",
+                            "§7§l生命加成: +12%",
+                            "§7§l吸血概率: +5%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +10000",
+                            "§3§l等级限制: +120"
+                        ],
+                        "Name": "§a§l<三§c§l级§e§l神>§r§l-§5§l[和平]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§d§l伪神之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 8b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§9§l二级§3§l神祇§6§l之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 1927077352
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 0b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +823456",
+                            "§7§l伤害加成: +10%",
+                            "§7§l最大生命: +212345",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +5%",
+                            "§7§l每秒回血: +6000",
+                            "§3§l等级限制: +120"
+                        ],
+                        "Name": "§a§l<三§c§l级§e§l神>§r§l-§5§l[破灭]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§r§l可借助此能源突破斗铠品质为§d§l伪神之体"
+                        ],
+                        "Name": "§d§l伪神能源"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 11b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§r§l可借助此能源突破斗铠品质为§9§l二级§3§l神祇§6§l§6§l之体"
+                        ],
+                        "Name": "§9§l二级§3§l神祇§6§l能源"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 12b,
+                "id": "customnpcs:npcCoinGold",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b一个便可抵贫困人民一年开销"
+                        ],
+                        "Name": "§e§l金魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§6§l真神之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 14b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": -2019532601
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 0b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +1200000",
+                            "§7§l伤害加成: +12%",
+                            "§7§l最大生命: +400000",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +6%",
+                            "§7§l每秒回血: +8000",
+                            "§3§l等级限制: +130"
+                        ],
+                        "Name": "§9§l<二§3§l级§6§l神>§r§l-§7§l[罗刹]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 15b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[符文]",
+                            "§4§l攻击伤害: +150000",
+                            "§a§l最大生命: +300000",
+                            "§6§l伤害加成: +2%",
+                            "§2§l生命加成: +4%",
+                            "§9§l每秒回血: +2500",
+                            "§1§l伤害吸收: +10000"
+                        ],
+                        "Name": "§c§l半神之体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 16b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§r§l可借助此能源突破斗铠品质为§6§l真神之体"
+                        ],
+                        "Name": "§6§l真神能源"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 17b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": -2019532601
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 0b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +666666",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +1500000",
+                            "§7§l生命加成: +15%",
+                            "§7§l吸血概率: +6%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +15000",
+                            "§3§l等级限制: +130"
+                        ],
+                        "Name": "§9§l<二§3§l级§6§l神>§r§l-§7§l[蝶神]"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "TraderIgnoreDamage": 0b,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/entity/432/walking dead/ersefsr.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 20000,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 1b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 6470911634515818930L,
+    "TraderMarket": "",
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "TraderCurrency": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:gunpowder",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍:§a由深渊之灵掉落"
+                        ],
+                        "Name": "§7§l深渊芯片"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "minecraft:nether_star",
+                "Count": 8b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a用于兑换三级神祇之心"
+                        ],
+                        "Name": "§a§l三级神祇之力"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 2b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "customnpcs:npcCoinGold",
+                "Count": 127b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b一个便可抵贫困人民一年开销"
+                        ],
+                        "Name": "§e§l金魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 5b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§c§l三级§d§l神祇§6§l之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "customnpcs:npcAirElement",
+                "Count": 5b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a可用于在神界突破三级神祇111-119魂力等级",
+                            "§6蕴含着三级神祇之力"
+                        ],
+                        "Name": "§a§l三级§e§l神祇§c§l之心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 8b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "customnpcs:npcAirElement",
+                "Count": 5b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a可用于在神界突破三级神祇111-119魂力等级",
+                            "§6蕴含着三级神祇之力"
+                        ],
+                        "Name": "§a§l三级§e§l神祇§c§l之心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§d§l伪神之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 11b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§9§l二级§3§l神祇§6§l之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 12b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 14b,
+                "id": "customnpcs:npcFireSpell",
+                "Count": 32b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l二级神祇能量晶体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 15b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[符文]",
+                            "§4§l攻击伤害: +150000",
+                            "§a§l最大生命: +300000",
+                            "§6§l伤害加成: +2%",
+                            "§2§l生命加成: +4%",
+                            "§9§l每秒回血: +2500",
+                            "§1§l吸收伤害: +10000"
+                        ],
+                        "Name": "§c§l半神之体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 16b,
+                "id": "minecraft:emerald",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§6§l真神之躯"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 17b,
+                "id": "customnpcs:npcFireSpell",
+                "Count": 32b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l二级神祇能量晶体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 18b,
+                "id": "minecraft:gunpowder",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍:§a由深渊之灵掉落"
+                        ],
+                        "Name": "§7§l深渊芯片"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 19b,
+                "id": "minecraft:nether_star",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a用于兑换三级神祇之心"
+                        ],
+                        "Name": "§a§l三级神祇之晶"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 20b,
+                "id": "customnpcs:npcAirElement",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c物品介绍：§a可用于在神界突破三级神祇111-119魂力等级",
+                            "§6蕴含着三级神祇之力"
+                        ],
+                        "Name": "§a§l三级§e§l神祇§c§l之心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 21b,
+                "id": "customnpcs:npcCoinGold",
+                "Count": 127b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b一个便可抵贫困人民一年开销"
+                        ],
+                        "Name": "§e§l金魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 22b,
+                "id": "customnpcs:npcNecklace",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c使用方法：§a用于合成并打开斗铠的神灵之体"
+                        ],
+                        "Name": "§a§l元素之灵"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 23b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 24b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 25b,
+                "id": "minecraft:flint",
+                "Count": 2b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c有股很强大的精神力？"
+                        ],
+                        "Name": "§7§l深渊之力"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 26b,
+                "id": "customnpcs:npcFireSpell",
+                "Count": 5b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l二级神祇能量晶体"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 27b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 28b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 29b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 2b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 31b,
+                "id": "customnpcs:npcEarthElement",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l用于提升魂环年限"
+                        ],
+                        "Name": "§7§l万年升灵完整精魄"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 32b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 5b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 34b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 35b,
+                "id": "customnpcs:npcCoinDiamond",
+                "Count": 5b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§5§l神界所需物品"
+                        ],
+                        "Name": "§e§l神§c§l魂§b§l币"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "三级神祇-雷劫",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 100000,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 2671012,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "TraderIgnoreNBT": 0b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 1,
+    "DropChance": [
+        {
+            "Integer": 100,
+            "Slot": 0
+        },
+        {
+            "Integer": 100,
+            "Slot": 1
+        },
+        {
+            "Integer": 100,
+            "Slot": 2
+        },
+        {
+            "Integer": 100,
+            "Slot": 3
+        },
+        {
+            "Integer": 100,
+            "Slot": 4
+        },
+        {
+            "Integer": 100,
+            "Slot": 5
+        },
+        {
+            "Integer": 100,
+            "Slot": 6
+        },
+        {
+            "Integer": 100,
+            "Slot": 7
+        },
+        {
+            "Integer": 100,
+            "Slot": 8
+        }
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 148502699742868117L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "手持三级神祇之心右键我",
+    "TotalTicksAlive": 2642201L,
+    "Rotation": [
+        -165.74982f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

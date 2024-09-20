@@ -1,0 +1,33 @@
+{
+    "ItemGiverChained": [
+    ],
+    "TransportData": [
+    ],
+    "FactionData": [
+        {
+            "Points": 2000,
+            "Faction": 0
+        },
+        {
+            "Points": 1000,
+            "Faction": 1
+        }
+    ],
+    "BankData": [
+    ],
+    "ItemGiversList": [
+    ],
+    "MailData": [
+    ],
+    "PlayerName": "PreGoldenuard",
+    "QuestData": {
+        "CompletedQuests": [
+        ],
+        "ActiveQuests": [
+        ]
+    },
+    "UUID": "5797b020-528d-c69d-22af-7a33ef712d9e",
+    "PlayerCompanionId": 0,
+    "DialogData": [
+    ]
+}

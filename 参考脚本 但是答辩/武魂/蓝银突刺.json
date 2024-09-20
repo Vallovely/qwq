@@ -1,0 +1,391 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 1,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "var player = world.getAllServerPlayers()
+for(a in player){
+var held = player[a].getHeldItem()
+if(held !== null){
+var name = held.getDisplayName()
+if(getLore(held,0)==\"§c§l持有者:fei_xiang2\" && player[a].isSneaking()==true){
+player[a].sendMessage(\"&b&l蓝银突刺!\")
+npc.executeCommand(\"/playsound ambient.weather.thunder \"+player[a].getName()+\" \"+player[a].x+\" \"+player[a].y+\" \"+player[a].z+\" 3 1 1\")
+var npcs = player[a].getSurroundingEntities(6,2)
+for(a in npcs){
+var fei = world.getPlayer(\"fei_xiang2\")
+damage(npcs[a],\"player\",500000,\"BypasserArmor\",fei)
+}
+}
+}
+}
+function damage(target, type, amount, data, form) {
+  Array.prototype.equals = function (obj) {
+    for (var x in this) {
+      if (obj == this[x]) {
+        return true;
+      }
+    }
+    return false;
+  }
+  var DamageSource = (form != null) ? Java.type(\"net.minecraft.util.EntityDamageSource\") : Java.type(\"net.minecraft.util.DamageSource\");
+  var damageSource = (form != null) ? new DamageSource(\"\" + type, form.getMCEntity()) : new DamageSource(\"\" + type);
+  if (data != null) {
+    if (data.equals(\"DamageCreative\")) {
+      damageSource.func_76359_i();
+    }
+    //伤害创造(让伤害可以伤害创造玩家)
+    if (data.equals(\"BypassesArmor\")) {
+      damageSource.func_76348_h();
+    }
+    //破甲(无视护甲的伤害)
+    if (data.equals(\"DamageAbsolute\")) {
+      damageSource.func_151518_m();
+    }
+    //真伤(绝对的伤害)
+    if (data.equals(\"DifficultyScaled\")) {
+      damageSource.func_76351_m();
+    }
+    //难度影响(受游戏难度影响(简单 普通 困难))
+    if (data.equals(\"Explosion\")) {
+      damageSource.func_94540_d();
+    }
+    //爆炸伤害
+    if (data.equals(\"Fire\")) {
+      damageSource.func_76361_j();
+    }
+    //火焰伤害
+    if (data.equals(\"Magic\")) {
+      damageSource.func_82726_p()
+    }
+    //魔法伤害
+    if (data.equals(\"Projectile\")) {
+      damageSource.func_76349_b()
+    }
+    //抛射物
+    //注:魔法伤害不自带破甲 请使用预设MAGIC或您自己添加属性(这些不是预设 而是独立的属性)
+  }
+  target.getMCEntity().func_70097_a(damageSource, amount)
+  //伤害某实体
+  /*
+  *ScriptEntity target:目标实体
+  *String type:伤害类型
+  *int amount:伤害值
+  *String[] data:属性
+  *ScriptEntity form:攻击者
+  */
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -6675402061121828286L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "蓝银突刺",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 39898000,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 1812619131619547201L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 39897787L,
+    "Rotation": [
+        16.017746f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

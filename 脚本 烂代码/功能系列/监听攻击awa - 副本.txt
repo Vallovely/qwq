@@ -1,0 +1,156 @@
+function Listener(eventType,listener,bus){
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ this.eventType=eventType;
+ this.listener=listener;
+ this.bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ this.getEventType=function(){
+  return this.eventType;
+ }
+ this.getListener=function(){
+  return this.listener;
+ }
+ this.getBus=function(){
+  return this.bus;
+ }
+}
+/**
+*EventListener listenEvent(String eventType,String priority,function listener)
+*-eventType:你要监听的事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-priority:你的事件优先级 从低到高LOWEST LOW NORMAL HIGH HIGHEST
+*-listener:事件方法
+*Return:
+*-EventListener:事件监听者
+*监听事件并返回监听对象
+*bus: event.entityPlayer在这个事件就是玩家
+**/
+function listenEvent(eventType,priority,listener,bus){
+ var Event=Java.type(eventType);
+    try{
+     var IEventListener=Java.type("net.minecraftforge.fml.common.eventhandler.IEventListener");
+     var EventPriority=Java.type("net.minecraftforge.fml.common.eventhandler.EventPriority");
+    }catch(err){
+     var IEventListener=Java.type("cpw.mods.fml.common.eventhandler.IEventListener");
+     var EventPriority=Java.type("cpw.mods.fml.common.eventhandler.EventPriority");
+    }
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ var event=new Event();
+    if(priority=="LOW"){
+     priority=EventPriority.LOW;
+    }
+    if(priority=="HIGH"){
+     priority=EventPriority.HIGH;
+    }
+    if(priority=="NORMAL"){
+     priority=EventPriority.NORMAL;
+    }
+    if(priority=="LOWEST"){dddd
+     priority=EventPriority.LOWEST;
+    }
+    if(priority=="HIGHEST"){
+     priority=EventPriority.HIGHEST;
+    }
+ var EventListener=Java.extend(IEventListener,{
+  invoke:listener
+ });
+ listener=new EventListener();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField("busID");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().register(busID,priority,listener);
+ return new Listener(eventType,listener,bus);
+}
+/**
+*void unListenEvent(IEventListener listener)
+*-listener:事件方法
+*取消监听事件
+**/
+function unListenEvent(eventType,listener,bus){
+ var Event=Java.type(eventType);
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ var event=new Event();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField("busID");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().unregister(busID,listener);
+}
+/**
+*@Author Hueihuea
+*著作权属于Hueihuea 2019/6/16起生效
+**/
+
+listenEvent("net.minecraftforge.event.entity.living.LivingHurtEvent","HIGH",function(event){
+try{
+	var EntityPlayerMP=Java.type("net.minecraft.entity.player.EntityPlayerMP")
+	var Entity=Java.type("net.minecraft.entity.Entity");
+	var EntityDamageSource=Java.type("net.minecraft.util.EntityDamageSource")
+	var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer")
+	var ScriptEntity=Java.type("noppes.npcs.scripted.ScriptEntity")
+	if(!(event.source instanceof EntityDamageSource)){
+		return;
+	}
+	if(!(event.source.func_76346_g() instanceof EntityPlayerMP)){
+		return;
+	}
+	 /**除错部分**/	 
+     var target=new ScriptPlayer(event.source.func_76346_g())
+	 /*发起攻击玩家*/
+     var entity=new ScriptEntity(event.entityLiving)
+	 /*被攻击实体*/
+	 var base=event.ammount
+	 /*伤害量event.ammount*/
+	 /**声明对象部分**/	 
+     /**以下自由代码区域**/
+	 var myDate = new Date();
+	 var time="§d[§d"+myDate.getHours()+"§d:§d"+myDate.getMinutes()+"§d:§d"+myDate.getSeconds()+"§d]"
+	 /*获取当前时分秒*/
+	 /**使用区域**/
+	 /**使用方法:输入 event.ammount*=ring(物品所在位,"物品名称",类型[1为吸血,2为暴击],概率[1=1%],倍率[1=100%],base,target)
+	 /**以上自由代码区域**/	 
+	 }catch(err){
+	 npc.say("§b§l[可耐的GXW_AS]:§r啊这出bug了§c"+err)
+	 }
+	 /**报错部分**/	 
+});
+var apl=world.getAllServerPlayers()
+for(i in apl){
+apl[i].sendMessage("§b§l[可耐的GXW_AS]§r叮咚!饰品脚本注册成功!哦吼吼!")
+}
+function ring(item1,suitable,type,random,rate,old,entity){
+	if(item1!==null){
+		 if(item1.getDisplayName()==suitable){
+			 if(type==1){
+				 addHealth(random,rate,old,entity)
+				 return 1
+			 }
+			 if(type==2){
+				 return addDamage(random,rate,old,entity)
+			 }
+		 }else{return 1}
+	 }
+}
+function addHealth(a,b,d,c){
+	 var num=Math.floor(Math.random()*100)
+		 if(num<=a){						 
+		     if((c.getHealth()+(d*1))<=c.getMaxHealth()){			 
+			     c.setHealth(c.getHealth()+(d*1))
+			 }else{c.setHealth(c.getMaxHealth())}
+			 c.sendMessage("§c吸血!")
+		 }
+}
+function addDamage(a,b,d,c){
+	 var num=Math.floor(Math.random()*100)
+		 if(num<=a){
+			 c.sendMessage("§6暴击!")
+			 return (1+b)
+		 }else{return 1}
+}
+/**
+*@Author GXW_SA[爱谷]
+*著作权属于GXW_SA[爱谷] 2021/4/4起生效
+**/
+	
+
+
+

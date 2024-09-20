@@ -1,0 +1,119 @@
+//对话钩子,早期脚本,简单易懂
+if(player.getInventory()[0]!=null)
+{
+if(getLore(player.getInventory()[0],0)=="§c§l持有者:"+player.getName()+"")
+{
+setItemLore(player.getInventory()[0],5,"§7§l攻击伤害: +"+score(player,"attackDamage1")+"");
+setItemLore(player.getInventory()[0],6,"§7§l伤害加成: +"+score(player,"attackDamage2")+"%");
+setItemLore(player.getInventory()[0],7,"§7§l最大生命: +"+score(player,"maxHealth1")+"");
+setItemLore(player.getInventory()[0],8,"§7§l生命加成: +"+score(player,"maxHealth2")+"%");
+setItemLore(player.getInventory()[0],9,"§7§l吸血概率: +"+score(player,"Blood")+"%");
+setItemLore(player.getInventory()[0],10,"§7§l暴击概率: +"+score(player,"Blast")+"%");
+setItemLore(player.getInventory()[0],11,"§7§l每秒回血: +"+score(player,"Heal")+"");
+replace(score(player,"attackDamage1"),score(player,"attackDamage2"),score(player,"maxHealth1"),score(player,"maxHealth2"));
+player.sendMessage("&e武魂属性已更新完毕")
+}
+else
+{
+player.sendMessage("&c这个东西不是武魂")
+}
+}
+else
+{
+player.sendMessage("&6请将武魂放第一格")
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+};
+function score(goal,object)
+{
+var fenshu=world.getScoreboard().getPlayerScore(""+goal.getName()+"",""+object+"",""+object+"");
+return fenshu;
+};
+function add(attribute,amount,operation)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+var UUID = Java.type("java.util.UUID");
+var itemStack = player.getInventory()[0].getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null) 
+{
+    root = new NBTTagCompound();
+    }
+    var attributeModifiers = root.func_150295_c("AttributeModifiers", 10);
+    var attributeModifier = new NBTTagCompound();
+    var uuid = UUID.randomUUID();
+    attributeModifier.func_74778_a("AttributeName", "generic."+attribute);
+    attributeModifier.func_74778_a("Name","My Modifier");
+    attributeModifier.func_74780_a("Amount", amount);
+    attributeModifier.func_74768_a("Operation", operation);
+    attributeModifier.func_74772_a("UUIDMost", uuid.getMostSignificantBits());
+    attributeModifier.func_74772_a("UUIDLeast", uuid.getLeastSignificantBits());
+    attributeModifiers.func_74742_a(attributeModifier);
+    root.func_74782_a("AttributeModifiers", attributeModifiers);
+    itemStack.field_77990_d = root;
+}
+function replace(a,b,c,d)
+{
+	reset(player.getInventory()[0]);
+	add("attackDamage",a,0);
+	add("attackDamage",b*0.01,1);
+	add("maxHealth",c,0);
+	add("maxHealth",d*0.01,1);
+};
+function reset(item)
+{
+var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound");
+var NBTTagList=Java.type("net.minecraft.nbt.NBTTagList");
+item=item.getMCItemStack();
+nbt=item.field_77990_d;
+	if(nbt==null)
+	{
+	nbt=new NBTTagCompound();
+	}
+attrList=nbt.func_150295_c("AttributeModifiers",0)
+attr=new NBTTagCompound();
+attr.func_74777_a("Amount",0);
+attr.func_74778_a("AttributeName","generic.attackDamage");
+attr.func_74768_a("Operation",0);
+attr.func_74778_a("Name","My Modifier");
+attr.func_74772_a("UUIDLeast",6064471111);
+attr.func_74772_a("UUIDMost",4644964200)
+attrList.func_74742_a(attr);
+nbt.func_74782_a("AttributeModifiers",attrList);
+item.field_77990_d=nbt;
+return nbt;
+};
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)
+}
+};

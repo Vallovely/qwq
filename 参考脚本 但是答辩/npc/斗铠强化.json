@@ -1,0 +1,1034 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "item=player.getHeldItem();
+if(item!=null){
+	itnm=item.getDisplayName();
+	itsz=item.getStackSize();
+	if(itnm==\"§b§l强化核心\"){
+		upitem=player.getInventory()[1];
+		if(upitem!=null){
+			uinm=upitem.getDisplayName();
+			if(uinm.indexOf(\"斗铠\")>-1){
+				haveplayer=upitem.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_150307_f(0);
+				haveplayer=haveplayer.replace(\"§6§l斗铠所属者:\",\"\")
+				if(haveplayer==\"\"){
+					setItemLore(upitem,0,\"§6§l斗铠所属者:\"+player.getName())
+				}
+				if(haveplayer==player.getName()){
+					lore=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_150307_f(0);
+					lv=getNumber(lore)
+					lvl=getNumber(upitem.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_150307_f(5))
+					da=getNumber(upitem.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_150307_f(3))
+					he=getNumber(upitem.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_150307_f(4))
+					if(lv==15&&lvl<5){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,150);
+						up(upitem,2,300);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+150))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+300))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+					}
+					if(lv==610&&lvl<10&&lvl>=5){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,300);
+						up(upitem,2,600);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+300))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+600))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==1115&&lvl<15&&lvl>=10){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,500);
+						up(upitem,2,1000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+500))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+1000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==1620&&lvl<20&&lvl>=15){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,800);
+						up(upitem,2,2000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+800))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+2000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+					
+					}
+					if(lv==2125&&lvl<25&&lvl>=20){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,1200);
+						up(upitem,2,3000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+1200))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+3000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==2630&&lvl<30&&lvl>=25){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,1800);
+						up(upitem,2,5000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+1800))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+5000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==3135&&lvl<35&&lvl>=30){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,2500);
+						up(upitem,2,8000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+2500))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+8000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==3640&&lvl<40&&lvl>=35){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,3500);
+						up(upitem,2,12000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+3500))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+12000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+					
+					}
+					if(lv==4145&&lvl<45&&lvl>=40){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,5000);
+						up(upitem,2,15000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+5000))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+15000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+					if(lv==4650&&lvl<50&&lvl>=45){
+						if(itsz!=1){
+							item.setStackSize(itsz-1);
+						}else{
+							player.setHeldItem(null);
+						}
+						up(upitem,1,7000);
+						up(upitem,2,20000);
+						setItemLore(upitem,3,\"§4§l攻击伤害: +\"+(da+7000))
+						setItemLore(upitem,4,\"§a§l最大生命: +\"+(he+20000))
+						setItemLore(upitem,5,\"§b§l强化等级:§f§l \"+(lvl+1))
+						
+					}
+				}
+			}
+		}
+	}
+}
+function setItemLore(item,line,lore){
+try{
+NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}catch(err){print(\"在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:\"+err)	}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+}//item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\").func_74745_c();
+function getNumber(string){
+ var string1 = string.replace(/§[0-9]/g,\"\")
+ return Number(string1.replace(/[^0-9]/ig,\"\"))
+}
+function getAttributeModifiers(item){
+var SharedMonsterAttributes=Java.type(\"net.minecraft.entity.SharedMonsterAttributes\");
+var nbt;
+var nbtlist;
+var attributeModifiers=[];
+this.AttributeModifier=function(attributeModifier,attributeName){
+     this.attributeModifier=attributeModifier;
+     this.attributeName=attributeName;
+     this.getID=function(){
+      return this.attributeModifier.func_111167_a();
+     }
+     this.getName=function(){
+      return this.attributeModifier.func_111166_b();
+     }
+     this.getAttributeName=function(){
+     return this.attributeName;
+     }
+     this.getAmount=function(){
+      return this.attributeModifier.func_111164_d();
+     }
+     this.getOperation=function(){
+      return this.attributeModifier.func_111169_c();
+     }
+     this.toString=function(){
+      return this.attributeName+\":\"+this.attributeModifier;
+     }
+    /*
+    *UUID getID():获取属性UUID
+    *String getName():获取名字
+    *String getAttributeName():获取属性名字
+    *double getAmount():获取属性的值
+    *int getOperation():获取属性的Operation
+    */
+    }
+nbt=item.getMCItemStack().field_77990_d;
+    if(nbt==null){
+     return;
+    }
+nbtlist=nbt.func_150295_c(\"AttributeModifiers\",10);
+    for(var i=0;i<nbtlist.func_74745_c();i++){
+     attributeModifiers[i]=new this.AttributeModifier(SharedMonsterAttributes.func_111259_a(nbtlist.func_150305_b(i)),
+     nbtlist.func_150305_b(i).func_74779_i(\"AttributeName\"));
+    }
+return attributeModifiers;
+/*
+*为物品添加属性
+*ScriptItemStack item:要获取属性(全部)的物品
+*返回
+*getAttributeModifiers.AttributeModifier[] attributeModifiers:属性数组
+*/
+}
+function getAmount(item,name){
+var shuxing=getAttributeModifiers(item)
+for(x in shuxing){
+if(shuxing[x].getAttributeName()==name){
+var amount = shuxing[x].getAmount()
+return amount
+}
+}
+return 0
+}
+function up(Item,type,value){
+if (type == \"1\"){
+type =\"generic.attackDamage\"
+}
+if (type == \"2\"){
+type =\"generic.maxHealth\"
+}
+if (type == \"3\"){
+type =\"generic.movementSpeed\"
+}
+if (type == \"4\"){
+type =\"generic.knockbackResistance\"
+}
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\")
+    var itemStack = Item.getMCItemStack();
+    var root = itemStack.field_77990_d;
+    if (root == null) {
+          root = new NBTTagCompound();
+    }
+    var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+	var tagCompound=attributeModifiers.func_74745_c();
+	for(x=0;x<tagCompound;x++){
+	s=attributeModifiers.func_150305_b(x);
+	if(s.func_74779_i(\"AttributeName\")==type&&s.func_74779_i(\"Operation\")==0){
+	var newvalue=s.func_74769_h(\"Amount\")+Number(value);
+	s.func_74780_a(\"Amount\",newvalue)
+	}
+	}
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "TraderSold": {
+        "NpcMiscInv": [
+            {
+                "Slot": 16b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l26-30"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l1-5"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 2b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l31-35"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l6-10"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 5b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l36-40"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l11-15"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 8b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l41-45"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l16-20"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 11b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l46-50"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "minecraft:diamond",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l21-25"
+                        ],
+                        "Name": "§b§l强化核心"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "TraderIgnoreDamage": 0b,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/1yase/gedsv.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 1,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -6675402061121828286L,
+    "TraderMarket": "",
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "TraderCurrency": {
+        "NpcMiscInv": [
+            {
+                "Slot": 1b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 20b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§9魂王升华材料"
+                    }
+                },
+                "Damage": 11s
+            },
+            {
+                "Slot": 2b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 32b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§b魂斗罗升华材料"
+                    }
+                },
+                "Damage": 3s
+            },
+            {
+                "Slot": 34b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 6b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§5魂帝升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 5b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 32b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4封号斗罗升华材料"
+                    }
+                },
+                "Damage": 14s
+            },
+            {
+                "Slot": 7b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 24b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§5魂帝升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 8b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 34b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4封号斗罗升华材料"
+                    }
+                },
+                "Damage": 14s
+            },
+            {
+                "Slot": 10b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 26b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§6魂圣升华材料"
+                    }
+                },
+                "Damage": 4s
+            },
+            {
+                "Slot": 11b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 36b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4封号斗罗升华材料"
+                    }
+                },
+                "Damage": 14s
+            },
+            {
+                "Slot": 13b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 28b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§6魂圣升华材料"
+                    }
+                },
+                "Damage": 4s
+            },
+            {
+                "Slot": 16b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 30b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§b魂斗罗升华材料"
+                    }
+                },
+                "Damage": 3s
+            },
+            {
+                "Slot": 19b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 20b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 7b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 22b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 2b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 23b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 8b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 25b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 3b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 26b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 9b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 28b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 4b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 29b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 10b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 31b,
+                "id": "customnpcs:npcCoinIron",
+                "Count": 5b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币",
+                            "§b其价值似乎比较高"
+                        ],
+                        "Name": "§f§l银魂币"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "斗铠强化",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 55570297,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "TraderIgnoreNBT": 0b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 1,
+    "DropChance": [
+        {
+            "Integer": 100,
+            "Slot": 0
+        },
+        {
+            "Integer": 100,
+            "Slot": 1
+        },
+        {
+            "Integer": 100,
+            "Slot": 2
+        },
+        {
+            "Integer": 100,
+            "Slot": 3
+        },
+        {
+            "Integer": 100,
+            "Slot": 4
+        },
+        {
+            "Integer": 100,
+            "Slot": 5
+        },
+        {
+            "Integer": 100,
+            "Slot": 6
+        },
+        {
+            "Integer": 100,
+            "Slot": 7
+        },
+        {
+            "Integer": 100,
+            "Slot": 8
+        }
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 1812619131619547201L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 55570051L,
+    "Rotation": [
+        16.017746f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

@@ -1,0 +1,480 @@
+//作者:muzermat
+//前置:money计分板 货币
+//首先是注册指令部分
+var HotNPC=Java.type("mchhui.hotnpc.HotNPC");
+var io=new IONPC();
+var Tempdata=Java.type("mchhui.hotnpc.utlis.Tempdata");
+var tempdata=HotNPC.tempdata;
+var plss = world.getAllServerPlayers()
+for(a in plss){
+	var moneys = io.get("money")
+	var money = moneys[plss[a].getName()]
+	if(money == undefined){
+		moneys[plss[a].getName()] = 0
+		plss[a].sendMessage("&r检测到你没有银行记录 自动设置为0余额")
+		io.set("money",moneys)
+	}
+}
+function Command(name,usage){
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:ppes 则返回noppes
+  */
+ };
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入"/help 你的指令名" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 4;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(){
+   return true;
+}
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  var CommandBase=Java.type("net.minecraft.command.CommandBase");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions
+  });
+  return new MCCommand();
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type("net.minecraft.server.MinecraftServer");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}
+var EntityPlayerMP=Java.type("net.minecraft.entity.player.EntityPlayerMP");
+var command=new Command();
+command.getCommandName=function(){
+ return "bank";
+}
+command.getCommandUsage=function(sender){
+ return "/银行";
+}
+command.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command.canCommandSenderUseCommand=function(sender){
+  return true;//是否允许使用true允许false不允许只有OP能用
+}
+command.addTabCompletionOptions=function(sender,args){
+  var jo = ["存款","取款","listop"]
+  return jo;
+}
+command.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+  var moneys = io.get("money")
+  var money = moneys[player.getName()]
+ if(args.length == 0 || args[0] == "help"){
+ player.sendMessage("&b&l当前余额:&a&l"+money)
+ player.sendMessage("&r&l输入/bank 存款 (可以直接存入手中物品)")
+ player.sendMessage("&r&l输入/bank 取款 货币 数量 (取出指定类型货币)")
+ player.sendMessage("&r&l输入/转账 玩家 货币 (给某玩家转账)")
+}
+ try{
+ var qian = ["§6§l铜魂币","§f§l银魂币","§e§l金魂币","§e§l神§c§l魂§b§l币"]
+ var jz = [1,64,4096,1040384]
+ if(args.length > 0){
+ 	if(args[0] == "reset"){
+ 		var pl = args[1]
+ 		moneys[pl] = 0
+ 		io.set("money",moneys)
+ 	}
+  if(args[0] == "存款"){
+    var hand = player.getHeldItem()
+    if(hand !== null){
+      var name = hand.getDisplayName()
+      var jiazhi = -1
+      for(a in qian){
+        if(name == qian[a]){
+          var jiazhi = a
+          break;
+        }
+      }
+      for(b in jz){
+        if(jiazhi == b){
+          var zjz = jz[b]
+          break;
+        }
+      }
+      if(jiazhi > -1){
+      var size = hand.getStackSize()
+      var qians = size*zjz
+      moneys[player.getName()] += qians
+      io.set("money",moneys)
+      player.sendMessage("&r魂师&a"+player.getName()+"&r您存入了&a"+name+"*"+size)
+      player.setHeldItem(null)
+    }else{
+      player.sendMessage("&5&l手中物品无法存入银行")
+    }
+    }else{
+      player.sendMessage("&5&l手中无任何物品")
+    }
+  }
+  if(args[0] == "take"){
+  	if(player.getMode() == 1){
+  		if(moneys[args[1]] != undefined){
+  			if(Number(args[2]) > 1){
+  				moneys[args[1]] -= Number(args[2])
+  				io.set("money",moneys)
+  				player.sendMessage("&6你扣除了"+args[1]+"的"+args[2]+"银行存款")
+  			}else{
+  				moneys[args[1]] *= (1-Number(args[2]))
+  				io.set("money",moneys)
+  				player.sendMessage("&6你将"+args[1]+"的存款设置为原来的"+(1-Number(args[2]))+"倍")
+  			}
+  		}
+  	}else{
+  		player.sender("&c权限不足")
+  	}
+  }
+  if(args[0] == "取款"){
+    var yuxu = ["铜魂币","银魂币","金魂币","神魂币"]
+    if(args.length > 2){
+        var sl = args[2]
+        var quchu = -1
+        for(c in yuxu){
+          if(args[1] == yuxu[c]){
+            var quchu = c
+            break;
+          }
+        }
+        if(quchu > -1){
+          for(d in jz){
+            if(quchu == d){
+              var quqian = jz[d]
+              break;
+            }
+          }
+            var zqq = quqian*sl
+            if(money >= zqq){
+              var qianitem = npc.getArmor(d)
+              if(sl > 0 && sl <= 64){
+              qianitem.setStackSize(sl)
+              moneys[player.getName()] -= zqq
+              io.set("money",moneys)
+                player.sendMessage("&r魂师&a"+player.getName()+"&r您取出了&a"+qianitem.getDisplayName()+"*"+sl)
+                npc.giveItem(player,qianitem)
+            }else{
+              player.sendMessage("&r&l数量必须大于0小于等于64")
+            }
+            }else{
+              player.sendMessage("&r&l货币数量不够")
+            }
+        }else{
+          player.sendMessage("&r&l可以取得只有铜魂币 银魂币 金魂币 神魂币")
+        }
+    }else{
+      player.sendMessage("&4&l错误的格式")
+    }
+  }
+  if(args[0] == "listop"){
+    if(player.getMode() == 1){
+      var pls = world.getAllServerPlayers()
+      player.sendMessage("&r&l----------------魂师余额列表----------------")
+      for(f in pls){
+        var mone = moneys[pls[f].getName()]
+        player.sendMessage("&r&l魂师"+pls[f].getName()+"的余额为："+mone)
+      }
+      player.sendMessage("&r&l----------------魂师余额列表----------------")
+    }else{
+      player.sendMessage("&r&l你不是创造模式魂师")
+    }
+  }
+ }
+}catch(e){
+  npc.say(e)
+}
+ return;
+}
+var bank1 = world.getTempData("bank1")
+if(bank1 !== 2){ 
+registerCommand(command);  
+world.setTempData("bank1",2)
+npc.say("&d[银行]&a指令主体注册成功")
+} 
+var shopCommand = new Command()
+shopCommand.getCommandName=function(){
+	return "shop"
+}
+shopCommand.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ try{
+ 	if(args[0] == "help"){
+ 		player.sendMessage("&b&l======================商店系统======================")
+ 		player.sendMessage("&7/shop see <名字> 查看某人的小卖部")
+ 		player.sendMessage("&7/shop buy <名字> 购买某人小卖部中的物品(默认全部购买)")
+ 		player.sendMessage("&7/shop sell <价格> 将手中物品上架到小卖部中(全部上架)")
+ 		player.sendMessage("&7/shop listShops 显示所有在线玩家的小卖部【不在线除外】")
+ 		player.sendMessage("&7Version 1.0.0 注：只能上架一件物品")
+ 		player.sendMessage("&b&l======================商店系统======================")
+ 	}else{
+ 		if(args[0] == "see"){
+ 			var p = args[1]
+ 			if(tempdata.has("shop"+p)){
+            player.sendMessage("&f[&a公告]&f魂师:&a "+p+" &f正在售卖物品:"+tempdata.get("shop"+p)[1].getDisplayName()+"*"+tempdata.get("shop"+p)[1].getStackSize()+"(售价:"+tempdata.get("shop"+p)[0]+")")
+ 			}else{player.sendMessage("&f该魂师没有上架任何物品")}
+ 		}
+ 		if(args[0] == "listShops"){
+ 			player.sendMessage("&b&l============交易市场============")
+ 			var pls = world.getAllServerPlayers()
+ 			for(x in pls){
+ 				p = pls[x].name
+ 			if(tempdata.has("shop"+p)){
+            player.sendMessage("&f[&a公告]&f魂师:&a "+p+" &f正在售卖物品:"+tempdata.get("shop"+p)[1].getDisplayName()+"*"+tempdata.get("shop"+p)[1].getStackSize()+"(售价:"+tempdata.get("shop"+p)[0]+")")
+ 			}
+ 		}
+ 	}
+ 		if(args[0] == "buy"){
+ 			var p = args[1]
+ 			if(tempdata.has("shop"+p)){
+            var item = tempdata.get("shop"+p)[1]
+            var value = tempdata.get("shop"+p)[0]
+            var io = new IONPC()
+            var money = io.get("money")
+            moneys = money[player.name]
+            if(moneys >= value){
+            	player.sendMessage("&f你成功购买了魂师:&a "+p+" &f的物品:"+item.getDisplayName())
+            	world.getPlayer(p).sendMessage("&f魂师&a "+player.name+" &f购买了你在小卖部售卖的东西。")
+            	money[player.name] -= Number(value)
+            	money[p] += Number(value)
+            	io.set("money",money)
+            	npc.giveItem(player,item)
+            	tempdata.remove("shop"+p)
+            }else{
+            	player.sendMessage("&f你的余额不足以购买这个东西。")
+            }
+ 			}else{player.sendMessage("&f该魂师没有上架任何物品")}
+ 		}
+ 		if(args[0] == "sell"){
+ 			var value = args[1]
+ 			if(value > 0){
+ 				var held = player.getHeldItem()
+ 				if(held != null){
+ 				if(!tempdata.has("shop"+player.name)){
+ 				player.sendMessage("&f你在小卖部里上架了"+held.getDisplayName()+"(售价:"+value+")")
+ 				tempdata.set("shop"+player.name,[value,held])
+ 				message("&f[&a公告]&f魂师:&a "+player.name+" &f在自己的小卖部里上架了物品:"+held.getDisplayName()+"(售价:"+value+")")
+                player.setHeldItem(null)
+ 			}else{
+ 				player.sendMessage("&f你的小卖部里还有物品未售出。")
+ 			}
+ 		}else{
+ 			player.sendMessage("&f手中无物品")
+ 		}
+ 			}else{
+ 				player.sendMessage("&f你出售的物品不是正数。")
+ 			}
+ 			}
+ 	}
+ }catch(e){player.sendMessage("&f请输入/shop help来查看指令列表")}	
+ return;
+}
+if(world.getTempData("shop") != true){
+world.setTempData("shop",true)
+registerCommand(shopCommand)
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}
+var command1=new Command();
+command1.getCommandName=function(){
+ return "转账";
+}
+command1.getCommandUsage=function(sender){
+ return "/转账";
+}
+command1.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command1.canCommandSenderUseCommand=function(sender){
+  return true;//是否允许使用true允许false不允许只有OP能用
+}
+command1.addTabCompletionOptions=function(sender,args){
+  var namelist = new Array()
+  var players = world.getAllServerPlayers()
+  for(e in players){
+    namelist.push(players[e].getName())
+  }
+  return namelist;
+}
+command1.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ try{
+ var payplayer = args[0]
+ if(args.length > 0){
+  if(world.getPlayer(payplayer)){
+    var ppay = world.getPlayer(payplayer)
+    if(args.length > 1){
+    var qian = args[1]
+    var qian = getNumber(qian)
+    var moneys = io.get("money")
+    var money = moneys[player.getName()]
+    if(money >= qian){
+      if(qian > 0){
+      moneys[player.getName()] -= qian
+      moneys[payplayer] += qian
+      io.set("money",moneys)
+      player.sendMessage("&r&l您向"+payplayer+"转账了"+qian+"元")
+      ppay.sendMessage("&r魂师&a"+player.getName()+"&r向您转账了&a"+qian+"&r元")
+    }else{
+      player.sendMessage("&r&l转账的钱只能为正数")
+    }
+    }else{
+      player.sendMessage("&r&l你的货币不够")
+    }
+  }else{
+    player.sendMessage("&4&l参数不足")
+  }
+  }else{
+  player.sendMessage("&r&l魂师不在线")
+  }
+ }else{
+  player.sendMessage("&4&l错误的格式")
+ }
+}catch(err){
+  npc.say(err)}
+ return;
+}
+var bank2 = world.getTempData("bank2")
+if(bank2 !== 3){
+registerCommand(command1);
+world.setTempData("bank2",3)
+npc.say("&d[银行]&a转账指令注册成功")
+}                                                                                              
+
+//利息部分
+var lx = world.getTempData("lx")
+var date = new Date()
+var time = date.getTime()
+if(lx <= time){
+  var pls = world.getAllServerPlayers()
+  for(a in pls){
+    player = pls[a]
+    var moneys = io.get("money")
+    var money = moneys[player.getName()]
+    var mm = Math.floor(money/1000)
+    moneys[player.getName()] += mm
+    io.set("money",moneys)
+    player.sendMessage("§r5分钟过去了,你的银行余额增加了§a"+mm+"§r,目前余额:§a"+money)
+  }
+    world.setTempData("lx",time+300000)
+}
+  function IONPC(){
+  //初始化部分
+  var File = Java.type("java.io.File");
+  var FileOutputStream = Java.type("java.io.FileOutputStream");
+  var BufferedReader = Java.type("java.io.BufferedReader");
+  var InputStreamReader = Java.type("java.io.InputStreamReader");
+  var FileInputStream = Java.type("java.io.FileInputStream");
+  var StringBuilder=Java.type("java.lang.StringBuilder");
+  var RootDirectory = new File("");
+  var folder = new File(RootDirectory.getCanonicalPath()+"\\CNPCData");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval("("+sb.toString()+")");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print("请输入对象");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function getNumber(string){
+ if(string !== undefined){
+ var string1 = string.replace(/§[0-9]/g,"")
+ return Number(string1.replace(/[^0-9]/ig,""))
+}
+}

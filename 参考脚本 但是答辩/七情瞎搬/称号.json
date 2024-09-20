@@ -1,0 +1,456 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 1,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "function Command(name,usage){
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:ppes 则返回noppes
+  */
+ };
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入\"/help 你的指令名\" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 4;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(){
+	 return true;
+}
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  var CommandBase=Java.type(\"net.minecraft.command.CommandBase\");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions
+  });
+  return new MCCommand();
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type(\"net.minecraft.server.MinecraftServer\");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}
+var EntityPlayerMP=Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+var command=new Command();
+command.getCommandName=function(){
+ return \"ch\";
+}
+command.getCommandUsage=function(sender){
+ return \"/.s\";
+}
+command.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command.canCommandSenderUseCommand=function(sender){
+	return true;//是否允许使用true允许false不允许只有OP能用
+}
+command.addTabCompletionOptions=function(sender,args){
+ return [\"help\",\"Qz\",\"Hz\",\"QHz\"]
+}
+command.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ try{
+ if(args[0]==\"help\"){
+ if (isOp(player.getName())){
+ player.sendMessage(\"&7丨--------------------------&a&l丨称号助手丨&7------------------------丨\")
+ player.sendMessage(\"&e - &7/ch help &a查看帮助\");
+ player.sendMessage(\"&e - &7/ch Qz &6[队伍名] &6[前缀] &a修改/创建队伍前缀\");
+ player.sendMessage(\"&e - &7/ch Hz &6[队伍名] &6[后缀] &a修改/创建队伍后缀\");
+ player.sendMessage(\"&e - &7/ch QHz &6[队伍名] &6[前缀] &6[后缀] &a修改/创建队伍前缀后缀\");
+ player.sendMessage(\"&e - &b注意大写小写区别,会影响指令\");
+ player.sendMessage(\"&e - &b用 Shift + 7 来用于彩色变更\");
+ player.sendMessage(\"&e - &b前缀不可超过16字符,后缀不可超过16字符,否则崩服。\");
+ player.sendMessage(\"&e - &b删除称号用/scoreboard teams remove [队伍名]\");
+ player.sendMessage(\"&7丨--------------------------&a&l丨称号助手丨&7------------------------丨\")
+ }else{player.sendMessage(\"§c未知指令。请使用/help来查看指令列表。\")}}
+ if(args[0]==\"Qz\"){
+ if (isOp(player.getName())){
+	var team = args[1]
+	var chengHao = args[2]
+	npc.executeCommand(\"scoreboard teams add \"+team+\"\")
+	var colorPrefix=color(chengHao);
+    world.getMCWorld().func_96441_U().func_96508_e(team).func_96666_b(colorPrefix);
+	player.sendMessage(\"&a&l[称号]&7:操作成功！\")
+ }else{player.sendMessage(\"§c未知指令。请使用/help来查看指令列表。\")}}
+ if(args[0]==\"Hz\"){
+ if (isOp(player.getName())){
+	var team = args[1]
+	var Suffix = args[2]
+	npc.executeCommand(\"scoreboard teams add \"+team+\"\")
+	var colorSuffix=color(Suffix)
+    world.getMCWorld().func_96441_U().func_96508_e(team).func_96662_c(colorSuffix);
+	player.sendMessage(\"&a&l[称号]&7:操作成功！\")
+ }else{player.sendMessage(\"§c未知指令。请使用/help来查看指令列表。\")}}
+ if(args[0]==\"QHz\"){
+ if (isOp(player.getName())){
+	var team = args[1]
+	var chengHao = args[2]
+	var Suffix = args[3]
+	npc.executeCommand(\"scoreboard teams add \"+team+\"\")
+	var colorPrefix=color(chengHao);
+	var colorSuffix=color(Suffix)
+	world.getMCWorld().func_96441_U().func_96508_e(team).func_96666_b(colorPrefix);
+	world.getMCWorld().func_96441_U().func_96508_e(team).func_96662_c(colorSuffix);
+	player.sendMessage(\"&a&l[称号]&7:操作成功！\")
+ }else{player.sendMessage(\"§c未知指令。请使用/help来查看指令列表。\")}}
+}catch(e){player.sendMessage(\"§a§l丨称号助手丨:§7指令参数错误,请输入 /ch help 查看正确指令。\");}
+ return;
+}
+registerCommand(command);
+//函数补全
+function isOp(playerName) {
+	var MinecraftServer = Java.type(\"net.minecraft.server.MinecraftServer\");
+	var ops = MinecraftServer.func_71276_C().func_71203_ab().func_152606_n();
+	for (var x in ops) {
+		if (ops[x] == playerName) {
+			return true;
+		}
+	}
+}
+function color(oldName){
+for(var c=0;c<oldName.length;c++){
+oldName=oldName.replace(\"&\",\"§\");
+}
+return oldName;
+};",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "npc.executeCommand(\"scoreboard players set muzermat pvp 1\")",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -6675402061121828286L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "称号",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 74262080,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 1812619131619547201L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 74261834L,
+    "Rotation": [
+        11.699971f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

@@ -1,0 +1,642 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 1,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "/**
+*@Author Hueihuea
+*/
+
+//变量注册方式参考本文件最后一段。
+
+//Config:
+
+//计分板显示的名字
+var displayName = \"§e§l公 告\"
+
+//计分板内容
+var scoreboardMessages = [ 
+  \"§cID: §a%player_name%\",
+  \"§c罪恶点: §a%playerKillCount%\",
+  \"§c魂力等级: §a%Soul_Level%\",
+  \"§c死亡次数: §a%deathCount%\",
+  \"§c暴击概率: §a%Blast%%\",
+  \"§c吸血概率: §a%Blood%%\",
+  \"§c每秒回血: §a%Heal%\",
+  \"§c当前坐标: \",
+  \" §a%player_pos_blockx%,%player_pos_blocky%,%player_pos_blockz%\",
+  \"§f§l一一一一一一一一一一一一——\",
+  \"§6回城用指令/die\",
+  \"§6展示直接输入show\",
+  \"§6防丢弃用指令/drop\",
+  \"§dQ群:1051916145\",
+  \"§f§l一一一一一一一一一一一一——\",
+];
+
+var HotNPC = Java.type(\"mchhui.hotnpc.HotNPC\");
+var Tempdata = Java.type(\"mchhui.hotnpc.utlis.Tempdata\");
+var tempdata = HotNPC.tempdata;
+var config;
+var listenerName = [\"EasyScoreboard-PlayerTickEvent\"];
+var listeners;
+var scoreboardFormatListener;
+var FMLCommonHandler = Java.type(\"cpw.mods.fml.common.FMLCommonHandler\");
+var EntityPlayerMP = Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+if (!tempdata.has(\"listeners\")) {
+  tempdata.set(\"listeners\", new Tempdata());
+}
+if (!tempdata.has(\"EasyScoreboardConfig\")) {
+  tempdata.set(\"EasyScoreboardConfig\", new function () { });
+}
+if (!tempdata.has(\"ScoreboardFormatListener\")) {
+  tempdata.set(\"ScoreboardFormatListener\", new function () {
+    var HashMap = Java.type(\"java.util.HashMap\");
+    var listeners = new HashMap();
+    this.post = function (event) {
+      if (listeners.containsKey(event.format)) {
+        listeners.get(event.format).call(null,event);
+      }
+    }
+    this.register = function (format, func) {
+      if (!(typeof func == \"function\")) {
+        throw \"必须是一个Function\";
+      }
+      listeners.put(format, func);
+    }
+    this.unregister = function (format) {
+      listeners.remove(name);
+    }
+  });
+}
+scoreboardFormatListener = tempdata.get(\"ScoreboardFormatListener\");
+listeners = tempdata.get(\"listeners\");
+config = tempdata.get(\"EasyScoreboardConfig\");
+config.displayName = displayName;
+config.scoreboardMessages = scoreboardMessages;
+
+function ScoreboardFormatEvent(player, format) {
+  this.format = format;
+  this.player = player;
+  this.text = format;
+}
+function update(player) {
+  var displayName = config.displayName;
+  var scoreboardMessages = config.scoreboardMessages;
+  var ScriptWorld = Java.type(\"noppes.npcs.scripted.ScriptWorld\");
+  var world = new ScriptWorld(player.getMCEntity().func_130014_f_());
+  var mcboard = world.getMCWorld().func_96441_U();
+  var S3BPacketScoreboardObjective = Java.type(\"net.minecraft.network.play.server.S3BPacketScoreboardObjective\");
+  if (mcboard.func_96518_b(\"EasyScoreboard\") != null) {
+    player.getMCEntity().field_71135_a.func_147359_a(new S3BPacketScoreboardObjective(mcboard.func_96518_b(\"EasyScoreboard\"), 1));
+  }
+  if (!world.getScoreboard().addObjective(\"EasyScoreboard\", \"dummy\")) {
+    var field_96683_d = mcboard.func_96518_b(\"EasyScoreboard\").class.getDeclaredField(\"field_96683_d\");
+    field_96683_d.setAccessible(true);
+    field_96683_d.set(mcboard.func_96518_b(\"EasyScoreboard\"), displayName.substring(0,16));
+    player.getMCEntity().field_71135_a.func_147359_a(new S3BPacketScoreboardObjective(mcboard.func_96518_b(\"EasyScoreboard\"), 0));
+  }
+  for (var i = 0; i < scoreboardMessages.length; i++) {
+    var String = Java.type(\"java.lang.String\");
+    var str = new String(scoreboardMessages[i]);
+    str=formatText(player,str);
+    str=str.substring(0, 16);
+    sendScoreboardMessage(player, str, mcboard, mcboard.func_96518_b(\"EasyScoreboard\"), scoreboardMessages.length - i)
+  }
+  mcboard.func_96530_a(1, mcboard.func_96518_b(\"EasyScoreboard\"));
+}
+function sendScoreboardMessage(player, message, scoreboard, scoreObjective, index) {
+  var S3CPacketUpdateScore = Java.type(\"net.minecraft.network.play.server.S3CPacketUpdateScore\");
+  var Integer=Java.type(\"java.lang.Integer\");
+  var Score = Java.type(\"net.minecraft.scoreboard.Score\");
+  var score = new Score(scoreboard, scoreObjective, message);
+  var field_96655_e = score.class.getDeclaredField(\"field_96655_e\");
+  field_96655_e.setAccessible(true);
+  field_96655_e.set(score,Integer.valueOf(index));
+  player.getMCEntity().field_71135_a.func_147359_a(new S3CPacketUpdateScore(score, 0));
+}
+
+function formatText(player,text) {
+  var startIndex = 0;
+  var endIndex = -1;
+  while (true) {
+    if (endIndex != -1 && endIndex + 1 <= text.length) {
+      startIndex = text.indexOf(\"%\", endIndex + 1);
+    } else {
+      startIndex = text.indexOf(\"%\");
+    }
+    while (true) {
+      if (startIndex > 1 && text.charAt(startIndex - 2) != \"\\\" && text.charAt(startIndex - 1) == \"\\\") {
+        if (startIndex + 1 > text.length) {
+          break;
+        }
+        startIndex = text.indexOf(\"%\", startIndex + 1);
+        continue;
+      }
+      break;
+    }
+    if (startIndex != -1 && startIndex + 1 <= text.length) {
+      endIndex = text.indexOf(\"%\", startIndex + 1);
+    } else {
+      endIndex = -1;
+      break;
+    }
+    while (true) {
+      if (endIndex > 1 && text.charAt(endIndex - 2) != \"\\\" && text.charAt(endIndex - 1) == \"\\\") {
+        if (endIndex + 1 > text.length) {
+          endIndex = -1;
+          break;
+        }
+        endIndex = text.indexOf(\"%\", endIndex + 1);
+        continue;
+      }
+      break;
+    }
+    if (endIndex == -1) {
+      break;
+    }
+    var format = text.substring(startIndex, endIndex + 1);
+    var event=new ScoreboardFormatEvent(player,format);
+    scoreboardFormatListener.post(event);
+    text = text.substring(0, startIndex) + event.text + ((endIndex + 1 <= text.length) ? text.substring(endIndex + 1) : \"\");
+    endIndex=startIndex+event.text.length-1;
+  }
+  return text.replace(/\\%/g,\"%\");
+}
+
+if (!listeners.has(listenerName[0])) {
+  listeners.set(listenerName[0], listenEvent(\"cpw.mods.fml.common.gameevent.TickEvent.PlayerTickEvent\", \"HIGH\",
+    function (event) {
+      if (!(event.player instanceof EntityPlayerMP)) {
+        return;
+      }
+      var player = getScriptEntity(event.player);
+      if (player.getAge() % 10 == 0) {
+        update(player);
+      }
+    }, FMLCommonHandler.instance().bus()));
+}
+
+function getScriptEntity(entity) {
+  var ScriptController = Java.type(\"noppes.npcs.controllers.ScriptController\");
+  if (entity == null) {
+    return null;
+  }
+  return ScriptController.Instance.getScriptForEntity(entity);
+}
+
+function Listener(eventType, listener, bus) {
+  var MinecraftForge = Java.type(\"net.minecraftforge.common.MinecraftForge\");
+  this.eventType = eventType;
+  this.listener = listener;
+  this.bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+  this.getEventType = function () {
+    return this.eventType;
+  }
+  this.getListener = function () {
+    return this.listener;
+  }
+  this.getBus = function () {
+    return this.bus;
+  }
+}
+/**
+*EventListener listenEvent(String eventType,String priority,function listener)
+*-eventType:你要监听的事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-priority:你的事件优先级 从低到高LOWEST LOW NORMAL HIGH HIGHEST
+*-listener:事件方法
+*-bus:你可以指定EventBus
+*Return:
+*-Listener:监听器
+*监听事件并返回监听对象
+*/
+function listenEvent(eventType, priority, listener, bus) {
+  var Event = Java.type(eventType);
+  try {
+    var IEventListener = Java.type(\"net.minecraftforge.fml.common.eventhandler.IEventListener\");
+    var EventPriority = Java.type(\"net.minecraftforge.fml.common.eventhandler.EventPriority\");
+  } catch (err) {
+    var IEventListener = Java.type(\"cpw.mods.fml.common.eventhandler.IEventListener\");
+    var EventPriority = Java.type(\"cpw.mods.fml.common.eventhandler.EventPriority\");
+  }
+  var MinecraftForge = Java.type(\"net.minecraftforge.common.MinecraftForge\");
+  var event = new Event();
+  if (priority == \"LOW\") {
+    priority = EventPriority.LOW;
+  }
+  if (priority == \"HIGH\") {
+    priority = EventPriority.HIGH;
+  }
+  if (priority == \"NORMAL\") {
+    priority = EventPriority.NORMAL;
+  }
+  if (priority == \"LOWEST\") {
+    priority = EventPriority.LOWEST;
+  }
+  if (priority == \"HIGHEST\") {
+    priority = EventPriority.HIGHEST;
+  }
+  var EventListener = Java.extend(IEventListener, {
+    invoke: listener
+  });
+  listener = new EventListener();
+  var bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+  var busID = bus.class.getDeclaredField(\"busID\");
+  busID.setAccessible(true);
+  busID = busID.getInt(bus);
+  event.getListenerList().register(busID, priority, listener);
+  return new Listener(eventType, listener, bus);
+}
+/**
+*void unListenEvent(String eventType,IEventListener listener,EventBus bus)
+*-eventType:事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-listener:事件方法
+*-bus:你可以指定EventBus
+*取消监听事件
+*/
+function unListenEvent(eventType, listener, bus) {
+  var Event = Java.type(eventType);
+  var MinecraftForge = Java.type(\"net.minecraftforge.common.MinecraftForge\");
+  var event = new Event();
+  var bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+  var busID = bus.class.getDeclaredField(\"busID\");
+  busID.setAccessible(true);
+  busID = busID.getInt(bus);
+  event.getListenerList().unregister(busID, listener);
+}
+
+scoreboardFormatListener.register(\"%player_name%\",function(event){
+  event.text=event.player.getName();
+});
+scoreboardFormatListener.register(\"%player_display_name%\",function(event){
+  event.text=event.player.getDisplayName();
+});
+scoreboardFormatListener.register(\"%player_world_time%\",function(event){
+  var ScriptWorld = Java.type(\"noppes.npcs.scripted.ScriptWorld\");
+  var world = new ScriptWorld(event.player.getMCEntity().func_130014_f_());
+  event.text=world.getTime();
+});
+scoreboardFormatListener.register(\"%player_world_time_12h%\",function(event){
+  var ScriptWorld = Java.type(\"noppes.npcs.scripted.ScriptWorld\");
+  var world = new ScriptWorld(event.player.getMCEntity().func_130014_f_());
+  var hour=parseInt(world.getTime()/1000);
+  var minute=parseInt((world.getTime()%1000)*(60/1000));
+  var flag=\"\";
+  hour+=6;
+  hour=parseInt(hour%24);
+  hour=((hour>12)?hour-12:hour);
+  flag=(hour>12)? \"pm\":\"am\";
+  hour=(hour<10)? \"0\"+hour:hour;
+  minute=(minute<10)? \"0\"+minute:minute;
+  event.text=hour+\":\"+minute+flag;
+});
+scoreboardFormatListener.register(\"%player_world_time_24h%\",function(event){
+  var ScriptWorld = Java.type(\"noppes.npcs.scripted.ScriptWorld\");
+  var world = new ScriptWorld(event.player.getMCEntity().func_130014_f_());
+  var hour=parseInt(world.getTime()/1000);
+  var minute=parseInt((world.getTime()%1000)*(60/1000));
+  hour+=6;
+  hour=parseInt(hour%24);
+  hour=(hour<10)? \"0\"+hour:hour;
+  minute=(minute<10)? \"0\"+minute:minute;
+  event.text=hour+\":\"+minute;
+});
+scoreboardFormatListener.register(\"%player_health%\",function(event){
+  event.text=parseInt(event.player.getHealth());
+});
+scoreboardFormatListener.register(\"%player_max_health%\",function(event){
+  event.text=parseInt(event.player.getMaxHealth());
+});
+scoreboardFormatListener.register(\"%player_food_level%\",function(event){
+  event.text=parseInt(event.player.getMCEntity().func_71024_bL().func_75116_a());
+});
+scoreboardFormatListener.register(\"%player_level%\",function(event){
+  event.text=event.player.getExpLevel();
+});
+scoreboardFormatListener.register(\"%Soul_Level%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"Soul_Level\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%playerKillCount%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"罪恶点\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%deathCount%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"死亡次数\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%Heal%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"Heal\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%Blast%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"Blast\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%Blood%\",function(event){
+  event.text=world.getScoreboard().getPlayerScore(event.player.getName(),\"Blood\",\"dummy\")
+});
+scoreboardFormatListener.register(\"%player_pos_x%\",function(event){
+  event.text=event.player.x;
+});
+scoreboardFormatListener.register(\"%player_pos_y%\",function(event){
+  event.text=event.player.y;
+});
+scoreboardFormatListener.register(\"%player_pos_z%\",function(event){
+  event.text=event.player.z;
+});
+scoreboardFormatListener.register(\"%player_pos_blockx%\",function(event){
+  event.text=event.player.blockX;
+});
+scoreboardFormatListener.register(\"%player_pos_blocky%\",function(event){
+  event.text=event.player.blockY;
+});
+scoreboardFormatListener.register(\"%player_pos_blockz%\",function(event){
+  event.text=event.player.blockZ;
+});
+",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -2795919196961721179L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "公告",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 38025843,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 6459182281226117703L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 38025630L,
+    "Rotation": [
+        -16.350494f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

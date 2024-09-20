@@ -1,0 +1,36 @@
+var exams=new Array
+var RealArray=works(exams,10)
+for(var a=0;a<RealArray.length;a++){
+	player.sendMessage("&a&l----------")
+	player.sendMessage("&b&l"+RealArray[a])
+}
+function works(arr,times){
+	while(arr.length<times){
+		var x=Math.floor(Math.random()*100);
+		    y=Math.floor(Math.random()*100);
+		    d=Math.random()*100;
+		if(d<=50){
+			var expected=x+"+"+y+"=";
+			if(isInArray(arr,expected)==false&&x+y<=100){
+				arr.push(expected);
+			}
+		}
+		if(d>50){
+			var expected=Math.max(x,y)+"-"+Math.min(x,y)+"=";
+			if(isInArray(arr,expected)==false){
+				arr.push(expected);
+			}
+		}			
+	}
+	return arr;
+}
+function isInArray(arr,value){
+    for(var i=0;i<arr.length;i++){
+        if(value===arr[i]){
+			return true;
+        }
+    }
+    return false;
+}
+//arr题目所在数组 times题目个数 
+

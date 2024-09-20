@@ -1,0 +1,110 @@
+function setItemLore(item,line,lore)
+{
+	try
+	{
+		var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+		loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+		loreList.func_150304_a(line,new NBTTagString(lore))
+	}
+	catch(err)
+	{
+		print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)
+	}
+	//修改物品lore某一行
+	/*
+	*ScriptItemStack item:要修改lore的物品
+	*int line:要修改lore的行数
+	*String lore:替换原来lore的lore
+	*/
+}
+
+
+
+
+分割线
+
+
+
+
+function addItemLore(item,lore)
+{
+	var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound")
+	var NBTTagList=Java.type("net.minecraft.nbt.NBTTagList")
+	var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+	nbt=item.getMCItemStack().field_77990_d;
+	if(nbt==null)
+	{
+		nbt=new NBTTagCompound();
+	}
+	if(nbt.func_74775_l("display")=="{}")
+	{
+		displayTag=new NBTTagCompound();
+		nbt.func_74782_a("display",displayTag);
+	}
+	if(nbt.func_74775_l("display").func_74781_a("Lore")==null)
+	{
+		loreList=new NBTTagList();
+		nbt.func_74775_l("display").func_74782_a("Lore",loreList);
+	}
+	item.getMCItemStack().field_77990_d=nbt;
+	loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+	loreList.func_74742_a(new NBTTagString(lore))
+	//为物品增加lore
+	/*
+	*ScriptItemStack item:要增加lore的物品
+	*String lore:要增加的lore
+	*/
+}
+
+
+分割线
+
+
+function getLore(item,content)
+{
+	if(item!=null)
+	{
+		var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+		if(item.getMCItemStack().field_77990_d!=null)
+		{
+			var nbt=item.getMCItemStack().field_77990_d
+			var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+			for(var i=0;i<loreLength;i++)
+			{
+				var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(i)
+				if(lore.indexOf(content)>-1)
+				{
+					var count=lore.slice(lore.indexOf("+")+1)
+					count=Number(count.replace("%",""))
+					return count
+				}
+			}
+			return 0
+		}
+		else
+			return 0
+	}
+	else
+		return 0
+}
+//获取行数
+
+分割线
+
+function getLore(item,line){
+  var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+  Item=item.getMCItemStack();
+  var nbt=Item.field_77990_d;
+  if(nbt==null){
+  return -1
+  };
+  if(nbt.func_74775_l("display")!==null){
+  var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+  if(line<=loreLength){
+  var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+  return lore
+  }}else{
+  return -1
+  }}
+//获取lore
+

@@ -1,0 +1,533 @@
+var player = world.getAllServerPlayers()
+for(a in player){
+var pl = player[a].getExpLevel()
+var name = player[a].getName()
+var id = "梁志超"
+var sl = world.getScoreboard().getPlayerScore(name,"Soul_Level","dummy")
+var hh = world.getScoreboard().getPlayerScore(name,"hh","dummy")
+var sll = sl+1
+if(sl <= 99){
+if(pl >= 10&&sl ==0){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 1 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5")}
+if(pl >= 20&&sl ==1){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5")}
+if(pl >= 30&&sl ==2){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5")}
+if(pl >= 40&&sl ==3){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7.5")}
+if(pl >= 50&&sl ==4){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7.5")}
+if(pl >= 60&&sl ==5){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7.5")}
+if(pl >= 70&&sl ==6){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 20")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 10")}
+if(pl >= 80&&sl ==7){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 20")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 10")}
+if(pl >= 90&&sl ==8){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 20")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 10")}
+if(pl >= 100&&sl ==9){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 20")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 10")
+player[a].sendMessage("&c&l您已经达到了魂士大圆满,最高可吸收百年魂环。")}
+if(hh >= 1){
+if(pl >= 110&&sl ==10){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 2 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 50")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 25")}
+if(pl >= 120&&sl ==11){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 50")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 25")}
+if(pl >= 130&&sl ==12){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 50")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 25")}
+if(pl >= 140&&sl ==13){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 50")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 25")}
+if(pl >= 150&&sl ==14){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 70")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 35")}
+if(pl >= 160&&sl ==15){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 70")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 35")}
+if(pl >= 170&&sl ==16){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 70")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 35")}
+if(pl >= 180&&sl ==17){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 70")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 35")}
+if(pl >= 190&&sl ==18){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 100")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 50")}
+if(pl >= 200&&sl ==19){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 100")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 50")
+player[a].sendMessage("&c&l您已经达到了魂师大圆满,最高可吸收百年魂环。")}}
+if(hh >= 2){
+if(pl >= 210&&sl ==20){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 3 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 220&&sl ==21){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 230&&sl ==22){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 240&&sl ==23){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 250&&sl ==24){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 260&&sl ==25){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 100")}
+if(pl >= 270&&sl ==26){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 400")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 200")}
+if(pl >= 280&&sl ==27){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 400")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 200")}
+if(pl >= 290&&sl ==28){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 400")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 200")}
+if(pl >= 300&&sl ==29){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 400")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 200")
+player[a].sendMessage("&c&l您已经达到了大魂师大圆满,最高可吸收千年魂环。")}}
+if(hh >= 3){
+if(pl >= 310&&sl ==30){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 4 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 700")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 350")}
+if(pl >= 320&&sl ==31){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 700")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 350")}
+if(pl >= 330&&sl ==32){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 700")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 350")}
+if(pl >= 340&&sl ==33){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 700")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 350")}
+if(pl >= 350&&sl ==34){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 900")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 450")}
+if(pl >= 360&&sl ==35){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 900")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 450")}
+if(pl >= 370&&sl ==36){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 900")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 450")}
+if(pl >= 380&&sl ==37){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 900")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 450")}
+if(pl >= 390&&sl ==38){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 500")}
+if(pl >= 400&&sl ==39){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1200")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 600")
+player[a].sendMessage("&c&l您已经达到了魂尊大圆满,最高可吸收万年魂环。")}}
+if(hh >= 4){
+if(pl >= 410&&sl ==40){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 5 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 420&&sl ==41){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 430&&sl ==42){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 440&&sl ==43){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 450&&sl ==44){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 460&&sl ==45){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 1600")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 800")}
+if(pl >= 470&&sl ==46){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 2000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 1000")}
+if(pl >= 480&&sl ==47){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 2000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 1000")}
+if(pl >= 490&&sl ==48){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 2000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 1000")}
+if(pl >= 500&&sl ==49){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 3000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 1500")
+player[a].sendMessage("&c&l您已经达到了魂宗大圆满,最高可吸收万年魂环。")}}
+if(hh >= 5){
+if(pl >= 510&&sl ==50){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 6 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 520&&sl ==51){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 530&&sl ==52){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 540&&sl ==53){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 550&&sl ==54){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 560&&sl ==55){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 4000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2000")}
+if(pl >= 570&&sl ==56){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 5000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2500")}
+if(pl >= 580&&sl ==57){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 5000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2500")}
+if(pl >= 590&&sl ==58){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 5000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2500")}
+if(pl >= 600&&sl ==59){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 5000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 2500")
+player[a].sendMessage("&c&l您已经达到了魂王大圆满,最高可吸收十万年魂环。")}}
+if(hh >=6){
+if(pl >= 610&&sl ==60){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 7 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 620&&sl ==61){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 630&&sl ==62){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 640&&sl ==63){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 650&&sl ==64){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 660&&sl ==65){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 6000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 670&&sl ==66){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 7000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 680&&sl ==67){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 7000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 690&&sl ==68){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 7000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3000")}
+if(pl >= 700&&sl ==69){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 8000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 3500")
+player[a].sendMessage("&c&l您已经达到了魂帝大圆满,最高可吸收四十万年魂环。")}}
+if(hh >= 7){
+if(pl >= 710&&sl ==70){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 8 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 720&&sl ==71){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 730&&sl ==72){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 740&&sl ==73){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 750&&sl ==74){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 760&&sl ==75){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 770&&sl ==76){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 780&&sl ==77){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 790&&sl ==78){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 9000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 4000")}
+if(pl >= 800&&sl ==79){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")
+player[a].sendMessage("&c&l您已经达到了魂圣大圆满，最高可吸收六十万年魂环。")}}
+if(hh >= 8){
+if(pl >= 810&&sl ==80){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 9 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 820&&sl ==81){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 830&&sl ==82){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 840&&sl ==83){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 850&&sl ==84){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 860&&sl ==85){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 870&&sl ==86){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 880&&sl ==87){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 890&&sl ==88){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 10000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 5000")}
+if(pl >= 900&&sl ==89){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 12000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 6000")
+player[a].sendMessage("&c&l您已经达到了魂斗罗大圆满,最高可吸收百万年魂环。")}}
+if(hh >= 9){
+if(pl >= 910&&sl ==90){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard teams join 10 " + id)
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 920&&sl ==91){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 930&&sl ==92){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 940&&sl ==93){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 950&&sl ==94){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 960&&sl ==95){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 970&&sl ==96){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 980&&sl ==97){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 15000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 7000")}
+if(pl >= 990&&sl ==98){
+npc.executeCommand("scoreboard players add "+player[a].getName()+" Soul_Level 1")
+player[a].sendMessage("&6&l[属性更新]&b&l您升到了["+sll+"]级")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" attackDamage1 20000")
+npc.executeCommand("scoreboard players add "+player[a].getName()+" maxHealth1 10000")
+player[a].sendMessage("&6&l您已经达到了极限斗罗境界,请前往深渊冲击半神境界")}}}}

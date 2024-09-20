@@ -1,0 +1,860 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 1,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "/**
+*@Author 兲哥
+*著作权属于兲哥 2021/2/23起生效
+*/
+
+//运行钩子
+var HotNPC=Java.type(\"mchhui.hotnpc.HotNPC\");
+var io=new IONPC();
+var Tempdata=Java.type(\"mchhui.hotnpc.utlis.Tempdata\");
+var tempdata=HotNPC.tempdata;
+var listenerName=[\"whzs\"];
+var date=new Date()
+if(!tempdata.has(\"listeners\")){
+ tempdata.set(\"listeners\",new Tempdata())
+}
+listeners=tempdata.get(\"listeners\");
+if(!listeners.has(listenerName[0])){
+ listeners.set(listenerName[0], listenEvent(\"net.minecraftforge.event.entity.living.LivingHurtEvent\",\"HIGH\",
+    function(event){
+      try{
+        var EntityPlayerMP=Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+        var EntityDamageSource=Java.type(\"net.minecraft.util.EntityDamageSource\");
+        var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+        var Entity=Java.type(\"net.minecraft.entity.Entity\");
+        var ScriptEntity=Java.type(\"noppes.npcs.scripted.ScriptEntity\");
+        if(!(event.source instanceof EntityDamageSource)){
+          return;
+        }
+        whzs=io.get(\"武魂真身\");
+        sld=io.get(\"熟练度\");
+        if(event.source.func_76346_g() instanceof EntityPlayerMP){//攻击者
+          var player=new ScriptPlayer(event.source.func_76346_g());
+          plzs=whzs[player.getName()];
+          plsld=sld[player.getName()];
+          if(io.get(\"whzs\")[player.getName()]==1){
+            if(plzs==\"0\"){
+              event.ammount *= 1.05+(0.3*(Number(plsld)/5));
+            }else if(plzs==\"2\"){
+              target=new ScriptEntity(event.entityLiving);
+              en=target.getSurroundingEntities(5);
+              for(i in en){
+                if(en[i]==player){
+                  continue;
+                }
+                whzs[player.getName()]=3;
+                io.set(\"武魂真身\",whzs);
+                damage(en[i],\"BypassesArmor\",event.ammount,[\"BypassesArmor\"],player);
+                whzs[player.getName()]=2;
+                io.set(\"武魂真身\",whzs);
+              }
+            }
+          }
+        }
+        //被攻击者
+        if(event.entityLiving instanceof EntityPlayerMP){
+          var target=new ScriptPlayer(event.entityLiving);
+          tazs=whzs[target.getName()];
+          tasld=sld[target.getName()];
+          if(io.get(\"whzs\")[target.getName()]==1){
+            if(tazs==\"1\"){
+              event.ammount *= (100-10-(5*Number(tasld/10)))/100;
+              npc.say((100-10-(5*Number(tasld/10)))/100)
+            }
+          }
+        }
+      }catch(e){npc.say(e)}
+  }
+ ))
+ npc.say(\"whzs受伤监听成功\")
+}
+// unListenEvent(listeners.get(listenerName[0]).getEventType(),listeners.get(listenerName[0]).getListener(),listeners.get(listenerName[0]).getBus());
+// listeners.remove(listenerName[0]);
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function damage(target,type,amount,data,form){
+Array.prototype.equals = function (obj) {
+for(x in this){
+if(obj==this[x]){
+return true;
+ }
+}
+return false;
+}
+var DamageSource=(form!=null)? Java.type(\"net.minecraft.util.EntityDamageSource\"):Java.type(\"net.minecraft.util.DamageSource\")
+damageSource=(form!=null)? new DamageSource(\"\"+type,form.getMCEntity()):new DamageSource(\"\"+type)
+if(data!=null){
+if(data.equals(\"DamageCreative\")){damageSource.func_76359_i()}//伤害创造(让伤害可以伤害创造玩家)
+if(data.equals(\"BypassesArmor\")){damageSource.func_76348_h()}//破甲(无视护甲的伤害)
+if(data.equals(\"DamageAbsolute\")){damageSource.func_151518_m()}//真伤(绝对的伤害)
+if(data.equals(\"DifficultyScaled\")){damageSource.func_76351_m()}//难度影响(受游戏难度影响(简单 普通 困难))
+if(data.equals(\"Explosion\")){damageSource.func_94540_d()}//爆炸伤害
+if(data.equals(\"Fire\")){damageSource.func_76361_j()}//火焰伤害
+if(data.equals(\"Magic\")){damageSource.func_82726_p()}//魔法伤害
+if(data.equals(\"Projectile\")){damageSource.func_76349_b()}//抛射物
+//注:魔法伤害不自带破甲 请使用预设MAGIC或您自己添加属性(这些不是预设 而是独立的属性)
+}
+target.getMCEntity().func_70097_a(damageSource,amount)
+//伤害某实体
+/*
+*ScriptEntity target:目标实体
+*String type:伤害类型
+*int amount:伤害值
+*String[] data:属性
+*ScriptEntity form:攻击者
+*/
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type(\"java.io.File\");
+  var FileOutputStream = Java.type(\"java.io.FileOutputStream\");
+  var BufferedReader = Java.type(\"java.io.BufferedReader\");
+  var InputStreamReader = Java.type(\"java.io.InputStreamReader\");
+  var FileInputStream = Java.type(\"java.io.FileInputStream\");
+  var StringBuilder=Java.type(\"java.lang.StringBuilder\");
+  var RootDirectory = new File(\"\");
+  var folder = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval(\"(\"+sb.toString()+\")\");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print(\"请输入对象\");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function Listener(eventType,listener,bus){
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ this.eventType=eventType;
+ this.listener=listener;
+ this.bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ this.getEventType=function(){
+  return this.eventType;
+ }
+ this.getListener=function(){
+  return this.listener;
+ }
+ this.getBus=function(){
+  return this.bus;
+ }
+}
+/**
+*EventListener listenEvent(String eventType,String priority,function listener)
+*-eventType:你要监听的事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-priority:你的事件优先级 从低到高LOWEST LOW NORMAL HIGH HIGHEST
+*-listener:事件方法
+*Return:
+*-EventListener:事件监听者
+*监听事件并返回监听对象
+*bus: event.entityPlayer在这个事件就是玩家
+*/
+function listenEvent(eventType,priority,listener,bus){
+ var Event=Java.type(eventType);
+    try{
+     var IEventListener=Java.type(\"net.minecraftforge.fml.common.eventhandler.IEventListener\");
+     var EventPriority=Java.type(\"net.minecraftforge.fml.common.eventhandler.EventPriority\");
+    }catch(err){
+     var IEventListener=Java.type(\"cpw.mods.fml.common.eventhandler.IEventListener\");
+     var EventPriority=Java.type(\"cpw.mods.fml.common.eventhandler.EventPriority\");
+    }
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ var event=new Event();
+    if(priority==\"LOW\"){
+     priority=EventPriority.LOW;
+    }
+    if(priority==\"HIGH\"){
+     priority=EventPriority.HIGH;
+    }
+    if(priority==\"NORMAL\"){
+     priority=EventPriority.NORMAL;
+    }
+    if(priority==\"LOWEST\"){
+     priority=EventPriority.LOWEST;
+    }
+    if(priority==\"HIGHEST\"){
+     priority=EventPriority.HIGHEST;
+    }
+ var EventListener=Java.extend(IEventListener,{
+  invoke:listener
+ });
+ listener=new EventListener();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField(\"busID\");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().register(busID,priority,listener);
+ return new Listener(eventType,listener,bus);
+}
+/**
+*void unListenEvent(IEventListener listener)
+*-listener:事件方法
+*取消监听事件
+*/
+function unListenEvent(eventType,listener,bus){
+ var Event=Java.type(eventType);
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ var event=new Event();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField(\"busID\");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().unregister(busID,listener);
+}
+
+
+
+
+
+
+
+
+//更新钩子
+pls=world.getAllServerPlayers()
+io=new IONPC()
+date=new Date()
+for(i in pls){
+  player=pls[i];
+  whzs=io.get(\"武魂真身\");
+  sld=io.get(\"熟练度\");
+  if(whzs[player.getName()]!=undefined){
+    whzs_=io.get(\"whzs\")
+    lqtm=io.get(\"lqtm\")
+    lqwc=io.get(\"lqwc\")
+    zstm=io.get(\"zstm\")
+    if(whzs_[player.getName()]==1){
+      if(zstm[player.getName()]<=date.getTime()){
+        player.sendMessage(\"§c§l武魂真身已结束\")
+        whzs_[player.getName()]=0
+        io.set(\"whzs\",whzs_);
+        lqtm[player.getName()]=date.getTime()+35000;
+        io.set(\"lqtm\",lqtm);
+      }
+    }else{
+      if(lqtm[player.getName()]<=date.getTime()&&lqwc[player.getName()]==0){
+        player.sendMessage(\"§a§l武魂真身已冷却完毕\")
+        lqwc[player.getName()]=1
+        io.set(\"lqwc\",lqwc);
+      }
+      if(player.getHeldItem()!=null){
+        if(player.isSneaking()&&judgeLore(player.getHeldItem(),\"持有者\") >= 0){
+          if(lqwc[player.getName()]!=0){
+            player.sendMessage(\"§6§l你开启了武魂真身\");
+            whzs_[player.getName()]=1;
+            lqwc[player.getName()]=0;            zstm[player.getName()]=date.getTime()+Number(whzs[player.getName()]==\"2\"?(8+Number(sld[player.getName()])):(10+ 2*Number(sld[player.getName()])))*1000
+            io.set(\"whzs\",whzs_);
+            io.set(\"lqwc\",lqwc);
+            io.set(\"zstm\",zstm);
+          }else{
+            player.sendMessage(\"§5§l武魂真身冷却中\")
+          }
+        }
+      }
+    }
+  }
+}
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type(\"java.io.File\");
+  var FileOutputStream = Java.type(\"java.io.FileOutputStream\");
+  var BufferedReader = Java.type(\"java.io.BufferedReader\");
+  var InputStreamReader = Java.type(\"java.io.InputStreamReader\");
+  var FileInputStream = Java.type(\"java.io.FileInputStream\");
+  var StringBuilder=Java.type(\"java.lang.StringBuilder\");
+  var RootDirectory = new File(\"\");
+  var folder = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval(\"(\"+sb.toString()+\")\");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print(\"请输入对象\");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "//更新钩子
+pls=world.getAllServerPlayers()
+io=new IONPC()
+date=new Date()
+for(i in pls){
+  player=pls[i];
+  whzs=io.get(\"武魂真身\");
+  sld=io.get(\"熟练度\");
+  if(whzs[player.getName()]!=undefined){
+    whzs_=io.get(\"whzs\")
+    lqtm=io.get(\"lqtm\")
+    lqwc=io.get(\"lqwc\")
+    zstm=io.get(\"zstm\")
+    if(whzs_[player.getName()]==1){
+      if(zstm[player.getName()]<=date.getTime()){
+        player.sendMessage(\"§c§l武魂真身已结束\")
+        whzs_[player.getName()]=0
+        io.set(\"whzs\",whzs_);
+        lqtm[player.getName()]=date.getTime()+30000;
+        io.set(\"lqtm\",lqtm);
+      }
+    }else{
+      if(lqtm[player.getName()]<=date.getTime()&&lqwc[player.getName()]==0){
+        player.sendMessage(\"§a§l武魂真身已冷却完毕\")
+        lqwc[player.getName()]=1
+        io.set(\"lqwc\",lqwc);
+      }
+      if(player.getHeldItem()!=null){
+        if(player.isSneaking()&&judgeLore(player.getHeldItem(),\"持有者\") >= 0){
+          if(lqwc[player.getName()]!=0){
+          	ball(2,\"reddust\")
+            whzs_[player.getName()]=1;
+            lqwc[player.getName()]=0;            zstm[player.getName()]=date.getTime()+Number(whzs[player.getName()]==\"2\"?(8+Number(sld[player.getName()])):(10+ 0.2*Number(sld[player.getName()])))*1000
+            player.sendMessage(\"§6§l你开启了武魂真身,持续\"+Number(whzs[player.getName()]==\"2\"?(8+0.2*Number(sld[player.getName()])):(10+ 0.2*Number(sld[player.getName()])))+\"秒\");            
+            io.set(\"whzs\",whzs_);
+            io.set(\"lqwc\",lqwc);
+            io.set(\"zstm\",zstm);
+          }else{
+            player.sendMessage(\"§5§l武魂真身冷却中\")
+          }
+        }
+      }
+    }
+  }
+}
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type(\"java.io.File\");
+  var FileOutputStream = Java.type(\"java.io.FileOutputStream\");
+  var BufferedReader = Java.type(\"java.io.BufferedReader\");
+  var InputStreamReader = Java.type(\"java.io.InputStreamReader\");
+  var FileInputStream = Java.type(\"java.io.FileInputStream\");
+  var StringBuilder=Java.type(\"java.lang.StringBuilder\");
+  var RootDirectory = new File(\"\");
+  var folder = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval(\"(\"+sb.toString()+\")\");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print(\"请输入对象\");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function ball(r,particle){
+for(var x=1;x<360;x++){
+var r = r;
+var x0 = player.getX(),y0 = player.getY(),z0 = player.getZ();
+var x1 = x0 + r * Math.sin(x * Math.PI / 180);
+var y1 = y0 + r * Math.cos(x * Math.PI / 180);
+var z1 = z0 + r * Math.cos(x * Math.PI / 180);
+var z2 = z0 + r * Math.sin(x * Math.PI / 180);
+world.spawnParticle(particle,x1,y1,z0,0,0,0,0,1);
+world.spawnParticle(particle,x1,y0,z1,0,0,0,0,1);
+world.spawnParticle(particle,x0,y1,z2,0,0,0,0,1);
+}
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 6351275722307102532L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "武魂真身1",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 46773794,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 2081216849668704771L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 46773794L,
+    "Rotation": [
+        178.94978f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

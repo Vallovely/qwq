@@ -1,0 +1,937 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 1,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "/**
+*@Author 兲哥
+*著作权属于兲哥 2021/2/16起生效
+*/
+var io = new IONPC();
+var EntityPlayerMP=Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+var command=new Command();
+command.getCommandName=function(){
+ return \"公会\";
+}
+command.getCommandUsage=function(sender){
+ return \"/公会\";
+}
+command.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command.canCommandSenderUseCommand=function(sender){
+  return true;//是否允许使用true允许false不允许只有OP能用
+}
+command.addTabCompletionOptions=function(sender,args){
+ var params = [];
+ if(args.length == 1){
+  params = [
+   \"help\",
+   \"admin\"
+  ]
+ }
+ if(args.length == 2){
+  if(args[0]==\"admin\"){
+   params = [
+    \"add\",
+    \"remove\",
+    \"ex\"
+   ]
+  }
+ }
+ if(args.length == 4){
+  if(args[0]==\"admin\"&&args[1]==\"add\"){
+   var allPlayers = world.getAllServerPlayers()
+   for(var x=0 in allPlayers){
+    params.push(allPlayers[x].getName())
+   }
+  }
+ }
+ return getListOfStringsMatchingLastWord(args[args.length - 1], [params], true);
+}
+command.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ var gh = io.get(\"所属公会\");
+ ghname = gh[player.getName()];
+ if(ghname==null){
+  gh[player.getName()] = \"无\";
+  ghname = gh[player.getName()];
+ }
+ io.set(\"所属公会\",gh);
+try{
+  if(args[0]==\"admin\"){
+    if(isOp(player.getName())){
+      try{
+        /*if(args[1]==\"ex\"){
+          player.sendMessage(\"&r&l成功修改公会\"+args[2]+\"&r&l的人数\")
+          egh=io.get(\"公会\"+args[2]);
+          egh.人数=Number(args[3]);
+          io.set(\"公会\"+args[2],egh);
+        }*/
+        if(args[1]==\"help\"){
+          player.sendMessage(\"&r&l公会管理用法:/公会 admin <add/remove> <gangname> [<playername> <x> <y> <z>]\")
+        }
+        if(args[1]==\"add\"){
+          try{hzname=world.getPlayer(args[3]).getName()}catch(e){player.sendMessage(\"&r&l玩家不在线\");return ;}
+          player.sendMessage(\"&r&l已成功创建公会\"+args[2]+\"&r&l会长\"+hzname);
+          newgh={\"坐标\":args[4]+\",\"+args[5]+\",\"+args[6],\"会长\":hzname,\"副会\":\"无\",\"成员\":hzname};
+          newgh[hzname]=\"2\";
+          newgh.加成=0.5;
+          io.set(\"公会\"+args[2],newgh);
+          gh[hzname]=args[2];
+          io.set(\"所属公会\",gh)
+        }
+        if(args[1]==\"remove\"){
+          rgh=io.get(\"公会\"+args[2]);
+          cy=rgh.成员
+          str=\"\";
+          for(i in cy){
+            if(cy[i]==\",\"){
+              gh[str]=\"无\";
+              str=\"\";
+            }else{
+              str+=cy[i];  
+            }
+          }
+          gh[str]=\"无\";
+          str=\"\";
+          io.set(\"所属公会\",gh)
+          io.remove(args[2]);
+          player.sendMessage(\"&r&l已成功删除公会\"+args[2]);
+        }
+      }catch(e){player.sendMessage(\"&r&l公会管理用法:/公会 admin <add/remove> <gangname> [<playername> <x> <y> <z>]\")}
+    }else{
+      player.sendMessage(\"§c未知指令。请使用/help来查看指令列表。\");
+    }
+  }else{
+    var gang = io.get(\"公会\"+ghname);
+    var lv;
+    if(gang[player.getName().toString]==undefined){
+      gang[player.getName().toString]=0;
+    }
+    lv=gang[player.getName()];
+    arg=args[0];
+    if(arg==0){
+      var str = gang.坐标;
+      eval(\"var point = [\"+str+\"]\");
+      x=point[0],y=point[1],z=point[2];
+      npc.executeCommand(\"/tp \"+player.getName()+\" \"+x+\" \"+y+\" \"+z);
+    }
+    if(arg==1){
+      var len = 1;
+      str=gang.成员
+      for(i in str){
+        if(str[i]==\",\"){len++};
+      }
+      player.sendMessage(\"公会:\"+ghname);
+      player.sendMessage(\"成员数量:\"+len+\"/5\");
+      player.sendMessage(\"会长:\"+gang.会长);
+      player.sendMessage(\"副会:\"+gang.副会);
+      player.sendMessage(\"成员:\"+gang.成员);
+    }
+    if(arg==2&&lv==0){
+      gh[player.getName()]=null;
+      gang[player.getName()]=null;
+      gang.成员=gang.成员.replace(\",\"+player.getName(),\"\");
+      io.set(\"所属公会\",gh);
+      io.set(\"公会\"+ghname,gang);
+      player.sendMessage(\"&r&l你已成功退出公会\");
+    }
+    if(arg==3){
+      var len = 1;
+      str=gang.成员
+      for(i in str){
+        if(str[i]==\",\"){len++};
+      }
+      if(len>=5){
+        player.sendMessage(\"&r&l公会已满\");
+      }
+      player.sendMessage(\"&r&l==点击玩家名字对他发出邀请!==\");
+      var str=\" [\"
+      var pls=world.getAllServerPlayers();
+      for(i in pls){
+        Name=pls[i].getName();
+        if(i!=0){
+          str+=\",\";
+        }
+        str+='{\"text\":\"§r<'+Name+'>\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 7 '+Name+'\"}}';
+      }
+      str+=\"]\";
+      npc.executeCommand(\"/tellraw \"+player.getName()+str);
+      player.sendMessage(\"&r&l==点击玩家名字对他发出邀请!==\");  
+    }
+    if(arg==4&&lv>=1){
+      player.sendMessage(\"&r&l==点击玩家名字来对他开除公会!==\");
+      var str1=\" [\"
+      var len = 1;
+      str=gang.成员
+      for(i in str){
+        if(str[i]==\",\"){len++};
+      }
+      eval((\"var name = ['\"+gang.成员.replace(/,/g,\"','\")+\"']\").toString());
+      for(i=0;i<len;i++){
+        if(i!=0){
+          str1+=\",\";
+        }
+        str1+='{\"text\":\"§r<'+name[i]+'>\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 5 '+name[i]+'\"}}';
+      }
+      str1+=\"]\";
+      npc.executeCommand(\"/tellraw \"+player.getName()+str1);
+      player.sendMessage(\"&r&l==点击玩家名字来对他开除公会!==\"); 
+    }
+    if(arg==5&&lv>=1){
+      if(gang[args[1]]==2||player.getName()==args[1]){
+        player.sendMessage(\"&r&l不可以开除会长或者自己\");
+      }else if(gang.成员.indexOf(args[1])>-1){
+        if(gang.副会==args[1]){
+          gang.副会=\"无\";
+        }
+        player.sendMessage(\"&r&l成功踢出\"+args[1]);
+        gh[args[1]]=\"无\"
+        io.set(\"所属公会\",gh);
+        gang.成员=gang.成员.replace(\",\"+args[1],\"\");
+        gang[args[1]]=null;
+        try{world.getPlayer(args[1]).sendMessage(\"&r&l你已被\"+player.getName()+\"踢出公会\"+ghname)}catch(e){}
+      }else{
+        player.sendMessage(\"&r&l公会里没有这个成员\")
+      }
+    }
+    if(arg==6&&lv==2){
+      player.sendMessage(\"&r&l==点击玩家名字来设置他为副会!==\");
+      var str1=\" [\"
+      var len = 1;
+      str=gang.成员
+      for(i in str){
+        if(str[i]==\",\"){len++};
+      }
+      eval((\"var name = ['\"+gang.成员.replace(/,/g,\"','\")+\"']\").toString());
+      for(i=0;i<len;i++){
+        if(i!=0){
+          str1+=\",\";
+        }
+        str1+='{\"text\":\"§r<'+name[i]+'>\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 8 '+name[i]+'\"}}';
+      }
+      str1+=\"]\";
+      npc.executeCommand(\"/tellraw \"+player.getName()+str1);
+      player.sendMessage(\"&r&l==点击玩家名字来设置他为副会!==\");
+    }
+    if(arg==7&&lv>=1){
+      name=args[1];
+      ghName = gh[name];
+      if(ghName==null){
+        gh[name] = \"无\";
+        ghName = gh[name];
+      }
+      io.set(\"所属公会\",gh);
+      if(ghName==\"无\"){
+        try{world.getPlayer(name).sendMessage(\"§r§l你被\"+player.getName()+\"§r§l邀请至公会\"+ghname/*+\"§r§l(30秒后自动拒绝)\"*/);
+        player.sendMessage(\"&r&l已向玩家\"+name+\"&r&l发出邀请\");}catch(e){player.sendMessage(\"&r&l该玩家不在线\")}
+        gh[name]=\"正在加入\"+ghname;
+        io.set(\"所属公会\",gh);
+        npc.executeCommand('/tellraw '+name+' [{\"text\":\"§a[同意]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 9 1\"}},{\"text\":\"§c[拒绝]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 9 0\"}}]');
+      }else if(ghName.indexOf(\"正在加入\")>-1){
+        player.sendMessage(\"&r&l该玩家正在被邀请\");
+      }else{
+        player.sendMessage(\"&r&l该玩家已在一个公会内\");
+      }
+    }
+    if(arg==8&&lv==2){
+      if(args[1]==player.getName()){
+        player.sendMessage(\"&r&l不可以把自己设置为副会\");
+      }else if(gang.成员.indexOf(args[1])>-1){
+        gang[args[1].toString()]=1;
+        gang[gang.副会.toString()]=0;
+        gang.副会=args[1];
+        player.sendMessage(\"&r&l成功将玩家\"+args[1]+\"设置为副会\")
+        try{world.getPlayer(args[1]).sendMessage(\"&r&l你被会长设置为副会\")}catch(e){}
+      }else{
+        player.sendMessage(\"&r&l公会里没有这个成员\")
+      }
+    }
+    if(arg==9){
+      if(gh[player.getName()].indexOf(\"正在加入\")>-1){
+        if(args[1]=0){
+          player.sendMessage(\"&r&l已拒绝\");
+          gh[player.getName()]=\"无\";
+        }else{
+          player.sendMessage(\"&r&l已同意\")
+          gh[player.getName()]=gh[player.getName()].replace(\"正在加入\",\"\");
+          gang=io.get(\"公会\"+gh[player.getName()]);
+          gang.成员+=\",\"+player.getName();
+          gang[player.getName().toString()]=0;
+          io.set(\"公会\"+gh[player.getName()],gang);
+        }
+        io.set(\"所属公会\",gh);
+
+      }else{
+        player.sendMessage(\"&r&l没有任何公会在邀请你\");
+      }
+    }
+    if(arg==\"help\"){
+      player.sendMessage(\"&r&l输入/公会点击要进行的操作即可\");
+    }
+    io.set(\"公会\"+ghname,gang);
+  }
+  }catch(e){if(ghname==\"无\"){
+  player.sendMessage(\"&r&l你不在任何一个公会\");
+ }else{
+    var gang = io.get(\"公会\"+ghname);
+  var lv;
+  if(gang[player.getName().toString]==undefined){
+    gang[player.getName().toString]=0;
+  }
+  lv=gang[player.getName()];
+  npc.executeCommand('/tellraw '+player.getName()+' [{\"text\":\"§r§l[返回公会]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 0\"}},{\"text\":\"§r§l[查看成员]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 1\"}}'+(lv==0?',{\"text\":\"§r§l[退出公会]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 2\"}}':'')+(lv==0?'':',{\"text\":\"§r§l[邀请成员]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 3\"}},{\"text\":\"§r§l[开除成员]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 4\"}}')+(lv==2?',{\"text\":\"§r§l[设置副会]\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/公会 6\"}}':'')+']');}}
+  return;
+}
+registerCommand(command);
+var HotNPC=Java.type(\"mchhui.hotnpc.HotNPC\");
+var Tempdata=Java.type(\"mchhui.hotnpc.utlis.Tempdata\");
+var tempdata=HotNPC.tempdata;
+var listenerName=[\"BlockEvent\",\"PlaceEvent\",\"attackevent\"];
+if(!tempdata.has(\"listeners\")){
+ tempdata.set(\"listeners\",new Tempdata())
+}
+listeners=tempdata.get(\"listeners\");
+if(!listeners.has(listenerName[0])){
+ listeners.set(listenerName[0],listenEvent(\"net.minecraftforge.event.world.BlockEvent\",\"HIGH\",
+function (event){
+var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+try{
+var player = new ScriptPlayer(event.player)
+if(isOp(player.getName())){
+  return;
+}
+if(io.get(\"所属公会\")[player.getName()]==undefined||io.get(\"所属公会\")[player.getName()]==\"无\"){
+    player.sendMessage(\"&r&l禁止破坏\");
+    event.setCanceled(true);
+    return;
+}
+if(io.get(\"公会\"+io.get(\"所属公会\")[player.getName()])[player.getName()]==0){
+  player.sendMessage(\"&r&l禁止破坏\");
+  event.setCanceled(true);
+  return;
+}
+gang=io.get(\"公会\"+io.get(\"所属公会\")[player.getName()])
+var str = gang.坐标;
+eval(\"var point = [\"+str+\"]\");
+x=point[0],y=point[1],z=point[2];
+var ScriptItemStack = Java.type(\"noppes.npcs.scripted.ScriptItemStack\");
+var Item = Java.type(\"net.minecraft.item.Item\");
+var ItemStack = Java.type(\"net.minecraft.item.ItemStack\");
+var block = Item.func_150898_a(event.block);
+var item = new ItemStack(block);
+var scriptItem = new ScriptItemStack(item);
+if(((event.x > x-4&&event.y > y-4&&event.z > z-4)&&(event.x < x+64&&event.y <y+64&&event.z <z+64))&&scriptItem.getName()!=\"minecraft:stained_glass\"){
+    return;
+}
+player.sendMessage(\"&r&l禁止破坏\");
+event.setCanceled(true);
+}catch(err){print(err)}
+}))
+npc.say(\"范围禁止修改方块监听成功\");
+}
+// unListenEvent(listeners.get(listenerName[0]).getEventType(),listeners.get(listenerName[0]).getListener(),listeners.get(listenerName[0]).getBus());
+// listeners.remove(listenerName[0]);
+
+if(!listeners.has(listenerName[1])){
+ listeners.set(listenerName[1],listenEvent(\"net.minecraftforge.event.world.BlockEvent.PlaceEvent\",\"HIGH\",
+function (event){
+var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+try{
+var player = new ScriptPlayer(event.player)
+if(isOp(player.getName())){
+  return;
+}
+if(io.get(\"所属公会\")[player.getName()]==undefined||io.get(\"所属公会\")[player.getName()]==\"无\"){
+    player.sendMessage(\"&r&l禁止破坏\");
+    event.setCanceled(true);
+    return;
+}
+if(io.get(\"公会\"+io.get(\"所属公会\")[player.getName()])[player.getName()]==0){
+  player.sendMessage(\"&r&l禁止破坏\");
+  event.setCanceled(true);
+  return;
+}
+gang=io.get(\"公会\"+io.get(\"所属公会\")[player.getName()])
+var str = gang.坐标;
+eval(\"var point = [\"+str+\"]\");
+x=point[0],y=point[1],z=point[2];
+var ScriptItemStack = Java.type(\"noppes.npcs.scripted.ScriptItemStack\");
+var Item = Java.type(\"net.minecraft.item.Item\");
+var ItemStack = Java.type(\"net.minecraft.item.ItemStack\");
+var block = Item.func_150898_a(event.block);
+var item = new ItemStack(block);
+var scriptItem = new ScriptItemStack(item);
+if(((event.x > x-4&&event.y > y-4&&event.z > z-4)&&(event.x < x+64&&event.y <y+64&&event.z <z+64))&&scriptItem.getName()!=\"minecraft:stained_glass\"){
+    return;
+}
+player.sendMessage(\"&r&l禁止破坏\");
+event.setCanceled(true);
+}catch(err){print(err)}
+}))
+npc.say(\"范围禁止修改方块监听成功\");
+}
+// unListenEvent(listeners.get(listenerName[1]).getEventType(),listeners.get(listenerName[1]).getListener(),listeners.get(listenerName[1]).getBus());
+// listeners.remove(listenerName[1]);
+if(!listeners.has(listenerName[2])){
+listeners.set(listenerName[2],listenEvent(\"net.minecraftforge.event.entity.living.LivingHurtEvent\",\"HIGH\",function(event){
+  try{
+    var EntityPlayerMP=Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+    var Entity=Java.type(\"net.minecraft.entity.Entity\");
+    var EntityDamageSource=Java.type(\"net.minecraft.util.EntityDamageSource\");
+    var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+    var ScriptEntity=Java.type(\"noppes.npcs.scripted.ScriptEntity\");
+    if(!(event.source instanceof EntityDamageSource)){
+        return;
+    }
+    if(!(event.source.func_76346_g() instanceof EntityPlayerMP)){
+        return;
+    }
+     if(!(event.entityLiving instanceof Entity)){
+      return;
+     }
+     var player=new ScriptPlayer(event.source.func_76346_g());
+     if(io.get(\"所属公会\")[player.getName()]==undefined||io.get(\"所属公会\")[player.getName()]==\"无\"){
+      return;
+     }
+     event.ammount = event.ammount*(1+Number(io.get(\"公会\"+io.get(\"所属公会\")[player.getName()]).加成));
+  }catch(e){npc.say(e)}
+}))
+npc.say(\"公会加成攻击监听监听成功\");
+}
+ unListenEvent(listeners.get(listenerName[2]).getEventType(),listeners.get(listenerName[2]).getListener(),listeners.get(listenerName[2]).getBus());
+ listeners.remove(listenerName[2]);
+function Listener(eventType,listener,bus){
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ this.eventType=eventType;
+ this.listener=listener;
+ this.bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ this.getEventType=function(){
+  return this.eventType;
+ }
+ this.getListener=function(){
+  return this.listener;
+ }
+ this.getBus=function(){
+  return this.bus;
+ }
+}
+/**
+*EventListener listenEvent(String eventType,String priority,function listener)
+*-eventType:你要监听的事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-priority:你的事件优先级 从低到高LOWEST LOW NORMAL HIGH HIGHEST
+*-listener:事件方法
+*Return:
+*-EventListener:事件监听者
+*监听事件并返回监听对象
+*bus: event.entityPlayer在这个事件就是玩家
+*/
+function listenEvent(eventType,priority,listener,bus){
+ var Event=Java.type(eventType);
+    try{
+     var IEventListener=Java.type(\"net.minecraftforge.fml.common.eventhandler.IEventListener\");
+     var EventPriority=Java.type(\"net.minecraftforge.fml.common.eventhandler.EventPriority\");
+    }catch(err){
+     var IEventListener=Java.type(\"cpw.mods.fml.common.eventhandler.IEventListener\");
+     var EventPriority=Java.type(\"cpw.mods.fml.common.eventhandler.EventPriority\");
+    }
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ var event=new Event();
+    if(priority==\"LOW\"){
+     priority=EventPriority.LOW;
+    }
+    if(priority==\"HIGH\"){
+     priority=EventPriority.HIGH;
+    }
+    if(priority==\"NORMAL\"){
+     priority=EventPriority.NORMAL;
+    }
+    if(priority==\"LOWEST\"){
+     priority=EventPriority.LOWEST;
+    }
+    if(priority==\"HIGHEST\"){
+     priority=EventPriority.HIGHEST;
+    }
+ var EventListener=Java.extend(IEventListener,{
+  invoke:listener
+ });
+ listener=new EventListener();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField(\"busID\");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().register(busID,priority,listener);
+ return new Listener(eventType,listener,bus);
+}
+/**
+*void unListenEvent(IEventListener listener)
+*-listener:事件方法
+*取消监听事件
+*/
+function unListenEvent(eventType,listener,bus){
+ var Event=Java.type(eventType);
+ var MinecraftForge=Java.type(\"net.minecraftforge.common.MinecraftForge\");
+ var event=new Event();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField(\"busID\");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().unregister(busID,listener);
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type(\"java.io.File\");
+  var FileOutputStream = Java.type(\"java.io.FileOutputStream\");
+  var BufferedReader = Java.type(\"java.io.BufferedReader\");
+  var InputStreamReader = Java.type(\"java.io.InputStreamReader\");
+  var FileInputStream = Java.type(\"java.io.FileInputStream\");
+  var StringBuilder=Java.type(\"java.lang.StringBuilder\");
+  var RootDirectory = new File(\"\");
+  var folder = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval(\"(\"+sb.toString()+\")\");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print(\"请输入对象\");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function isOp(playerName){
+ var MinecraftServer=Java.type(\"net.minecraft.server.MinecraftServer\");
+ var ops=MinecraftServer.func_71276_C().func_71203_ab().func_152606_n();
+ for(var x in ops){
+    if(ops[x]==playerName){
+     return true;
+    }
+ }
+ return false;
+}
+function getListOfStringsMatchingLastWord(startsText, textArrays, ignoreCase) {
+  var ArrayList = Java.type(\"java.util.ArrayList\");
+  var arr = new ArrayList();
+  var textArray = textArrays.shift();
+  if (textArray == null) {
+    return arr;
+  }
+  if (ignoreCase) {
+    startsText = startsText.toLowerCase();
+  }
+  for (var x in textArray) {
+    var text = textArray[x];
+    if (text == null) {
+      continue;
+    }
+    if (ignoreCase) {
+      text = text.toLowerCase();
+    }
+    if (text.startsWith(startsText)) {
+      arr.add(textArray[x]);
+    }
+  }
+  arr.addAll(getListOfStringsMatchingLastWord(startsText, textArrays))
+  return arr;
+}
+function Command(name,usage){
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:/noppes 则返回noppes
+  */
+ };
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入\"/help 你的指令名\" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 4;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(){
+  return true;
+ }
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  var CommandBase=Java.type(\"net.minecraft.command.CommandBase\");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions,
+   func_184882_a:this.canCommandSenderUseCommand
+  });
+  return new MCCommand();
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type(\"net.minecraft.server.MinecraftServer\");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -2795919196961721179L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "公会",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 56100568,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 6459182281226117703L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 56100355L,
+    "Rotation": [
+        -16.350494f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

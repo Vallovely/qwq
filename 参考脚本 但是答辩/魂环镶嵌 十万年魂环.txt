@@ -1,0 +1,224 @@
+//后门已移除
+var held = player.getHeldItem();
+var baoshi = player.getInventory()[0];
+if(held !== null&&baoshi !== null){
+ if(judgeLore(held,"§7§l<< §b§l| §7§l◆ §4§l十万年魂环镶嵌孔 §7§l◆ §b§l| §7§l>>") > -1){
+  if(getLore(baoshi,0).indexOf("[魂环]")>=-1&&baoshi.getStackSize()>0){
+   var bsl = judgeLore(held,"§7§l<< §b§l| §7§l◆ §4§l十万年魂环镶嵌孔 §7§l◆ §b§l| §7§l>>")
+   var attack = judgeLore(baoshi,"攻击伤害")
+   if(attack!=-1){
+    var att = getLore(baoshi,attack)
+    var numAtt = getNumber(att)
+   }else{
+    var numAtt = 0
+   }
+   var attackM = judgeLore(baoshi,"攻击加成")
+   if(attackM!=-1){
+    var attM = getLore(baoshi,attackM)
+    var numAttM = getNumber(attM)/100
+   }else{
+    var numAttM = 0
+   }
+   var health = judgeLore(baoshi,"最大生命")
+   if(health!=-1){
+    var reg = getLore(baoshi,health)
+    var numReg = getNumber(reg)
+   }else{
+    var numReg = 0
+   }
+   var healthM = judgeLore(baoshi,"生命加成")
+   if(healthM!=-1){
+    var regM = getLore(baoshi,healthM)
+    var numRegM = getNumber(regM)/100
+   }else{
+    var numRegM = 0
+   }
+   var speed = judgeLore(baoshi,"速度加成")
+   if(speed!=-1){
+    var speed1 = getLore(baoshi,speed)
+    var numSpeed = getNumber(speed1)/100
+   }else{
+    var numSpeed = 0
+   }
+   var cgl = judgeLore(baoshi,"成功几率")
+   if(cgl!=-1){
+    var cgl1 = getLore(baoshi,cgl)
+    var numCgl = getNumber(cgl1)/100
+   }else{
+    var numCgl = 0
+   }
+   var sjs = Math.random()
+   baoshi.setStackSize(baoshi.getStackSize()-1)
+   if(sjs<=numCgl){
+    setItemLore(held,bsl,"§7§l<< §b§l| §7§l◆ §4§l"+baoshi.getDisplayName()+"§7§l◆ §b§l| §7§l>>")
+    attr("generic.attackDamage",numAtt,0)
+    attr("generic.attackDamage",numAttM,1)
+    attr("generic.maxHealth",numReg,0)
+    attr("generic.maxHealth",numRegM,1)
+    attr("generic.movementSpeed",numSpeed,1)
+    player.sendMessage("§f镶嵌成功！")
+   }else{
+    player.sendMessage("§f镶嵌失败！")
+   }
+  }else{
+   player.sendMessage("§f这个东西不是魂环！请把要镶嵌的魂环放在第一格哦亲！")
+  }
+ }else{
+  player.sendMessage("§f这个B东西不能镶嵌魂环！请手持要镶嵌魂环的物品！")
+ }
+}else{
+ player.sendMessage("§f请把魂环放在物品栏第一格并手持要镶嵌魂环的物品！")
+}
+function addItemLore(item,lore){
+			var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound")
+	var NBTTagList=Java.type("net.minecraft.nbt.NBTTagList")
+	var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+nbt=item.getMCItemStack().field_77990_d;
+if(nbt==null){
+nbt=new NBTTagCompound();
+}
+if(nbt.func_74775_l("display")=="{}"){
+displayTag=new NBTTagCompound();
+nbt.func_74782_a("display",displayTag);
+}
+if(nbt.func_74775_l("display").func_74781_a("Lore")==null){
+loreList=new NBTTagList();
+nbt.func_74775_l("display").func_74782_a("Lore",loreList);
+}
+item.getMCItemStack().field_77990_d=nbt;
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_74742_a(new NBTTagString(lore))
+//为物品增加lore
+/*
+*ScriptItemStack item:要增加lore的物品
+*String lore:要增加的lore
+*/
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)
+}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+};
+function attr(attrName,attrAmount,attrOperation)
+{
+var Item=player.getHeldItem()
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound")
+var itemStack = Item.getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null)
+{
+root = new NBTTagCompound();
+}
+var attributeModifiers = root.func_150295_c("AttributeModifiers", 10);
+var attrList=attributeModifiers.func_74745_c();
+for(var n=0;n<attrList;n++)
+{
+var test=attributeModifiers.func_150305_b(n);
+if(test.func_74779_i("AttributeName")==attrName&&test.func_74762_e("Operation")==attrOperation)
+{
+var amount=test.func_74769_h("Amount");
+amount=amount+attrAmount;
+test.func_74780_a("Amount",amount);
+break
+}
+if(n==attrList-1)
+{
+add(attrName,attrAmount,attrOperation);
+break
+}
+}
+};
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function getNumber(string){
+ var string1 = string.replace(/§[0-9]/g,"")
+ return Number(string1.replace(/[^0-9]/ig,""))
+}
+function add(attribute,amount,operation)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+var UUID = Java.type("java.util.UUID");
+var itemStack = player.getHeldItem().getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null)
+{
+root = new NBTTagCompound();
+}
+var attributeModifiers = root.func_150295_c("AttributeModifiers", 10);
+var attributeModifier = new NBTTagCompound();
+var uuid = UUID.randomUUID();
+attributeModifier.func_74778_a("AttributeName",attribute);
+attributeModifier.func_74778_a("Name","My Modifier");
+attributeModifier.func_74780_a("Amount", amount);
+attributeModifier.func_74768_a("Operation", operation);
+attributeModifier.func_74772_a("UUIDMost", uuid.getMostSignificantBits());
+attributeModifier.func_74772_a("UUIDLeast", uuid.getLeastSignificantBits());
+attributeModifiers.func_74742_a(attributeModifier);
+root.func_74782_a("AttributeModifiers", attributeModifiers);
+itemStack.field_77990_d = root;
+};

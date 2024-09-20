@@ -1,0 +1,94 @@
+﻿//湮灭风暴 [湮灭虚无] [黑暗风暴 ][支流印随] [回轮] [空虚]
+//死亡钩子[湮灭虚无]
+dieAll()
+function dieAll(){
+	var entity = npc.getSurroundingEntities(7, 1)
+	for (var i in entity){
+		entity[i].sendMessage(npc.getName()+":§c全他妈给爷一块死哈哈哈哈哈哈哈哈哈!")
+		entity[i].setHealth(0)
+	}
+	return;
+}
+//伤害钩子[支流印随]
+strong()
+function strong(){
+	var entity = npc.getSurroundingEntities(7, 1)
+	var count = entity.length
+	event.setDamage(event.getDamage()/count)
+	return;
+}
+//伤害钩子[回轮]
+var num=Math.random()*100
+var max=npc.getMaxHealth()
+var get=npc.getHealth()
+if(num<=10){
+	npc.setHealth(max*0.05+get)
+	event.setCancelled(true)
+	event.getSource().sendMessage("§b§l[回轮之术]§f湮灭风暴回复5pct生命")
+}
+//伤害钩子[黑暗风暴]
+npc.getJob().spawnEntity(1)
+npc.getJob().spawnEntity(1)
+//攻击钩子[空虚]
+var entity=npc.getSurroundingEntities(5,1)
+var x=npc.getSurroundingEntities(5,1).length
+var num1=Math.random()*100
+if(num1<=20){
+	for(i in entity){
+		var high=Math.floor(Math.random()*10)
+		entity[i].setPosition(entity[i].getX(),entity[i].getY()+high+10,entity[i].getZ())
+		entity[i].addPotionEffect(8,high+x,170,true)
+		entity[i].sendMessage("§b§l[空虚之法]§f湮灭风暴施法强度为§c"+high)
+	}
+}
+//黑暗风暴
+//碰撞钩子
+var entity=npc.getSurroundingEntities(2,1)
+for(i in entity){
+	var max=entity[i].getMaxHealth()
+	var get=entity[i].getHealth()
+	var health=npc.getHealth()
+	entity[i].setPosition(npc.getX(),npc.getY()+2,npc.getZ())
+	entity[i].setHealth(get-(max*0.001))
+	npc.setHealth(health-1)
+}
+
+/**
+*@Author GXW_SA[爱谷]
+*著作权属于GXW_SA[爱谷] 2020/8/16起生效
+**/
+/**
+湮灭虚无
+boss死亡时秒杀范围7格内玩家
+支流印随
+boss所受任何伤害均除以7格范围内玩家数量
+回轮
+boss受击有10%概率回复5%生命值
+空虚
+boss攻击有20%概率将5格内玩家击飞0-10格同时附加[(0-10)+玩家数量]s无法跳跃
+黑暗风暴
+boss受击召唤2个黑暗风暴
+每个黑暗风暴会以2倍正常速度对boss攻击目标形成半径2格的包围圈
+每触碰到实体将会扣除5%生命并将范围2格内玩家击飞至黑暗风暴上方一格处且扣除玩家0.1%最大生命值[每个风暴最大可扣除2%]
+**/
+
+funtion awa(array){
+let n=array[0];
+let times=1;
+for(let qwq=1;qwq<nums.length;qwq++){
+	if(n==array[qwq]){
+		times++;
+	}else{
+		times--;
+		if(times==0){
+			n=array[i+1];
+		}
+	}
+}
+return num;
+}
+	
+
+
+
+	

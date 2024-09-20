@@ -1,0 +1,12 @@
+﻿var apl=world.getAllServerPlayers()
+for(i in apl){
+	if(apl[i].getArmor(3)!==null){
+		if(apl[i].getArmor(3).getDisplayName()=="§e§l[精神]§f§l无主之物"){		
+             apl[i].setArmor(3,npc.getArmor(0))		
+		     apl[i].getArmor(3).setCustomName("§d§l[精神]§c§l"+apl[i].getName())
+			 apl[i].sendMessage("§b§l[未知]§c堕落荒原！迎来新的“生命”！")
+			 npc.executeCommand("/playsound mob.enderdragon.growl "+apl[i].getName())
+             apl[i].removeAllItems(npc.getProjectileItem()) 
+		}
+	}
+}

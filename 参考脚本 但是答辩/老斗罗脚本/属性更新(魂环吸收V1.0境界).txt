@@ -1,0 +1,713 @@
+//更新钩子,早期脚本,简单易懂
+/*
+*@Rimuru Tempest
+*著作权属于Rimuru,改版权一经发现追究责任
+*/
+var players = world.getAllServerPlayers();
+for(x=0;x<players.length;x++)
+{
+SuckBlood(score(players[x],"Blood")/10000,score(players[x],"maxHealth1")*0.05)
+Blast(score(players[x],"Blast")/10000,1)
+Heal()
+if(players[x].isSneaking()==true)
+{
+if(players[x].getHeldItem()!=null)
+{
+if(players[x].getHeldItem().getDisplayName()=="§f§l属性更新")
+{
+if(players[x].getInventory()[0]!=null)
+{
+if(getLore(players[x].getInventory()[0],0)=="§c持有者:"+players[x].getName()+"")
+{
+if(Math.floor(players[x].getExpLevel()/10)>score(players[x],"Soul_Level")&&score(players[x],"Soul_Level")!=99)
+{
+skr();
+setItemLore(players[x].getInventory()[0],1,"§4§l攻击伤害:+"+score(players[x],"attackDamage1")+"");
+setItemLore(players[x].getInventory()[0],2,"§c§l攻击加成:+"+score(players[x],"attackDamage2")+"%");
+setItemLore(players[x].getInventory()[0],3,"§2§l最大生命:+"+score(players[x],"maxHealth1")+"");
+setItemLore(players[x].getInventory()[0],4,"§a§l生命加成:+"+score(players[x],"maxHealth2")+"%");
+setItemLore(players[x].getInventory()[0],5,"§e§l吸血概率:+"+score(players[x],"Blood")+"%");
+setItemLore(players[x].getInventory()[0],6,"§6§l暴击概率:+"+score(players[x],"Blast")+"%");
+setItemLore(players[x].getInventory()[0],7,"§b§l每秒回血:+"+score(players[x],"Heal")+"");
+replace(score(players[x],"attackDamage1"),score(players[x],"attackDamage2"),score(players[x],"maxHealth1"),score(players[x],"maxHealth2"));
+}
+else
+{
+players[x].sendMessage("§a没有需要更新的哦")
+}
+}
+else
+{
+players[x].sendMessage("§c请将武魂放在物品栏第一格")
+}
+}
+else
+{
+players[x].sendMessage("§c请将武魂放在物品栏第一格")
+}
+}
+}
+}
+}
+function skr()
+{
+var levels = world.getScoreboard().getPlayerScore(players[x].getName(),"True_Level","dummy");
+var Soul_Level = world.getScoreboard().getPlayerScore(players[x].getName(),"Soul_Level","dummy");
+var id = players[x].getName();
+var N=Soul_Level+1;
+if(Soul_Level<10)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 3");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 15");
+if(levels>=10&&Soul_Level==0)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hs " + id)
+	
+}
+if(levels>=20&&Soul_Level==1)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=30&&Soul_Level==2)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=40&&Soul_Level==3)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=50&&Soul_Level==4)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=60&&Soul_Level==5)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=70&&Soul_Level==6)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=80&&Soul_Level==7)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=90&&Soul_Level==8)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=100&&Soul_Level==9)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<20&&Soul_Level>=11)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 5");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 25");
+if(levels>=110&&Soul_Level==11)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hss " + id)
+}
+if(levels>=120&&Soul_Level==12)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=130&&Soul_Level==13)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=140&&Soul_Level==14)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=150&&Soul_Level==15)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=160&&Soul_Level==16)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=170&&Soul_Level==17)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=180&&Soul_Level==18)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=190&&Soul_Level==19)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<30&&Soul_Level>=21)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 20");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 100");
+if(levels>=210&&Soul_Level==21)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join dhs " + id)
+}
+if(levels>=220&&Soul_Level==22)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=230&&Soul_Level==23)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=240&&Soul_Level==24)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=250&&Soul_Level==25)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=260&&Soul_Level==26)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=270&&Soul_Level==27)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=280&&Soul_Level==28)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=290&&Soul_Level==29)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<40&&Soul_Level>=31)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 40");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 200");
+if(levels>=310&&Soul_Level==31)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hz " + id)
+}
+if(levels>=310&&Soul_Level==32)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=320&&Soul_Level==33)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=340&&Soul_Level==34)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=350&&Soul_Level==35)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=360&&Soul_Level==36)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=370&&Soul_Level==37)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=380&&Soul_Level==38)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=390&&Soul_Level==39)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<50&&Soul_Level>=41)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 60");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 300");
+if(levels>=410&&Soul_Level==41)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hzz " + id)
+}
+if(levels>=420&&Soul_Level==42)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=430&&Soul_Level==43)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=440&&Soul_Level==44)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=450&&Soul_Level==45)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=460&&Soul_Level==46)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=470&&Soul_Level==47)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=480&&Soul_Level==48)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=490&&Soul_Level==49)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<60&&Soul_Level>=51)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 90");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 450");
+if(levels>=510&&Soul_Level==51)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hw " + id)
+}
+if(levels>=520&&Soul_Level==52)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=530&&Soul_Level==53)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=540&&Soul_Level==54)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=550&&Soul_Level==55)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=560&&Soul_Level==56)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=570&&Soul_Level==57)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=580&&Soul_Level==58)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=590&&Soul_Level==59)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<70&&Soul_Level>=61)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 150");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 750");
+if(levels>=610&&Soul_Level==61)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hd " + id)
+}
+if(levels>=620&&Soul_Level==62)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=630&&Soul_Level==63)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=640&&Soul_Level==64)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=650&&Soul_Level==65)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=660&&Soul_Level==66)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=670&&Soul_Level==67)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=680&&Soul_Level==68)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=690&&Soul_Level==69)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<80&&Soul_Level>=71)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 300");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 1500");
+if(levels>=710&&Soul_Level==71)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hsss " + id)
+}
+if(levels>=720&&Soul_Level==72)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=730&&Soul_Level==73)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=740&&Soul_Level==74)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=750&&Soul_Level==75)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=760&&Soul_Level==76)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=770&&Soul_Level==77)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=780&&Soul_Level==78)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=790&&Soul_Level==79)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<90&&Soul_Level>=81)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 500");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 2500");
+if(levels>=810&&Soul_Level==81)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join hdl " + id)
+}
+if(levels>=820&&Soul_Level==82)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=830&&Soul_Level==83)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=840&&Soul_Level==84)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=850&&Soul_Level==85)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=860&&Soul_Level==86)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=870&&Soul_Level==87)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=880&&Soul_Level==88)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=890&&Soul_Level==89)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	players[x].sendMessage("§a到大圆满了哦,快去吸收魂环吧")
+}
+}
+if(Soul_Level<100&&Soul_Level>=91)
+{
+npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage1 1000");
+npc.executeCommand("scoreboard players add "+players[x].getName()+" maxHealth1 5000");
+if(levels>=910&&Soul_Level==91)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard teams join fh " + id)
+}
+if(levels>=920&&Soul_Level==92)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=930&&Soul_Level==93)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=940&&Soul_Level==94)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=950&&Soul_Level==95)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+}
+if(levels>=960&&Soul_Level==96)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage2 3");
+}
+if(levels>=970&&Soul_Level==97)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage2 3");
+}
+if(levels>=980&&Soul_Level==98)
+{
+	players[x].sendMessage("§b§l[传灵塔]:§6§l魂力UP！升至§a§l["+N+"]§6§l级")
+	npc.executeCommand("scoreboard players add " + id + " Soul_Level 1")
+	npc.executeCommand("scoreboard players add "+players[x].getName()+" attackDamage2 3");
+}
+}
+};
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+};
+function score(Substance,objective)
+{
+var Points=world.getScoreboard().getPlayerScore(""+Substance.getName()+"",""+objective+"",""+objective+"");
+return Points;
+};
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)
+}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+};
+function SuckBlood(Chance,Amount)
+{
+if(score(players[x],"Attack")>0)
+{
+if(Math.random()<Chance)
+{
+players[x].setHealth(players[x].getHealth()+Amount);
+players[x].sendMessage("§b[斗罗大陆RPG]:§c吸血!吸取了"+Math.floor(Amount)+"点§3HP");
+}
+}
+}
+function Blast(Chance,LVL)
+{
+if(score(players[x],"Attack")>0)
+{
+if(Math.random()<Chance)
+{
+players[x].addPotionEffect(5,1,LVL,false);
+var Damage=(LVL+1)*1.3+1;
+players[x].sendMessage("§b[斗罗大陆RPG]:§6暴击!"+Damage+"倍伤害");
+}
+}
+};
+function Heal()
+{
+if(players[x].getHealth()+score(players[x],"Heal")<=players[x].getMaxHealth()&&players[x].getHealth()>=players[x].getMaxHealth()*0.1)
+{
+players[x].setHealth(players[x].getHealth()+score(players[x],"Heal"))
+}
+};
+function add(attribute,amount,operation)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+var UUID = Java.type("java.util.UUID");
+var itemStack = players[x].getInventory()[0].getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null) 
+{
+    root = new NBTTagCompound();
+    }
+    var attributeModifiers = root.func_150295_c("AttributeModifiers", 10);
+    var attributeModifier = new NBTTagCompound();
+    var uuid = UUID.randomUUID();
+    attributeModifier.func_74778_a("AttributeName", "generic."+attribute);
+    attributeModifier.func_74778_a("Name","My Modifier");
+    attributeModifier.func_74780_a("Amount", amount);
+    attributeModifier.func_74768_a("Operation", operation);
+    attributeModifier.func_74772_a("UUIDMost", uuid.getMostSignificantBits());
+    attributeModifier.func_74772_a("UUIDLeast", uuid.getLeastSignificantBits());
+    attributeModifiers.func_74742_a(attributeModifier);
+    root.func_74782_a("AttributeModifiers", attributeModifiers);
+    itemStack.field_77990_d = root;
+}
+function replace(a,b,c,d)
+{
+	reset(players[x].getInventory()[0]);
+	add("attackDamage",a,0);
+	add("attackDamage",b*0.01,1);
+	add("maxHealth",c,0);
+	add("maxHealth",d*0.01,1);
+};
+function reset(item)
+{
+var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound");
+var NBTTagList=Java.type("net.minecraft.nbt.NBTTagList");
+item=item.getMCItemStack();
+nbt=item.field_77990_d;
+	if(nbt==null)
+	{
+	nbt=new NBTTagCompound();
+	}
+attrList=nbt.func_150295_c("AttributeModifiers",0)
+attr=new NBTTagCompound();
+attr.func_74777_a("Amount",0);
+attr.func_74778_a("AttributeName","generic.attackDamage");
+attr.func_74768_a("Operation",0);
+attr.func_74778_a("Name","My Modifier");
+attr.func_74772_a("UUIDLeast",6064471111);
+attr.func_74772_a("UUIDMost",4644964200)
+attrList.func_74742_a(attr);
+nbt.func_74782_a("AttributeModifiers",attrList);
+item.field_77990_d=nbt;
+return nbt;
+};
+npc.executeCommand("/scoreboard players set @a[score_Attack_min=0] Attack 0");

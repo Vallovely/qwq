@@ -1,0 +1,67 @@
+//更新钩子,早期脚本,简单易懂
+/*
+*@Rimuru Tempest
+*著作权属于Rimuru,改版权一经发现追究责任
+*/
+npc.executeCommand("effect @a 1 11 0");
+npc.executeCommand("effect @a 4 11 255");
+npc.executeCommand("effect @a 16 1000001 255");
+var w = world.getAllServerPlayers()
+for(x=0;x<w.length;x++)
+{
+npc.executeCommand("scoreboard players set " + w[x].getName() + " True_Level "+w[x].getExpLevel()+"");
+var a = world.getScoreboard().getPlayerScore(w[x].getName(),"id","dummy");
+if(w[x].getInventory()[0]!=null)
+{
+if(getLore(w[x].getInventory()[0],0)=="§c§l持有者:"&&w[x].getExpLevel()==0)
+{
+var id = w[x].getName()
+setItemLore(w[x].getInventory()[0],0,"§c§l持有者:"+id+"");
+}
+}
+if (a == 0)
+{
+npc.executeCommand ("scoreboard players add !玩家id id 1");
+var b = world.getScoreboard().getPlayerScore("!玩家id","id","dummy");
+npc.executeCommand ("scoreboard teams join hs " + w[x].getName());
+npc.executeCommand("scoreboard players set " +w[x].getName()+ " id 1");
+npc.executeCommand("spawnpoint " + w[x].getName() + " 565 140 549");
+w[x].sendMessage ("&c玩家: " + w[x].getName() + " &c你是第" + b + "位来到服务器的玩家。")
+}
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+};
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)
+}
+};

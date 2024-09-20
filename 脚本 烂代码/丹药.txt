@@ -1,0 +1,647 @@
+function removeItem(entity,item,number){
+	if(entity!=null&&item!=null){
+		var tr=entity.inventoryItemCount(item)
+		if(tr>=number){
+			var needToRemove=number
+			for(var i=0,neddToRemove
+			
+		}
+	}
+}
+
+
+//运行
+/*炼丹*/
+function Command(name,usage){
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:ppes 则返回noppes
+  */
+ };
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入"/help 你的指令名" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 4;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(){
+   return true;
+}
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  var CommandBase=Java.type("net.minecraft.command.CommandBase");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions
+  });
+  return new MCCommand();
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type("net.minecraft.server.MinecraftServer");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}
+var EntityPlayerMP=Java.type("net.minecraft.entity.player.EntityPlayerMP");
+var command=new Command();
+command.getCommandName=function(){
+ return "ld";
+}
+command.getCommandUsage=function(sender){
+ return "/ld";
+}
+command.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command.canCommandSenderUseCommand=function(sender){
+  return true;//是否允许使用true允许false不允许只有OP能用
+}
+command.addTabCompletionOptions=function(sender,args){
+ return ["start","learn"]
+}
+command.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ try{
+var namelist = ["§4§l潜力散","§4§l狂暴散","§b§l护体散","§b§l合气散","§a§l回复散","§f§l一品聚气散","§f§l二品聚气散","§f§l三品聚气散","§f§l四品聚气散","§f§l五品聚气散","§f§l六品聚气散","§f§l七品聚气散","§f§l八品聚气散","§f§l九品聚气散","§f§l十品聚气散","§3§l黄品聚灵散","§5§l玄品聚灵散","§7§l地品聚灵散","§6§l天品聚灵散","§d§l极品聚灵散","§e§l仙品聚灵散","§d§l辟谷散"]
+  if(args[0] == "learnlist"){
+    var abxx = ["§4§l潜力丹","§4§l狂暴丹","§b§l护体丹","§b§l合气丹","§a§l回复丹","§6§l聚气丹一品","§6§l聚气丹二品","§6§l聚气丹三品","§6§l聚气丹四品","§6§l聚气丹五品","§6§l聚气丹六品","§6§l聚气丹七品","§6§l聚气丹八品","§6§l聚气丹九品","§6§l聚气丹十品","§3§l黄品聚灵丹","§5§l玄品聚灵丹","§7§l地品聚灵丹","§6§l天品聚灵丹","§d§l极品聚灵丹","§e§l仙品聚灵丹","§d§l辟谷丹"]
+    player.sendMessage("可学习丹药列表："+abxx)
+    player.sendMessage("药材列表："+namelist)
+  }
+ if(args[0] == "start"){
+  var abxx = ["潜力丹","狂暴丹","护体丹","合气丹","回复丹","聚气丹一品","聚气丹二品","聚气丹三品","聚气丹四品","聚气丹五品","聚气丹六品","聚气丹七品","聚气丹八品","聚气丹九品","聚气丹十品","黄品聚灵丹","玄品聚灵丹","地品聚灵丹","天品聚灵丹","极品聚灵丹","仙品聚灵丹","辟谷丹"]
+  var dym = args[1]
+  if(abxx.indexOf(dym) > -1){
+    var sl = args[2]
+    var held = player.getHeldItem()
+    if(held != null){
+    var name = held.getDisplayName()
+    if(namelist.indexOf(name) > -1){
+      var sj = [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]
+      if(namelist.indexOf(name) == abxx.indexOf(dym)){
+      if(player.getStoredData(dym) == "yes"){
+      if(player.getStoredData("islding") != "yes"){
+      var size = held.getStackSize()
+      if(size >= sl*5){
+      held.setStackSize(size-sl*5)
+      player.setStoredData("liandansj",sj[namelist.indexOf(name)]*2)
+      npc.say(sj[namelist.indexOf(name)]*2)
+      player.setStoredData("liandanmz",dym)
+      player.setStoredData("liandansl",sl)
+      player.setStoredData("islding","yes")
+      player.sendMessage("§r你已开始炼丹,请在丹药出现问题时5秒内输入/ld chuli")
+      world.spawnParticle("flame",player.x,player.y,player.z,-2,0,2,0,100)
+    }else{
+      player.sendMessage("§c炼制此丹药的药材不足")
+    }
+  }else{
+    player.sendMessage("§c一心二用是炼丹师的大忌")
+  }
+      }else{
+        player.sendMessage("§c你还不知此丹药如何炼制")
+      }
+      }else{
+        player.sendMessage("§c你炼制的药材和丹药不符")
+      }
+    }else{
+      player.sendMessage("§c手中物品并非药材")
+    }
+  }else{
+    player.sendMessage("§c此丹药无法炼制")
+  }
+}
+ }
+ if(args[0] == "chuli"){
+  if(player.getStoredData("chuli") == "yes"){ 
+  player.setStoredData("chuli","no")
+  player.setStoredData("chulishijian",-1)
+  player.sendMessage("处理成功")
+  }else{
+    player.sendMessage("§4丹炉目前还未出现问题")
+  }
+ }
+ if(args[0] == "learn"){
+  var xx = args[1]
+  var abxx = ["潜力丹","狂暴丹","护体丹","合气丹","回复丹","聚气丹一品","聚气丹二品","聚气丹三品","聚气丹四品","聚气丹五品","聚气丹六品","聚气丹七品","聚气丹八品","聚气丹九品","聚气丹十品","黄品聚灵丹","玄品聚灵丹","地品聚灵丹","天品聚灵丹","极品聚灵丹","仙品聚灵丹","辟谷丹"]
+  if(abxx.indexOf(xx) > -1){
+  if(player.getStoredData(xx) != "yes"){
+  held = player.getHeldItem()
+  if(held != null){
+  name = held.getDisplayName()
+  if(name == "§f§l[丹纸]-§c§l"+xx){
+  held.setStackSize(held.getStackSize()-1)
+  player.setStoredData(xx,"yes")
+  player.sendMessage("§c你已掌握此丹药炼制方法")
+  }else{
+    player.sendMessage("§c手中物品并非丹药图纸")
+  }
+  }else{
+    player.sendMessage("§c该丹药你已学会炼制")
+  }
+  }else{
+    player.sendMessage("§c此图纸无法炼制丹药")
+  }
+ }
+}
+ }catch(e){
+  var message = ["&b&l&n————————————&c&l炼丹炉&b&l&n————————————","&f&l/ld start <丹药名> <数量> (开始炼制某丹药)","&f&l/ld learn <丹药名>(学习手中炼丹图纸)","&f&l/ld chuli (处理炼丹问题)","&f&l/ld learnlist 查看可学习丹药列表","&b&l&n————————————&c&l炼丹炉&b&l&n————————————"]
+  for(x in message){
+    player.sendMessage(message[x])
+  }
+  npc.say(e)
+ }
+ return;
+}
+registerCommand(command);   
+
+//更新
+/*更新*/
+try{
+var players = world.getAllServerPlayers()
+for(x in players){
+  player = players[x]
+  //var ld = player.getStoredData("liandan")
+  if(player.getStoredData("islding") == "yes"){
+    var sj = player.getStoredData("liandansj")
+    if(player.getStoredData("chuli") != "yes"){
+      sj -= 1
+      player.setStoredData("liandansj",sj)
+      if(sj == 0){
+        var dy = player.getStoredData("liandanmz")
+        var sl = player.getStoredData("liandansl")
+        player.sendMessage("§c炼丹成功，本次出丹§a"+sl+"§c枚")
+         world.spawnParticle("flame",player.x,player.y,player.z,-2,0,2,1,1000)
+        if(dy == "潜力丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§4§l潜力丹")
+          player.sendMessage("§r丹药说明：右键使用，获得§a25§r秒力量I效果")
+          npc.giveItem(player,dyx)
+        }
+        if(dy == "狂暴丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§4§l狂暴丹")
+          player.sendMessage("§r丹药说明：右键使用，获得§a25§r秒力量II效果")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "护体丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§b§l护体丹")
+          player.sendMessage("§r丹药说明：右键使用，获得§a25§r秒抗性提升I效果")
+          npc.giveItem(player,dyx)
+        }
+        if(dy == "合气丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§b§l合气丹")
+          player.sendMessage("§r丹药说明：右键使用，获得§a25§r秒抗性提升II效果")
+          npc.giveItem(player,dyx)
+        }
+       if(dy == "辟谷丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§d§l辟谷丹")
+          player.sendMessage("§r丹药说明：右键使用，获得§a200§r秒饱和效果")
+          npc.giveItem(player,dyx)
+        }
+        if(dy == "回复丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§a§l回复丹")
+          player.sendMessage("§r丹药说明：右键使用，回复§a百分之五§r最大生命")
+          npc.giveItem(player,dyx)
+        }
+        if(dy == "聚气丹一品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[一品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a100-500§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹二品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[二品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a200-700§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹三品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[三品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a400-1100§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹四品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[四品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机增加§a600-1500§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹五品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[五品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a900-2200§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+          if(dy == "聚气丹六品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[六品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a1200-2800§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹七品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[七品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a1600-3800§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹八品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[八品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a2000-4800§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹九品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[九品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a2500-6100§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "聚气丹十品"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l聚气丹§f§l[十品]")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a3000-7400§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "黄品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§3§l黄品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a4000-10000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "玄品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§5§l玄品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a6000-14000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "地品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§7§l地品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a9000-20000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "天品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§6§l天品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a13000-28000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "极品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§d§l极品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a17000-37000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        if(dy == "仙品聚灵丹"){
+          var dyx = world.createItem("minecraft:diamond",0,sl)
+          dyx.setCustomName("§e§l仙品聚灵丹")
+          player.sendMessage("§r丹药说明：右键一键使用，随机获得§a25000-55000§r灵气/个")
+          npc.giveItem(player,dyx)         
+        }
+        player.setStoredData("liandanmz",null)
+        player.setStoredData("islding","no")
+        player.setStoredData("liandansj",null)
+        player.setStoredData("liandansl",null)
+      }else{
+      if(sj%2 == 0){
+        player.sendMessage("§c距离炼丹成功还有§a"+sj/2+"§c秒")
+      }
+      if(Math.random() < 0.15){
+        player.sendMessage("§4糟糕！！！炼丹炉出现了问题，快在§a5§4秒内输入§f/ld chuli§4来解决。")
+        player.setStoredData("chuli","yes")
+        player.setStoredData("chulishijian",10)
+      }
+    }
+    }else{
+    player.setStoredData("chulishijian",player.getStoredData("chulishijian")-1)
+    if(player.getStoredData("chulishijian")  == 0){
+      player.sendMessage("§4完蛋喽···你因为没及时处理问题而导致炸炉。")
+        player.setStoredData("liandanmz",null)
+        player.setStoredData("islding","no")
+        player.setStoredData("liandansj",null)
+        player.setStoredData("liandansl",null)
+      player.setStoredData("chulishijian",-1)
+      player.setStoredData("chuli","no")
+    }else{
+    if(player.getStoredData("chulishijian")%2 == 0){
+    player.sendMessage("§c还有§a"+player.getStoredData("chulishijian")/2+"§c秒就要炸炉啦！")
+  }
+}
+    }
+  }
+}
+}catch(e){
+
+}
+
+
+/*更新*/
+/*这是一个普通的监听XD*/
+function Listener(eventType, listener, bus) {
+    var MinecraftForge = Java.type("net.minecraftforge.common.MinecraftForge");
+    this.eventType = eventType;
+    this.listener = listener;
+    this.bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+    this.getEventType = function () {
+        return this.eventType;
+    }
+    this.getListener = function () {
+        return this.listener;
+    }
+    this.getBus = function () {
+        return this.bus;
+    }
+}                                                                                                                                                                              
+function listenEvent(eventType, priority, listener, bus) {
+    var Event = Java.type(eventType);
+    try {
+        var IEventListener = Java.type("net.minecraftforge.fml.common.eventhandler.IEventListener");
+        var EventPriority = Java.type("net.minecraftforge.fml.common.eventhandler.EventPriority");
+    } catch (err) {
+        var IEventListener = Java.type("cpw.mods.fml.common.eventhandler.IEventListener");
+        var EventPriority = Java.type("cpw.mods.fml.common.eventhandler.EventPriority");
+    }
+    var MinecraftForge = Java.type("net.minecraftforge.common.MinecraftForge");
+    var event = new Event();
+    if (priority == "LOW") {
+        priority = EventPriority.LOW;
+    }
+    if (priority == "HIGH") {
+        priority = EventPriority.HIGH;
+    }
+    if (priority == "NORMAL") {
+        priority = EventPriority.NORMAL;
+    }
+    if (priority == "LOWEST") {
+        priority = EventPriority.LOWEST;
+    }
+    if (priority == "HIGHEST") {
+        priority = EventPriority.HIGHEST;
+    }
+    var EventListener = Java.extend(IEventListener, {
+        invoke: listener
+    });
+    listener = new EventListener();
+    var bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+    var busID = bus.class.getDeclaredField("busID");
+    busID.setAccessible(true);
+    busID = busID.getInt(bus);
+    event.getListenerList().register(busID, priority, listener);
+    return new Listener(eventType, listener, bus);
+}
+/**
+*void unListenEvent(IEventListener listener)
+*-listener:事件方法
+*取消监听事件
+*/
+function unListenEvent(eventType, listener, bus) {
+    var Event = Java.type(eventType);
+    var MinecraftForge = Java.type("net.minecraftforge.common.MinecraftForge");
+    var event = new Event();
+    var bus = (bus == null) ? MinecraftForge.EVENT_BUS : bus;
+    var busID = bus.class.getDeclaredField("busID");
+    busID.setAccessible(true);
+    busID = busID.getInt(bus);
+    event.getListenerList().unregister(busID, listener);
+}
+/*武魂真身-更新*/
+try{
+var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+var EntityPlayerMP=Java.type("net.minecraft.entity.player.EntityPlayerMP");
+var EntityDamageSource=Java.type("net.minecraft.util.EntityDamageSource");
+var Entity = Java.type("net.minecraft.entity.Entity")
+var ScriptLiving = Java.type("noppes.npcs.scripted.ScriptLiving");
+var HotNPC=Java.type("mchhui.hotnpc.HotNPC");
+var Tempdata=Java.type("mchhui.hotnpc.utlis.Tempdata");
+var tempdata=HotNPC.tempdata;
+var listenerName=["rightclick-dyyyyy"];
+var date=new Date()
+if(!tempdata.has("listeners")){
+ tempdata.set("listeners",new Tempdata())
+}
+var time = date.getTime()
+listeners=tempdata.get("listeners");
+if(!listeners.has(listenerName[0])){
+ listeners.set(listenerName[0], listenEvent("net.minecraftforge.event.entity.player.PlayerInteractEvent","HIGH",
+function(event){
+  if(!(event.entityPlayer instanceof EntityPlayerMP)){
+    return;
+  }
+  var player=new ScriptPlayer(event.entityPlayer);
+  if(player.getHeldItem() !== null){
+  var name = player.getHeldItem().getDisplayName()
+  var size = player.getHeldItem().getStackSize()
+  if(name == "§4§l潜力丹"){
+    player.sendMessage("§4§l潜力丹§r药效开始发作")
+    player.addPotionEffect(5,25,0,true)
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§4§l狂暴丹"){
+    player.sendMessage("§4§l狂暴丹§r药效开始发作")
+    player.addPotionEffect(5,25,1,true)
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§b§l护体丹"){
+    player.sendMessage("§b§l护体丹§r药效开始发作")
+    player.addPotionEffect(11,25,0,true)
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§b§l合气丹"){
+    player.sendMessage("§b§l合气丹§r药效开始发作")
+    player.addPotionEffect(11,25,1,true)
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§d§l辟谷丹"){
+    player.sendMessage("§b§l辟谷丹§r药效开始发作")
+    player.addPotionEffect(23,200,1,true)
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§a§l回复丹"){
+    player.sendMessage("§a§l回复丹§r已使用")
+    if(player.getHealth() > 0){
+      player.setHealth(player.getHealth()+player.getMaxHealth()*0.03)
+    }
+    player.getHeldItem().setStackSize(size-1)
+  }
+  if(name == "§6§l聚气丹§f§l[一品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹一品§r的药效")
+      var xp = Math.floor(Math.random()*400)+100
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[二品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹二品§r的药效")
+      var xp = Math.floor(Math.random()*500)+200
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }    
+  }
+  if(name == "§6§l聚气丹§f§l[三品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹三品§r的药效")
+      var xp = Math.floor(Math.random()*700)+400
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[四品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹四品§r的药效")
+      var xp = Math.floor(Math.random()*900)+600
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[五品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹五品§r的药效")
+      var xp = Math.floor(Math.random()*1300)+900
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[六品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹六品§r的药效")
+      var xp = Math.floor(Math.random()*1600)+1200
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[七品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹七品§r的药效")
+      var xp = Math.floor(Math.random()*2200)+1600
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[八品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹八品§r的药效")
+      var xp = Math.floor(Math.random()*2800)+2000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[九品]"){
+    if(player.getExpLevel() >= 400){
+      player.sendMessage("§r你吸收了§6§l聚气丹九品§r的药效")
+      var xp = Math.floor(Math.random()*3600)+2500
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l聚气丹§f§l[十品]"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l聚气丹十品§r的药效")
+      var xp = Math.floor(Math.random()*4400)+3000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§3§l黄品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§3§l黄品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*6000)+4000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§5§l玄品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§5§l玄品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*8000)+6000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§7§l地品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§7§l地品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*11000)+9000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§6§l天品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§6§l天品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*15000)+13000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§d§l极品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§d§l极品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*20000)+17000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  if(name == "§e§l仙品聚灵丹"){
+    if(player.getExpLevel() >= 0){
+      player.sendMessage("§r你吸收了§e§l仙品聚灵丹§r的药效")
+      var xp = Math.floor(Math.random()*30000)+25000
+      npc.executeCommand("xp "+xp*size+" "+player.name)
+      player.setHeldItem(null)
+    }
+  }
+  }
+}))
+ npc.say("右键监听注册成功！")
+}
+ //unListenEvent(listeners.get(listenerName[0]).getEventType(),listeners.get(listenerName[0]).getListener(),listeners.get(listenerName[0]).getBus());
+ //listeners.remove(listenerName[0]);
+}catch(e){
+  npc.setTitle(e)
+}

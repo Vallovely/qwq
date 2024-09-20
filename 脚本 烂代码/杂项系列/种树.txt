@@ -1,0 +1,21 @@
+//ChatHook
+function treePlant(x,y,tick){
+	world.setBlock(npc.x,npc.y-1,npc.z,world.createItem("minecraft:grass",1,1));
+	var dx = npc.getX()+Math.random()*2*x-x;
+	    dz = npc.getZ()+Math.random()*2*z-z;
+		dy = npc.getY();
+	var block1 = world.getBlock(dx,dy,dz);
+	var block2 = world.getBlock(npc.x,npc.y-1,npc.z);
+	if(block1 !== block2 && tick !== Math.random()*100){
+		world.setBlock(dx,dy,dz,block2);
+	}else{
+		return;
+	}
+}
+/**
+*x,y二维坐标范围
+*tick概率
+*@Author Vallovely
+*著作权属于Vallovely 2021/9/7起生效
+*联系方式: qq2380556707
+**/

@@ -1,0 +1,49 @@
+var w = world.getAllServerPlayers();
+for(var x in w){
+	var a = world.getScoreboard().getPlayerScore(w[x].getName(),"wh","dummy");
+	if(a > 0){
+		if (w[x].getInventory()[0]!=null) {
+			if (judegLore(w[x].getInventory()[0],"持有者")>-1) {
+
+			}else{
+				w[x].addPotionEffect(2,1,10,false);
+			w[x].addPotionEffect(15,1,10,false);
+			w[x].sendMessage("&c请将武魂放物品栏第一格");
+			}
+		}else{
+			w[x].addPotionEffect(2,1,10,false);
+			w[x].addPotionEffect(15,1,10,false);
+			w[x].sendMessage("&c请将武魂放物品栏第一格");
+		}
+	}
+}
+function judegLore(item,content)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}

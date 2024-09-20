@@ -1,0 +1,493 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "var HotNPC=Java.type(\"mchhui.hotnpc.HotNPC\");
+var io=new IONPC();
+var Tempdata=Java.type(\"mchhui.hotnpc.utlis.Tempdata\");
+var tempdata=HotNPC.tempdata;
+        whzs=io.get(\"武魂真身\");
+        sld=io.get(\"熟练度\");
+var level = world.getScoreboard().getPlayerScore(player.getName(),\"Soul_Level\",\"dummy\")
+var held = player.getHeldItem()
+if(held !== null){
+if(level > 70){
+  var xz = world.getScoreboard().getPlayerScore(player.getName(),\"zsxz\",\"dummy\")
+  if(xz !== 1){
+  	if(judgeLore(held,\"持有者\") >= 0){
+    setItemLore(held,12,\"§b§l武魂熟练度: §f§l+0%\")
+    whzs[player.getName()]=1;
+    io.set(\"武魂真身\",whzs)
+    //这里是武魂真身类型【0为攻击，1为格挡，2为群体伤害】
+    sld[player.getName()] = 0
+    //初始熟练度
+    io.set(\"熟练度\",sld)
+    world.getScoreboard().setPlayerScore(player.getName(),\"zsxz\",1,\"dummy\")
+world.getScoreboard().setPlayerScore(player.getName(),\"武魂真身\",2,\"dummy\")
+    message(\"§4§l[公告]§a§l魂师\"+player.getName()+\"§r§l选择了防御真身\")
+}else{
+	player.sendMessage(\"§r§l你拿其他物品右键我做什么\")
+}
+  }else{
+    player.sendMessage(\"§r§l你已有武魂真身\")
+  }
+}else{
+  player.sendMessage(\"§r§l你还未到达魂圣境界，无法选择真身\")
+}
+}else{
+	player.sendMessage(\"§r§l手中没得东西\")
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type(\"java.io.File\");
+  var FileOutputStream = Java.type(\"java.io.FileOutputStream\");
+  var BufferedReader = Java.type(\"java.io.BufferedReader\");
+  var InputStreamReader = Java.type(\"java.io.InputStreamReader\");
+  var FileInputStream = Java.type(\"java.io.FileInputStream\");
+  var StringBuilder=Java.type(\"java.lang.StringBuilder\");
+  var RootDirectory = new File(\"\");
+  var folder = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval(\"(\"+sb.toString()+\")\");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print(\"请输入对象\");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+\"\\CNPCData\\\"+file+\".sw\");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print(\"在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:\"+err)
+}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+};
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}
+function addItemLore(item,lore){
+			var NBTTagCompound=Java.type(\"net.minecraft.nbt.NBTTagCompound\")
+	var NBTTagList=Java.type(\"net.minecraft.nbt.NBTTagList\")
+	var NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+nbt=item.getMCItemStack().field_77990_d;
+if(nbt==null){
+nbt=new NBTTagCompound();
+}
+if(nbt.func_74775_l(\"display\")==\"{}\"){
+displayTag=new NBTTagCompound();
+nbt.func_74782_a(\"display\",displayTag);
+}
+if(nbt.func_74775_l(\"display\").func_74781_a(\"Lore\")==null){
+loreList=new NBTTagList();
+nbt.func_74775_l(\"display\").func_74782_a(\"Lore\",loreList);
+}
+item.getMCItemStack().field_77990_d=nbt;
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_74742_a(new NBTTagString(lore))
+//为物品增加lore
+/*
+*ScriptItemStack item:要增加lore的物品
+*String lore:要增加的lore
+*/
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/enderchibi/MsEnderchibi.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -7384499937341668370L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "防御真身",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 46712101,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 5178280566145224288L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "选择后可增加防御",
+    "TotalTicksAlive": 46712101L,
+    "Rotation": [
+        -5.132509f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

@@ -1,0 +1,687 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 10,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "var items = player.getHeldItem();
+var wh = player.getInventory()[0];
+if(player.getInventory()[0]!=null){
+if (judegLore(player.getInventory()[0],\"持有者\") > -1) {
+if(player.getHeldItem()!=null){
+if (items.getDisplayName().indexOf('升灵')>-1&&items.getStackSize()>-1) {
+	if(items.getDisplayName().indexOf('百年升灵完整精魄')>-1){
+		var hs = judegLore(wh,'百年')
+		if(hs>-1){
+			var hss = getLore(wh,hs);
+                        var loreb = hss
+			hss = hss.replace(\"§6§l<百年>\",\"§5§l<千年>\")
+			setItemLore(wh,hs,hss);
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" attackDamage1 1000\");
+			setItemLore(wh,5,\"§7§l攻击伤害: +\"+Score(player,\"attackDamage1\")+\"\");
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" maxHealth1 3000\");
+			setItemLore(wh,7,\"§7§l最大生命: +\"+Score(player,\"maxHealth1\")+\"\");
+			if (items.getStackSize()==1) {player.setHeldItem(null)}else{
+			items.setStackSize(items.getStackSize()-1);
+			}
+			replace(Score(player,\"attackDamage1\"),Score(player,\"maxHealth1\"));
+			player.sendMessage(\"§e升灵成功!\")
+                        message(\"&4&l[公告]&6&l魂师&a&l\"+player.getName()+\"&6&l将他的\"+loreb+\"升灵为\"+hss)
+		}else{player.sendMessage(\"§5你的武魂魂环年份已全部都是千年了\")}
+	}else{
+		if(items.getDisplayName().indexOf('千年升灵完整精魄')>-1){
+			var hs = judegLore(wh,'<千年>');
+			
+		if(hs>-1){
+			var hss = getLore(wh,hs);
+                        var loreb = hss
+			hss = hss.replace(\"§5§l<千年>\",\"§7§l<万年>\")
+			setItemLore(wh,hs,hss);
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" attackDamage1 5000\");
+			setItemLore(wh,5,\"§7§l攻击伤害: +\"+Score(player,\"attackDamage1\")+\"\");
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" maxHealth1 10000\");
+			setItemLore(wh,7,\"§7§l最大生命: +\"+Score(player,\"maxHealth1\")+\"\");
+			if (items.getStackSize()==1) {player.setHeldItem(null)}else{
+			items.setStackSize(items.getStackSize()-1);
+			}
+			replace(Score(player,\"attackDamage1\"),Score(player,\"maxHealth1\"));
+			player.sendMessage(\"§e升灵成功!\")
+                        message(\"&4&l[公告]&6&l魂师&a&l\"+player.getName()+\"&6&l将他的\"+loreb+\"升灵为\"+hss)
+		}else{player.sendMessage(\"§5你的武魂魂环年份已全部都是万年了\")}
+	}else{
+		if(items.getDisplayName().indexOf('万年升灵完整精魄')>-1){
+				var hs = judegLore(wh,'<万年>');
+			
+		if(hs>-1){
+			var hss = getLore(wh,hs);
+                        var loreb = hss
+			hss = hss.replace(\"§7§l<万年>\",\"§c§l<十万年>\")
+			setItemLore(wh,hs,hss);
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" attackDamage1 30000\");
+			setItemLore(wh,5,\"§7§l攻击伤害: +\"+Score(player,\"attackDamage1\")+\"\");
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" maxHealth1 50000\");
+			setItemLore(wh,7,\"§7§l最大生命: +\"+Score(player,\"maxHealth1\")+\"\");
+			if (items.getStackSize()==1) {player.setHeldItem(null)}else{
+			items.setStackSize(items.getStackSize()-1);
+			}
+			replace(Score(player,\"attackDamage1\"),Score(player,\"maxHealth1\"));
+			player.sendMessage(\"§e升灵成功!\")
+                        message(\"&4&l[公告]&6&l魂师&a&l\"+player.getName()+\"&6&l将他的\"+loreb+\"升灵为\"+hss)
+		}else{player.sendMessage(\"§5你的武魂魂环年份已全部都是十万年了\")}
+		}else{
+			if(items.getDisplayName().indexOf('cwc展位的')>-1){
+				var hs = judegLore(wh,'<万年>');
+		if(hs>-1){
+			var hss = getLore(wh,hs);
+                        var loreb = hss
+			hss = hss.replace(\"§7§l<万年>\",\"§c§l<十万年>\")
+			setItemLore(wh,hs,hss);
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" attackDamage1 30000\");
+			setItemLore(wh,5,\"§7§l攻击伤害: +\"+Score(player,\"attackDamage1\")+\"\");
+			npc.executeCommand(\"scoreboard players add \"+player.getName()+\" maxHealth1 50000\");
+			setItemLore(wh,7,\"§7§l最大生命: +\"+Score(player,\"maxHealth1\")+\"\");
+			if (items.getStackSize()==1) {player.setHeldItem(null)}else{
+			items.setStackSize(items.getStackSize()-1);
+			}
+			replace(Score(player,\"attackDamage1\"),Score(player,\"maxHealth1\"));
+			player.sendMessage(\"§a§l升灵成功！\")
+                        message(\"&4&l[公告]&6&l魂师&a&l\"+player.getName()+\"&6&l将他的\"+loreb+\"升灵为\"+hss)
+		}else{player.sendMessage(\"§5你的武魂魂环已经是最佳年限了\")}
+			}
+		}
+	}
+}
+}else{player.sendMessage(\"§5此物品并不是升灵\")}
+}else{player.sendMessage(\"§5你手中没有任何东西\")}
+}else{player.sendMessage(\"§5你物品栏第一格不是武魂\")}
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1;
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1;
+}
+return -1;
+}
+function Score(Substance,objective)
+{
+var Points=world.getScoreboard().getPlayerScore(\"\"+Substance.getName()+\"\",\"\"+objective+\"\",\"\"+objective+\"\");
+return Points;
+};
+function setItemLore(item,line,lore){
+try{
+NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}catch(err){print(\"在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:\"+err)	}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+}
+function getNumber(string){
+ var string1 = string.replace(/§[0-9]/g,\"\")
+ return Number(string1.replace(/[^0-9]/ig,\"\"))
+}
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+var UUID = Java.type(\"java.util.UUID\");
+function b(e){
+    var index=e.lastIndexOf(\"\+\");  // a+1+1
+    e=e.substring(index+1,e.length);
+    return e;
+}
+//分割
+function judegLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function add(attribute,amount,operation)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+var UUID = Java.type(\"java.util.UUID\");
+var itemStack = player.getInventory()[0].getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null) 
+{
+    root = new NBTTagCompound();
+    }
+    var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+    var attributeModifier = new NBTTagCompound();
+    var uuid = UUID.randomUUID();
+    attributeModifier.func_74778_a(\"AttributeName\", \"generic.\"+attribute);
+    attributeModifier.func_74778_a(\"Name\",\"My Modifier\");
+    attributeModifier.func_74780_a(\"Amount\", amount);
+    attributeModifier.func_74768_a(\"Operation\", operation);
+    attributeModifier.func_74772_a(\"UUIDMost\", uuid.getMostSignificantBits());
+    attributeModifier.func_74772_a(\"UUIDLeast\", uuid.getLeastSignificantBits());
+    attributeModifiers.func_74742_a(attributeModifier);
+    root.func_74782_a(\"AttributeModifiers\", attributeModifiers);
+    itemStack.field_77990_d = root;
+}
+function replace(a,c)
+{
+	reset(player.getInventory()[0]);
+	add(\"attackDamage\",a,0);
+	add(\"maxHealth\",c,0);
+};
+function reset(item)
+{
+var NBTTagCompound=Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+var NBTTagList=Java.type(\"net.minecraft.nbt.NBTTagList\");
+item=item.getMCItemStack();
+nbt=item.field_77990_d;
+	if(nbt==null)
+	{
+	nbt=new NBTTagCompound();
+	}
+attrList=nbt.func_150295_c(\"AttributeModifiers\",0)
+attr=new NBTTagCompound();
+attr.func_74777_a(\"Amount\",0);
+attr.func_74778_a(\"AttributeName\",\"generic.attackDamage\");
+attr.func_74768_a(\"Operation\",0);
+attr.func_74778_a(\"Name\",\"My Modifier\");
+attr.func_74772_a(\"UUIDLeast\",6064471111);
+attr.func_74772_a(\"UUIDMost\",4644964200)
+attrList.func_74742_a(attr);
+nbt.func_74782_a(\"AttributeModifiers\",attrList);
+item.field_77990_d=nbt;
+return nbt;
+};
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/crystal/ElectricCrystal.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -6675402061121828286L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "升灵之器",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "EntityClass": "noppes.npcs.entity.EntityNpcCrystal",
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+            "ReturnToStart": 1b,
+            "NpcInv": [
+            ],
+            "PotionEffect": 0,
+            "stopAndInteract": 1b,
+            "Size": 5,
+            "Resistances": {
+                "Arrow": 1.0f,
+                "Explosion": 1.0f,
+                "Knockback": 1.0f,
+                "Melee": 1.0f
+            },
+            "BossBar": 0b,
+            "RespawnTime": 20,
+            "NpcAngrySound": "",
+            "ReactsToFire": 0b,
+            "IgnoreCobweb": 0b,
+            "PositionOffsetZ": 5.0f,
+            "PositionOffsetY": 5.0f,
+            "PositionOffsetX": 5.0f,
+            "LootMode": 0,
+            "AttackStrenght": 5,
+            "NpcLines": {
+                "Lines": [
+                ]
+            },
+            "DefendFaction": 0b,
+            "MovingPatern": 0,
+            "FireIndirect": 0,
+            "NpcVisible": 0,
+            "FindShelter": 2,
+            "TacticalVariant": 0,
+            "Orientation": 0,
+            "KnockBack": 0,
+            "CanDespawn": 0b,
+            "BurnInSun": 0b,
+            "StandingState": 0,
+            "AttackInvisible": 0b,
+            "WalkingRange": 10,
+            "ShotCount": 1,
+            "pDur": 5,
+            "StartPosNew": [0,0,0],
+            "AttackRange": 2,
+            "NpcKillLines": {
+                "Lines": [
+                ]
+            },
+            "AvoidsSun": 0b,
+            "PotionImmune": 0b,
+            "Texture": "customnpcs:textures/entity/crystal/EnderCrystal.png",
+            "NpcJob": 0,
+            "NpcAttackLines": {
+                "Lines": [
+                ]
+            },
+            "BurstCount": 1,
+            "pSpeed": 10,
+            "pArea": 0,
+            "pImpact": 0,
+            "MoveState": 0,
+            "RangeAndMelee": 0,
+            "pRender3D": 0b,
+            "CombatRegen": 0,
+            "DistanceToMelee": 4,
+            "pEffect": 0,
+            "NpcStepSound": "",
+            "FireRate": 5,
+            "pEffAmp": 0,
+            "ImmuneToFire": 0b,
+            "NpcKilledLines": {
+                "Lines": [
+                ]
+            },
+            "DisablePitch": 0b,
+            "pPhysics": 1b,
+            "NpcInteractLines": {
+                "Lines": [
+                    {
+                        "Line": "Hello @p",
+                        "Song": "",
+                        "Slot": 0
+                    }
+                ]
+            },
+            "NpcHurtSound": "minecraft:game.player.hurt",
+            "pSpin": 0b,
+            "pTrail": 0,
+            "CreatureType": 0,
+            "NoFallDamage": 0b,
+            "Name": "Noppes",
+            "NpcIdleSound": "",
+            "Weapons": [
+            ],
+            "NPCDialogOptions": [
+            ],
+            "DirectLOS": 1b,
+            "AggroRange": 16,
+            "HealthRegen": 1,
+            "DoorInteract": 2,
+            "MoveSpeed": 5,
+            "minDelay": 20,
+            "UsingSkinUrl": 0b,
+            "SkinUrl": "",
+            "CanSwim": 1b,
+            "MaxHealth": 20,
+            "HideBodyWhenKilled": 0b,
+            "AttackSpeed": 20,
+            "PotionDuration": 5,
+            "Role": 0,
+            "maxDelay": 40,
+            "DropChance": [
+            ],
+            "FactionPoints": {
+                "DecreaseFaction1Points": 0b,
+                "OptionFaction2Points": 100,
+                "OptionFactions1": -1,
+                "OptionFactions2": -1,
+                "OptionFaction1Points": 100,
+                "DecreaseFaction2Points": 0b
+            },
+            "pDamage": 4,
+            "AimWhileShooting": 0b,
+            "AttackOtherFactions": 0b,
+            "CanDrown": 1b,
+            "CanSprint": 0b,
+            "pSize": 5,
+            "CanLeap": 0b,
+            "MovingState": 0,
+            "MovingPos": 0,
+            "PotionAmp": 0,
+            "OnAttack": 0,
+            "TacticalRadius": 8,
+            "MaxExp": 0,
+            "OrderedLines": 0b,
+            "pGlows": 0b,
+            "FiringSound": "random.bow",
+            "Accuracy": 60,
+            "MinExp": 0,
+            "Armor": [
+            ],
+            "CloakTexture": "",
+            "MaxFiringRange": 15,
+            "pXlr8": 0b,
+            "GlowTexture": "",
+            "pExplode": 0b,
+            "NpcDeathSound": "minecraft:game.player.hurt",
+            "MovingPause": 1b,
+            "pStick": 0b,
+            "FactionID": -1,
+            "MovingPathNew": [
+            ],
+            "Title": "",
+            "npcInteracting": 1b,
+            "ShowName": 0,
+            "AvoidsWater": 0b,
+            "NoLivingAnimation": 0b,
+            "SpawnCycle": 0
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 11572116,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 1812619131619547201L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "手持升灵精魄右键我",
+    "TotalTicksAlive": 10543085L,
+    "Rotation": [
+        16.017746f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

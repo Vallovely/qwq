@@ -1,0 +1,234 @@
+//运行钩子
+var HotNPC=Java.type("mchhui.hotnpc.HotNPC");
+var io=new IONPC();
+var Tempdata=Java.type("mchhui.hotnpc.utlis.Tempdata");
+var tempdata=HotNPC.tempdata;
+var listenerName=["giaogiao"];
+var date=new Date()
+if(!tempdata.has("listeners")){
+ tempdata.set("listeners",new Tempdata())
+}
+listeners=tempdata.get("listeners");
+if(!listeners.has(listenerName[0])){
+ listeners.set(listenerName[0], listenEvent("net.minecraftforge.event.entity.living.LivingHurtEvent","LOW",
+    function(event){
+      try{
+        var EntityPlayerMP=Java.type("net.minecraft.entity.player.EntityPlayerMP");
+        var EntityDamageSource=Java.type("net.minecraft.util.EntityDamageSource");
+        var ScriptPlayer=Java.type("noppes.npcs.scripted.ScriptPlayer");
+        var Entity=Java.type("net.minecraft.entity.Entity");
+        var ScriptEntity=Java.type("noppes.npcs.scripted.ScriptEntity");
+        if(!(event.source instanceof EntityDamageSource)){
+          return;
+        }
+        //被攻击者
+        if(event.entityLiving instanceof EntityPlayerMP){
+          var target=new ScriptPlayer(event.entityLiving);
+          var shxs = world.getScoreboard().getPlayerScore(target.getName(),"伤害吸收","dummy")
+          event.ammount -= shxs
+        }
+      }catch(e){npc.say(e)}
+  }
+ ))
+ npc.say("whzs受伤监听成功")
+}
+// unListenEvent(listeners.get(listenerName[0]).getEventType(),listeners.get(listenerName[0]).getListener(),listeners.get(listenerName[0]).getBus());
+// listeners.remove(listenerName[0]);
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function damage(target,type,amount,data,form){
+Array.prototype.equals = function (obj) {
+for(x in this){
+if(obj==this[x]){
+return true;
+ }
+}
+return false;
+}
+var DamageSource=(form!=null)? Java.type("net.minecraft.util.EntityDamageSource"):Java.type("net.minecraft.util.DamageSource")
+damageSource=(form!=null)? new DamageSource(""+type,form.getMCEntity()):new DamageSource(""+type)
+if(data!=null){
+if(data.equals("DamageCreative")){damageSource.func_76359_i()}//伤害创造(让伤害可以伤害创造玩家)
+if(data.equals("BypassesArmor")){damageSource.func_76348_h()}//破甲(无视护甲的伤害)
+if(data.equals("DamageAbsolute")){damageSource.func_151518_m()}//真伤(绝对的伤害)
+if(data.equals("DifficultyScaled")){damageSource.func_76351_m()}//难度影响(受游戏难度影响(简单 普通 困难))
+if(data.equals("Explosion")){damageSource.func_94540_d()}//爆炸伤害
+if(data.equals("Fire")){damageSource.func_76361_j()}//火焰伤害
+if(data.equals("Magic")){damageSource.func_82726_p()}//魔法伤害
+if(data.equals("Projectile")){damageSource.func_76349_b()}//抛射物
+//注:魔法伤害不自带破甲 请使用预设MAGIC或您自己添加属性(这些不是预设 而是独立的属性)
+}
+target.getMCEntity().func_70097_a(damageSource,amount)
+//伤害某实体
+/*
+*ScriptEntity target:目标实体
+*String type:伤害类型
+*int amount:伤害值
+*String[] data:属性
+*ScriptEntity form:攻击者
+*/
+}
+function IONPC(){
+  //初始化部分
+  var File = Java.type("java.io.File");
+  var FileOutputStream = Java.type("java.io.FileOutputStream");
+  var BufferedReader = Java.type("java.io.BufferedReader");
+  var InputStreamReader = Java.type("java.io.InputStreamReader");
+  var FileInputStream = Java.type("java.io.FileInputStream");
+  var StringBuilder=Java.type("java.lang.StringBuilder");
+  var RootDirectory = new File("");
+  var folder = new File(RootDirectory.getCanonicalPath()+"\\CNPCData");
+  if(!folder.exists()){
+    folder.mkdir();
+  }
+  //获取部分
+  //file:文件名
+  this.get = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    var text = null;
+    if(files.exists()){
+      var fileInputStream = new FileInputStream(files);
+      var inputStreamReader = new InputStreamReader(fileInputStream);
+      var bufferedReader = new BufferedReader(inputStreamReader);
+      var sb = new StringBuilder();
+      while((text = bufferedReader.readLine()) != null){
+              sb.append(text);
+            }
+    }
+    try{
+      return eval("("+sb.toString()+")");
+    }catch(e){
+      return {};
+    }
+  }
+  //设置部分
+  //file:文件名
+  //object:对象
+  this.set = function(file,object){
+    if(!(object instanceof Object)){
+      print("请输入对象");
+      return;
+    }
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    if(files.exists()){
+      files.createNewFile();
+    }
+    var fileOutputStream = new FileOutputStream(files);
+    fileOutputStream.write(JSON.stringify(object).getBytes());
+    fileOutputStream.flush();
+    fileOutputStream.close();
+  }
+  //删除部分
+  //file:文件名
+  this.remove = function(file){
+    var files = new File(RootDirectory.getCanonicalPath()+"\\CNPCData\\"+file+".sw");
+    if(files.exists()){
+      files.delete();
+    }
+  }
+}
+function Listener(eventType,listener,bus){
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ this.eventType=eventType;
+ this.listener=listener;
+ this.bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ this.getEventType=function(){
+  return this.eventType;
+ }
+ this.getListener=function(){
+  return this.listener;
+ }
+ this.getBus=function(){
+  return this.bus;
+ }
+}
+/**
+*EventListener listenEvent(String eventType,String priority,function listener)
+*-eventType:你要监听的事件的类路径 如net.minecraftforge.event.ServerChatEvent
+*-priority:你的事件优先级 从低到高LOWEST LOW NORMAL HIGH HIGHEST
+*-listener:事件方法
+*Return:
+*-EventListener:事件监听者
+*监听事件并返回监听对象
+*bus: event.entityPlayer在这个事件就是玩家
+*/
+function listenEvent(eventType,priority,listener,bus){
+ var Event=Java.type(eventType);
+    try{
+     var IEventListener=Java.type("net.minecraftforge.fml.common.eventhandler.IEventListener");
+     var EventPriority=Java.type("net.minecraftforge.fml.common.eventhandler.EventPriority");
+    }catch(err){
+     var IEventListener=Java.type("cpw.mods.fml.common.eventhandler.IEventListener");
+     var EventPriority=Java.type("cpw.mods.fml.common.eventhandler.EventPriority");
+    }
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ var event=new Event();
+    if(priority=="LOW"){
+     priority=EventPriority.LOW;
+    }
+    if(priority=="HIGH"){
+     priority=EventPriority.HIGH;
+    }
+    if(priority=="NORMAL"){
+     priority=EventPriority.NORMAL;
+    }
+    if(priority=="LOWEST"){
+     priority=EventPriority.LOWEST;
+    }
+    if(priority=="HIGHEST"){
+     priority=EventPriority.HIGHEST;
+    }
+ var EventListener=Java.extend(IEventListener,{
+  invoke:listener
+ });
+ listener=new EventListener();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField("busID");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().register(busID,priority,listener);
+ return new Listener(eventType,listener,bus);
+}
+/**
+*void unListenEvent(IEventListener listener)
+*-listener:事件方法
+*取消监听事件
+*/
+function unListenEvent(eventType,listener,bus){
+ var Event=Java.type(eventType);
+ var MinecraftForge=Java.type("net.minecraftforge.common.MinecraftForge");
+ var event=new Event();
+ var bus=(bus==null)?MinecraftForge.EVENT_BUS:bus;
+ var busID=bus.class.getDeclaredField("busID");
+ busID.setAccessible(true);
+ busID=busID.getInt(bus);
+ event.getListenerList().unregister(busID,listener);
+}

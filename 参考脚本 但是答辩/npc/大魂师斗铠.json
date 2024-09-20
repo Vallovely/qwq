@@ -1,0 +1,1412 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "TraderSold": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 5659370378985751692L,
+                            "UUIDLeast": -6710305097421859635L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -6051654809356779311L,
+                            "UUIDLeast": -8715320426755797173L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 2774819710799466272L,
+                            "UUIDLeast": -5884932255708443418L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 4008235545130059205L,
+                            "UUIDLeast": -7133242235929130104L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 2b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +70",
+                            "§a§l最大生命: +300",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -4826255609489045380L,
+                            "UUIDLeast": -5602506119222555862L,
+                            "Amount": 300.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 4362223199526473650L,
+                            "UUIDLeast": -9216905074953139812L,
+                            "Amount": 70.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 1511731199557913701L,
+                            "UUIDLeast": -9027757684595143780L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 2837041860392602184L,
+                            "UUIDLeast": -5153085632719901588L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -2105770147455873682L,
+                            "UUIDLeast": -7034231595779243416L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -1958066498551265698L,
+                            "UUIDLeast": -7745199399982040678L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 5b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +70",
+                            "§a§l最大生命: +300",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -6491258641040129462L,
+                            "UUIDLeast": -8634478796050246256L,
+                            "Amount": 300.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -616149527853382399L,
+                            "UUIDLeast": -5067230124008580997L,
+                            "Amount": 70.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -3455435282858163638L,
+                            "UUIDLeast": -8169307082719586700L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 3023611050107946806L,
+                            "UUIDLeast": -7564142724935191064L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 1056008846333460536L,
+                            "UUIDLeast": -7312125786616324605L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 21559013474651183L,
+                            "UUIDLeast": -7099537335731033509L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 8b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +70",
+                            "§a§l最大生命: +300",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 8366326904634494853L,
+                            "UUIDLeast": -7057150407828669696L,
+                            "Amount": 300.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 3070447751861651686L,
+                            "UUIDLeast": -7945386542152197019L,
+                            "Amount": 70.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 124006853973069112L,
+                            "UUIDLeast": -6299636516788021318L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -5952409259026857895L,
+                            "UUIDLeast": -8186318942695370304L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 3302859522848604838L,
+                            "UUIDLeast": -7066559631637485087L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -3477034132982446771L,
+                            "UUIDLeast": -8275488799655016656L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 11b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +70",
+                            "§a§l最大生命: +300",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -8149359474814009236L,
+                            "UUIDLeast": -5892916415314478925L,
+                            "Amount": 300.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -9178982378514133235L,
+                            "UUIDLeast": -9146611692712331749L,
+                            "Amount": 70.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "customnpcs:npcOrb",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l大魂师斗铠升华信物"
+                    }
+                },
+                "Damage": 2s
+            }
+        ]
+    },
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "TraderIgnoreDamage": 0b,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/elfmale/Dark_Elf.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 1,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 6351275722307102532L,
+    "TraderMarket": "",
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "TraderCurrency": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +20",
+                            "§a§l最大生命: +80",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§2§l魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 33380990972479943L,
+                            "UUIDLeast": -9018052347856640720L,
+                            "Amount": 80.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 5389330744222566073L,
+                            "UUIDLeast": -4653575357358397911L,
+                            "Amount": 20.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 5659370378985751692L,
+                            "UUIDLeast": -6710305097421859635L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -6051654809356779311L,
+                            "UUIDLeast": -8715320426755797173L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 2b,
+                "id": "minecraft:chainmail_helmet",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 2774819710799466272L,
+                            "UUIDLeast": -5884932255708443418L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 4008235545130059205L,
+                            "UUIDLeast": -7133242235929130104L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +20",
+                            "§a§l最大生命: +80",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§2§l魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -2529777817293668011L,
+                            "UUIDLeast": -5019732287586946018L,
+                            "Amount": 80.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 2785359311936635046L,
+                            "UUIDLeast": -8662696810558414099L,
+                            "Amount": 20.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 1511731199557913701L,
+                            "UUIDLeast": -9027757684595143780L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 2837041860392602184L,
+                            "UUIDLeast": -5153085632719901588L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 5b,
+                "id": "minecraft:chainmail_chestplate",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -2105770147455873682L,
+                            "UUIDLeast": -7034231595779243416L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -1958066498551265698L,
+                            "UUIDLeast": -7745199399982040678L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +20",
+                            "§a§l最大生命: +80",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§2§l魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 8387910012041055671L,
+                            "UUIDLeast": -7029295470763513542L,
+                            "Amount": 80.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 7973832554535014119L,
+                            "UUIDLeast": -6821730217342299967L,
+                            "Amount": 20.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -3455435282858163638L,
+                            "UUIDLeast": -8169307082719586700L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 3023611050107946806L,
+                            "UUIDLeast": -7564142724935191064L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 8b,
+                "id": "minecraft:chainmail_leggings",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 1056008846333460536L,
+                            "UUIDLeast": -7312125786616324605L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": 21559013474651183L,
+                            "UUIDLeast": -7099537335731033509L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +20",
+                            "§a§l最大生命: +80",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§2§l魂师斗铠§6§l[高阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": -8451724545812575736L,
+                            "UUIDLeast": -8629158076175442110L,
+                            "Amount": 80.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -174207588301257065L,
+                            "UUIDLeast": -6579151947497465649L,
+                            "Amount": 20.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +30",
+                            "§a§l最大生命: +120",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§3§l[初阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 124006853973069112L,
+                            "UUIDLeast": -6299636516788021318L,
+                            "Amount": 120.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -5952409259026857895L,
+                            "UUIDLeast": -8186318942695370304L,
+                            "Amount": 30.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 11b,
+                "id": "minecraft:chainmail_boots",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§b§l斗铠认知:§c§l斗铠可增强魂师的实力",
+                            "§e§l斗铠属性:§4§l",
+                            "§4§l攻击伤害: +45",
+                            "§a§l最大生命: +200",
+                            "§b§l斗铠耐久度:§6§l无限耐久"
+                        ],
+                        "Name": "§9§l大魂师斗铠§5§l[中阶]"
+                    },
+                    "AttributeModifiers": [
+                        {
+                            "UUIDMost": 3302859522848604838L,
+                            "UUIDLeast": -7066559631637485087L,
+                            "Amount": 200.0d,
+                            "AttributeName": "generic.maxHealth",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        },
+                        {
+                            "UUIDMost": -3477034132982446771L,
+                            "UUIDLeast": -8275488799655016656L,
+                            "Amount": 45.0d,
+                            "AttributeName": "generic.attackDamage",
+                            "Operation": 0,
+                            "Name": "My Modifier"
+                        }
+                    ]
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 27b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 18b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 19b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 19b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 24b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 20b,
+                "id": "customnpcs:npcOrb",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l大魂师斗铠升华信物"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 21b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 19b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 22b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 24b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 23b,
+                "id": "customnpcs:npcOrb",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l大魂师斗铠升华信物"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 24b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 19b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 25b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 24b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 26b,
+                "id": "customnpcs:npcOrb",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l大魂师斗铠升华信物"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 27b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 19b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 28b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 24b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3大魂师升华材料"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 29b,
+                "id": "customnpcs:npcOrb",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§3§l大魂师斗铠升华信物"
+                    }
+                },
+                "Damage": 2s
+            },
+            {
+                "Slot": 31b,
+                "id": "customnpcs:npcCoinBronze",
+                "Count": 10b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§e斗罗大陆交易所用货币"
+                        ],
+                        "Name": "§6§l铜魂币"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "大魂师斗铠",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 35404661,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "TraderIgnoreNBT": 0b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 0b,
+    "Role": 1,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 2081216849668704771L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 35404661L,
+    "Rotation": [
+        178.94978f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

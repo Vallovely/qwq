@@ -1,0 +1,768 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "TraderSold": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 2023037764
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 1b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +10000",
+                            "§7§l伤害加成: +1%",
+                            "§7§l最大生命: +1500",
+                            "§7§l生命加成: +2%",
+                            "§7§l吸血概率: +1%",
+                            "§7§l暴击概率: +1%",
+                            "§7§l每秒回血: +30",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[大地之王]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 1b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +12000",
+                            "§7§l伤害加成: +2%",
+                            "§7§l最大生命: +1800",
+                            "§7§l生命加成: +4%",
+                            "§7§l吸血概率: +2%",
+                            "§7§l暴击概率: +2%",
+                            "§7§l每秒回血: +40",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[氪金大地之王]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 2023037764
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 1b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +9000",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +2500",
+                            "§7§l生命加成: +4%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +50",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[魔魂大白鲨]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +10000",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +3500",
+                            "§7§l生命加成: +7%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +80",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[氪金魔魂大白鲨]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 2023037764
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 1b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +9500",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +1800",
+                            "§7§l生命加成: +2%",
+                            "§7§l吸血概率: +2%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +20",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[僵尸绿尸]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 7b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +10000",
+                            "§7§l伤害加成: +0%",
+                            "§7§l最大生命: +2000",
+                            "§7§l生命加成: +4%",
+                            "§7§l吸血概率: +4%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +40",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[氪金僵尸绿尸]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 2023037764
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 1b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +11000",
+                            "§7§l伤害加成: +4%",
+                            "§7§l最大生命: +1000",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +20",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[血魔蝠王]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 10b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +12000",
+                            "§7§l伤害加成: +7%",
+                            "§7§l最大生命: +1100",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +0%",
+                            "§7§l每秒回血: +30",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[氪金血魔蝠王]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 12b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "armourersWorkshop": {
+                        "identifier": {
+                            "skinType": "armourers:sword",
+                            "globalId": 0,
+                            "localId": 2023037764
+                        },
+                        "dyeData": {
+                        },
+                        "lock": 1b
+                    },
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +10500",
+                            "§7§l伤害加成: +2%",
+                            "§7§l最大生命: +1000",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +2%",
+                            "§7§l每秒回血: +20",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[迪迦奥特曼]"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 13b,
+                "id": "minecraft:diamond_sword",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§c§l[魂环]",
+                            "§7§l攻击伤害: +11500",
+                            "§7§l伤害加成: +4%",
+                            "§7§l最大生命: +1100",
+                            "§7§l生命加成: +0%",
+                            "§7§l吸血概率: +0%",
+                            "§7§l暴击概率: +4%",
+                            "§7§l每秒回血: +30",
+                            "§3§l等级限制: +40"
+                        ],
+                        "Name": "§7§l<万年>-[氪金迪迦奥特曼]"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "TraderIgnoreDamage": 0b,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/11AAheiyan2/menga.png",
+    "NpcJob": 8,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -4408166604976501506L,
+    "TraderMarket": "",
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "TraderCurrency": {
+        "NpcMiscInv": [
+            {
+                "Slot": 0b,
+                "id": "minecraft:dye",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§7§l大地之王魂魄碎片"
+                    }
+                },
+                "Damage": 8s
+            },
+            {
+                "Slot": 1b,
+                "id": "customnpcs:npcRuby",
+                "Count": 3b,
+                "tag": {
+                    "ench": [
+                        {
+                            "lvl": 1s,
+                            "id": 0s
+                        }
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4§l红宝石*10"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 3b,
+                "id": "minecraft:dye",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§7§l魔魂大白鲨魂魄碎片"
+                    }
+                },
+                "Damage": 8s
+            },
+            {
+                "Slot": 4b,
+                "id": "customnpcs:npcRuby",
+                "Count": 3b,
+                "tag": {
+                    "ench": [
+                        {
+                            "lvl": 1s,
+                            "id": 0s
+                        }
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4§l红宝石*10"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 6b,
+                "id": "minecraft:dye",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§7§l僵尸绿尸魂魄碎片"
+                    }
+                },
+                "Damage": 8s
+            },
+            {
+                "Slot": 7b,
+                "id": "customnpcs:npcRuby",
+                "Count": 3b,
+                "tag": {
+                    "ench": [
+                        {
+                            "lvl": 1s,
+                            "id": 0s
+                        }
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4§l红宝石*10"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 9b,
+                "id": "minecraft:dye",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§7§l血魔蝠王魂魄碎片"
+                    }
+                },
+                "Damage": 8s
+            },
+            {
+                "Slot": 10b,
+                "id": "customnpcs:npcRuby",
+                "Count": 3b,
+                "tag": {
+                    "ench": [
+                        {
+                            "lvl": 1s,
+                            "id": 0s
+                        }
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4§l红宝石*10"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 12b,
+                "id": "minecraft:dye",
+                "Count": 22b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§7§l迪迦奥特曼魂魄碎片"
+                    }
+                },
+                "Damage": 8s
+            },
+            {
+                "Slot": 13b,
+                "id": "customnpcs:npcRuby",
+                "Count": 3b,
+                "tag": {
+                    "ench": [
+                        {
+                            "lvl": 1s,
+                            "id": 0s
+                        }
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4§l红宝石*10"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "万年魂环兑换",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 11221572,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "TraderIgnoreNBT": 0b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 0b,
+    "Role": 1,
+    "DropChance": [
+        {
+            "Integer": 100,
+            "Slot": 0
+        },
+        {
+            "Integer": 100,
+            "Slot": 1
+        },
+        {
+            "Integer": 100,
+            "Slot": 2
+        },
+        {
+            "Integer": 100,
+            "Slot": 3
+        },
+        {
+            "Integer": 100,
+            "Slot": 4
+        },
+        {
+            "Integer": 100,
+            "Slot": 5
+        },
+        {
+            "Integer": 100,
+            "Slot": 6
+        },
+        {
+            "Integer": 100,
+            "Slot": 7
+        },
+        {
+            "Integer": 100,
+            "Slot": 8
+        }
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": -3422956472725963046L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 10545799L,
+    "Rotation": [
+        -158.69994f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "ChunkPlayerLastSeen": 1618620037979L,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

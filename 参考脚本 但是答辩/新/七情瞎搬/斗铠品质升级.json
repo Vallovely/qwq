@@ -1,0 +1,526 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "function getLore(item,line)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print(\"在操作lore发生异常,可能是因为没有lore 请将报错提供给作者：\"+err)
+}
+//修改物品lore某一行
+/*
+*ScriptItemStack item：要修改lore的物品
+*int line：要修改lore的行数
+*String lore：替换原来lore的lore
+*/
+};
+function getNumber(string){
+ var string1 = string.replace(/§[0-9]/g,\"\")
+ return Number(string1.replace(/[^0-9]/ig,\"\"))
+}
+
+function attr(attrName,attrAmount,attrOperation)
+{
+var Item=player.getHeldItem()
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\")
+var itemStack = Item.getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null)
+{
+root = new NBTTagCompound();
+}
+var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+var attrList=attributeModifiers.func_74745_c();
+for(var n=0;n<attrList;n++)
+{
+var test=attributeModifiers.func_150305_b(n);
+if(test.func_74779_i(\"AttributeName\")==attrName&&test.func_74762_e(\"Operation\")==attrOperation)
+{
+var amount=test.func_74769_h(\"Amount\");
+amount=amount+attrAmount;
+test.func_74780_a(\"Amount\",amount);
+break
+}
+if(n==attrList-1)
+{
+add(attrName,attrAmount,attrOperation);
+break
+}
+}
+};
+function add(attribute,amount,operation)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+var UUID = Java.type(\"java.util.UUID\");
+var itemStack = player.getHeldItem().getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null)
+{
+root = new NBTTagCompound();
+}
+var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+var attributeModifier = new NBTTagCompound();
+var uuid = UUID.randomUUID();
+attributeModifier.func_74778_a(\"AttributeName\",attribute);
+attributeModifier.func_74778_a(\"Name\",\"My Modifier\");
+attributeModifier.func_74780_a(\"Amount\", amount);
+attributeModifier.func_74768_a(\"Operation\", operation);
+attributeModifier.func_74772_a(\"UUIDMost\", uuid.getMostSignificantBits());
+attributeModifier.func_74772_a(\"UUIDLeast\", uuid.getLeastSignificantBits());
+attributeModifiers.func_74742_a(attributeModifier);
+root.func_74782_a(\"AttributeModifiers\", attributeModifiers);
+itemStack.field_77990_d = root;
+};
+var item = player.getHeldItem()
+var ti = player.getInventory()[1]
+if(item !== null && ti !== null){
+	var lore = getLore(item,20)
+		if(lore == \"§e§l斗铠品质:§c§l<§c§l半神之体§c§l>\"){
+			if(ti.getDisplayName() == \"§d§l伪神能源\"){
+			var attack1 = getNumber(getLore(item,13))
+		    attack1 += 15000
+			var health1 = getNumber(getLore(item,14))
+	        health1 += 50000
+			var attack2 = getNumber(getLore(item,15))/100
+			attack22 = 0.01
+			attack2 += attack22
+			var health2 = getNumber(getLore(item,16))/100
+			health22 = 0.02
+			health2 += health22
+			var shxs = getNumber(getLore(item,18))
+			shxs += 30000
+	attr(\"generic.attackDamage\",attack1,0)
+        attr(\"generic.attackDamage\",attack22,1)
+            attr(\"generic.maxHealth\",health1,0)
+                attr(\"generic.maxHealth\",health22,1)
+                setItemLore(item,13,\"§4§l攻击伤害： +\"+attack1)
+                setItemLore(item,14,\"§a§l最大生命： +\"+health1)
+                setItemLore(item,15,\"§6§l伤害加成： +\"+attack2*100+\"%\")
+                setItemLore(item,16,\"§2§l生命加成： +\"+health2*100+\"%\")
+                setItemLore(item,18,\"§1§l吸收伤害： +\"+shxs)
+                item.setTag(\"伤害吸收\",shxs)
+            setItemLore(item,20,\"§e§l斗铠品质:§d§l<伪神之体>\")
+            player.sendMessage(\"&b&l神祇@p,您的斗铠品质已升级为：§d§l伪神之体\")
+            player.getMCEntity().field_71071_by.field_70462_a[1] = null
+}else{
+	player.sendMessage(\"&r&l物品栏第二格放§d§l伪神能源\")
+}
+}
+if(lore == \"§e§l斗铠品质:§d§l<伪神之体>\"){
+			if(ti.getDisplayName() == \"§6§l真神能源\"){
+			var attack1 = getNumber(getLore(item,13))
+		    attack1 += 30000
+			var health1 = getNumber(getLore(item,14))
+	        health1 += 100000
+			var attack2 = getNumber(getLore(item,15))/100
+			attack22 = 0.02
+			attack2 += attack22
+			var health2 = getNumber(getLore(item,16))/100
+			health22 = 0.04
+			health2 += health22
+			var shxs = getNumber(getLore(item,18))
+			shxs += 50000
+	attr(\"generic.attackDamage\",attack1,0)
+        attr(\"generic.attackDamage\",attack22,1)
+            attr(\"generic.maxHealth\",health1,0)
+                attr(\"generic.maxHealth\",health22,1)
+                setItemLore(item,13,\"§4§l攻击伤害： +\"+attack1)
+                setItemLore(item,14,\"§a§l最大生命： +\"+health1)
+                setItemLore(item,15,\"§6§l伤害加成： +\"+attack2*100+\"%\")
+                setItemLore(item,16,\"§2§l生命加成： +\"+health2*100+\"%\")
+                setItemLore(item,18,\"§1§l吸收伤害： +\"+shxs)
+                item.setTag(\"伤害吸收\",shxs)
+            setItemLore(item,20,\"§e§l斗铠品质:§6§l<真神之体>\")
+            player.sendMessage(\"&b&l神祇@p,您的斗铠品质已升级为：§6§l真神之体\")
+            player.getMCEntity().field_71071_by.field_70462_a[1] = null
+}else{
+	player.sendMessage(\"&r&l物品栏第二格放§6§l真神能源\")
+}
+}
+if(lore == \"§e§l斗铠品质:§6§l<真神之体>\"){
+			if(ti.getDisplayName() == \"§c§l三级§d§l神祇§6§l能源\"){
+			var attack1 = getNumber(getLore(item,13))
+		    attack1 += 50000
+			var health1 = getNumber(getLore(item,14))
+	        health1 += 200000
+			var attack2 = getNumber(getLore(item,15))/100
+			attack22 = 0.03
+			attack2 += attack22
+			var health2 = getNumber(getLore(item,16))/100
+			health22 = 0.06
+			health2 += health22
+			var shxs = getNumber(getLore(item,18))
+			shxs += 80000
+	attr(\"generic.attackDamage\",attack1,0)
+        attr(\"generic.attackDamage\",attack22,1)
+            attr(\"generic.maxHealth\",health1,0)
+                attr(\"generic.maxHealth\",health22,1)
+                setItemLore(item,13,\"§4§l攻击伤害： +\"+attack1)
+                setItemLore(item,14,\"§a§l最大生命： +\"+health1)
+                setItemLore(item,15,\"§6§l伤害加成： +\"+attack2*100+\"%\")
+                setItemLore(item,16,\"§2§l生命加成： +\"+health2*100+\"%\")
+                setItemLore(item,18,\"§1§l吸收伤害： +\"+shxs)
+                item.setTag(\"伤害吸收\",shxs)
+            setItemLore(item,20,\"§e§l斗铠品质:§c§l<三级§d§l神祇>\")
+            player.sendMessage(\"&b&l神祇@p,您的斗铠品质已升级为：§c§l三级§d§l神祇\")
+            player.getMCEntity().field_71071_by.field_70462_a[1] = null
+}else{
+	player.sendMessage(\"&r&l物品栏第二格放§c§l三级§d§l神祇§6§l能源\")
+}
+}
+if(lore == \"§e§l斗铠品质:§c§l<三级§d§l神祇>\"){
+			if(ti.getDisplayName() == \"§9§l二级§3§l神祇§6§l能源\"){
+			var attack1 = getNumber(getLore(item,13))
+		    attack1 += 80000
+			var health1 = getNumber(getLore(item,14))
+	        health1 += 300000
+			var attack2 = getNumber(getLore(item,15))/100
+			attack22 = 0.04
+			attack2 += attack22
+			var health2 = getNumber(getLore(item,16))/100
+			health22 = 0.08
+			health2 += health22
+			var shxs = getNumber(getLore(item,18))
+			shxs += 120000
+	attr(\"generic.attackDamage\",attack1,0)
+        attr(\"generic.attackDamage\",attack22,1)
+            attr(\"generic.maxHealth\",health1,0)
+                attr(\"generic.maxHealth\",health22,1)
+                setItemLore(item,13,\"§4§l攻击伤害： +\"+attack1)
+                setItemLore(item,14,\"§a§l最大生命： +\"+health1)
+                setItemLore(item,15,\"§6§l伤害加成： +\"+attack2*100+\"%\")
+                setItemLore(item,16,\"§2§l生命加成： +\"+health2*100+\"%\")
+                setItemLore(item,18,\"§1§l吸收伤害： +\"+shxs)
+                item.setTag(\"伤害吸收\",shxs)
+            setItemLore(item,20,\"§e§l斗铠品质:§9§l<二级§3§l神祇>\")
+            player.sendMessage(\"&b&l神祇@p,您的斗铠品质已升级为：§9§l二级§3§l神祇\")
+            player.getMCEntity().field_71071_by.field_70462_a[1] = null
+}else{
+	player.sendMessage(\"&r&l物品栏第二格放§9§l二级§3§l神祇§6§l能源\")
+}
+}
+}else{
+	player.sendMessage(\"&r&l手中或物品栏第二格为空\")
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/11new/char-6.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 5093631503335682148L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "斗铠品质升级",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 1087966,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 8652551576316218637L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 1084733L,
+    "Rotation": [
+        -280.2005f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

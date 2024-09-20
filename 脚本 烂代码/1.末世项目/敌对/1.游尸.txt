@@ -1,0 +1,16 @@
+var n=Math.floor(Math.random()*100)
+if(n<=10){
+	event.getTarget().setPosition(event.getTarget().getX(),event.getTarget().getY()+2,event.getTarget().getZ())//击飞
+	event.getTarget().knockback(4,npc.getRotation())//击退
+	event.getTarget().addPotionEffect(2,5,2,true)//减速
+	event.setDamage(event.getDamage()*1.8)//增伤
+	event.getTarget().sendMessage("§d§l"+npc.getName()+"§f§l触发§c§l强击")//提示
+	npc.executeCommand("/playsound random.anvil_land "+event.getTarget().getName())//音效
+}
+//攻击有10%概率将目标沿抛物线击飞造成180%伤害并造成60%减速,持续五秒。
+/**
+*@Author Vallovely
+*著作权属于Vallovely 2021/9/1起生效
+*联系方式: qq2380556707
+**/
+

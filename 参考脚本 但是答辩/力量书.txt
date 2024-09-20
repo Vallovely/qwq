@@ -1,0 +1,48 @@
+/*力量书
+*/
+var wj = world.getAllServerPlayers();
+for(a=0;a<wj.length;a++)
+{
+if(wj[a].getHeldItem()!=null)
+{
+{
+if(wj[a].isSneaking()==true)
+{
+}
+}
+{
+if(wj[a].isSneaking()==true)
+{
+npc.executeCommand("scoreboard players add "+wj[a].getName()+" lls 1")
+}
+else
+{
+if(world.getScoreboard().getPlayerScore(wj[a].getName(),"lls","dummy")>0)
+{
+wj[a].sendMessage("§4你tm别动啊，断开链接了！")
+world.getScoreboard().setPlayerScore(wj[a].getName(),"lls",0,"dummy")
+}
+}
+}
+if(wj[a].getHeldItem().getDisplayName()!=="§c§l力量书")
+{
+world.getScoreboard().setPlayerScore(wj[a].getName(),"lls",0,"dummy")
+}
+if(world.getScoreboard().getPlayerScore(wj[a].getName(),"lls","dummy")==2)
+{
+wj[a].sendMessage("§6§l沉睡多年的狂兽能量啊....")}
+if(world.getScoreboard().getPlayerScore(wj[a].getName(),"lls","dummy")==4)
+{
+wj[a].sendMessage("§6§l在体内隐匿多年....")}
+if(world.getScoreboard().getPlayerScore(wj[a].getName(),"lls","dummy")==6)
+{
+wj[a].sendMessage("§6§l给老子出来！！！")
+npc.executeCommand("/effect "+wj[a].getName()+" 5 99999 0")
+npc.executeCommand("scoreboard players set "+wj[a].getName()+" lls 0")
+var ap = world.getAllServerPlayers()
+		for(x in ap){
+		ap[x].sendMessage("§4§l"+wj[a].getName()+"成功获得力量属性")
+		}
+}
+}
+}

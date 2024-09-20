@@ -1,0 +1,37 @@
+{
+    "ItemGiverChained": [
+    ],
+    "TransportData": [
+    ],
+    "FactionData": [
+        {
+            "Points": 2000,
+            "Faction": 0
+        },
+        {
+            "Points": 1000,
+            "Faction": 1
+        },
+        {
+            "Points": 0,
+            "Faction": 2
+        }
+    ],
+    "BankData": [
+    ],
+    "ItemGiversList": [
+    ],
+    "MailData": [
+    ],
+    "PlayerName": "Vallovely",
+    "QuestData": {
+        "CompletedQuests": [
+        ],
+        "ActiveQuests": [
+        ]
+    },
+    "UUID": "645ba162-7a8c-afbd-f27c-00b5b20d9431",
+    "PlayerCompanionId": 0,
+    "DialogData": [
+    ]
+}

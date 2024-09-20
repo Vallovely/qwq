@@ -1,0 +1,128 @@
+1 1 0.5
+2 1.8 1
+3 2.8 1.5
+4 10 5*0.5 2*0.2 4 2*0.5 1*0.2
+
+击退抗性35 35 35 40 50[魂兽]
+攻击速度18 18 18 17
+
+var aN=npc.getSurroundingEntities(16,2)
+var aP=world.getAllServerPlayers()
+for(i in aN){
+aN[i].setMeleeSpeed(18)
+aN[i].setKnockbackResistance(1.35)
+for(i in aP){
+aP[i].sendMessage(aN[i].getName())
+}
+}
+npc.setMeleeSpeed(18)//攻速
+npc.setKnockbackResistance(1.35)//击退抗性
+
+var aN=npc.getSurroundingEntities(256,2)
+for(i in aN){
+if(aN[i].getName().indexOf("§4§n")!=-1){
+aN[i].getMCEntity().stats.spawnCycle=
+}
+}
+
+1本
+npc.setName("§9[飞僵]§2§n一本§4§nBoss")
+npc.setTitle("§f魂士§f§n[大圆满]§r")
+
+npc.setName("§7[毛僵]§2§n一本§4§n杂兵")
+npc.setTitle("§f魂士§f§n[高阶]§r")
+
+npc.setName("§7[绿僵]§2§n一本§4§n杂兵")
+npc.setTitle("§f魂士§f§n[中阶]§r")
+
+npc.setName("§7[白僵]§2§n一本§4§n杂兵")
+npc.setTitle("§f魂士§f§n[初阶]§r")
+
+
+2本
+npc.setName("§9[狼王]§2§n二本§4§nBoss")
+npc.setTitle("§2魂师§f§n[大圆满]§r")
+
+npc.setName("§7[军贼]§2§n二本§4§n杂兵")
+npc.setTitle("§2魂师§f§n[高阶]§r")
+
+npc.setName("§7[恶贼]§2§n二本§4§n杂兵")
+npc.setTitle("§2魂师§f§n[中阶]§r")
+
+npc.setName("§7[恶狼]§2§n二本§4§n杂兵")
+npc.setTitle("§2魂师§f§n[初阶]§r")
+
+
+3本
+npc.setName("§7[毒犯]§2§n三本§4§n杂兵")
+npc.setTitle("§3大魂师§f§n[初阶]§r")
+
+npc.setName("§7[恐怖分子]§2§n三本§4§n杂兵")
+npc.setTitle("§3大魂师§f§n[中阶]§r")
+
+npc.setName("§7[瘾君子]§2§n三本§4§n杂兵")
+npc.setTitle("§3大魂师§f§n[高阶]§r")
+
+npc.setName("§9[黑社会老大]§2§n三本§4§nBoss")
+npc.setTitle("§2大魂师§f§n[大圆满]§r")
+
+4本
+npc.setName("§7[贞子]§7§n四本§4§n杂兵")
+npc.setTitle("§7魂尊§f§n[初阶]§r")
+
+npc.setName("§7[亡灵骑士]§7§n四本§4§n杂兵")
+npc.setTitle("§7魂尊§f§n[中阶]§r")
+
+npc.setName("§7[毒液]§7§n四本§4§n杂兵")
+npc.setTitle("§7魂尊§f§n[高阶]§r")
+
+5本
+npc.setName("§7[火焰毒液]§8§n五本§4§n杂兵")
+npc.setTitle("§8魂宗§f§n[初阶]§r")
+
+npc.setName("§7[邪魔毒液]§8§n五本§4§n杂兵")
+npc.setTitle("§8魂宗§f§n[中阶]§r")
+
+npc.setName("§7[变异毒液]§8§n五本§4§n杂兵")
+npc.setTitle("§8魂宗§f§n[高阶]§r")
+
+6本
+npc.setName("§7[冰焰骑士]§9§n六本§4§n杂兵")
+npc.setTitle("§9魂王§f§n[初阶]§r")
+
+npc.setName("§7[地狱蜘蛛侠]§9§n六本§4§n杂兵")
+npc.setTitle("§9魂王§f§n[高阶]§r")
+
+7本
+npc.setName("§7[泥浆怪]§5§n七本§4§n杂兵")
+npc.setTitle("§5魂帝§f§n[初阶]§r")
+
+npc.setName("§9[阿巴阿巴怪]§5§n七本§4§nBoss")
+npc.setTitle("§5魂帝§f§n[大圆满]§r")
+
+npc.setName("§7[绅士]§5§n七本§4§n杂兵")
+npc.setTitle("§5魂帝§f§n[中阶]§r")
+
+
+npc.setName("§7[暴露狂]§5§n七本§4§n杂兵")
+npc.setTitle("§5魂帝§f§n[初阶]§r")
+
+
+var players = npc.getSurroundingEntities(1,1);
+for(x=0;x<players.length;x++){
+ var player = players[x];
+ if(player.getHealth() > 0){
+  player.setHealth(Infinity);
+  player.addPotionEffect(11,1,254,true);
+  player.sendMessage("§e§l爱谷的更新预告")
+  player.sendMessage("§f§l从§4§l§n十万年魂兽§f§l开始，魂兽不再以§b§l聚集§f§l的形式存在,而是分布在地图§b§l各个区域")
+player.sendMessage("§f§l如§a§l§n蓝银皇§f§l出现在§a§l§n森林§f§l附近。§a§l§n天青牛蟒§f§l出现在§a§l还没造的地图区域§e§l[金色传说- §e§l手动狗头保命]")
+player.sendMessage("§f§l望各位做好心理准备")
+ }
+}
+var pl = world.getAllServerPlayers();
+for(i=0;i<players.length;i++){
+ if(pl[i].getY() <= -1){
+  pl[i].setHealth(-1);
+ }
+}

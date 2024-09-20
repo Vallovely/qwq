@@ -1,0 +1,665 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+        {
+            "Slot": 0b,
+            "id": "customnpcs:npcFireSpell",
+            "Count": 1b,
+            "tag": {
+                "Unbreakable": 1b,
+                "display": {
+                    "Name": "§3§l二级神祇能量晶体"
+                }
+            },
+            "Damage": 0s
+        },
+        {
+            "Slot": 1b,
+            "id": "customnpcs:npcFireSpell",
+            "Count": 1b,
+            "tag": {
+                "Unbreakable": 1b,
+                "display": {
+                    "Name": "§3§l二级神祇能量晶体"
+                }
+            },
+            "Damage": 0s
+        },
+        {
+            "Slot": 2b,
+            "id": "customnpcs:npcFireSpell",
+            "Count": 1b,
+            "tag": {
+                "Unbreakable": 1b,
+                "display": {
+                    "Name": "§3§l二级神祇能量晶体"
+                }
+            },
+            "Damage": 0s
+        }
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 2.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 30,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 1500000,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 97.30034f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "npc.clearTempData()",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "/*怪物技能*/
+//更新
+var lq1 = npc.getTempData(\"lq1\")
+var lq2 = npc.getTempData(\"lq2\")
+var lq3 = npc.getTempData(\"lq3\")
+var lq4 = npc.getTempData(\"lq4\")
+var jz = npc.getTempData(\"jz\")
+var hs = npc.getTempData(\"hs\")
+var jls = Math.random()*100
+if(npc.getHealth() < npc.getMaxHealth() && npc.getHealth() > 0){
+	if(jls < 10 && lq1 <= 0){
+		npc.say(\"&b&l降智光环\")
+		npc.setTempData(\"jz\",10)
+		npc.setTempData(\"lq1\",30)
+		for(j=5;j>=0;j--){
+		for(var x=1;x<360;x++){
+			var angel=Math.PI/180*x;
+			var sin=Math.sin(angel);
+			var cos=Math.cos(angel);
+			try {
+			world.spawnParticle(\"wake\",npc.x+j*sin,npc.y+0.1,npc.z+j*cos,0,0,0,0,1)
+			} catch(err){
+				print(err)
+			}
+		}
+	}
+	}
+	if(jls > 5 && jls < 15 && lq2 <= 0){
+		npc.say(\"&b&l憨神光环\")
+		npc.setTempData(\"hs\",10)
+		npc.setTempData(\"lq2\",30)
+		ball(3,\"wake\")
+	}
+	if(jls > 10 && jls < 20 && lq3 <= 0){
+		npc.say(\"&b&l憨神之光\")
+		npc.setTempData(\"hszg\",1)
+		npc.setTempData(\"lq3\",25)
+		world.spawnParticle(\"wake\",npc.x-1,npc.y-1,npc.z-1,1,1,1,1,5)
+	}
+	if(jls > 15 && jls < 25 && lq4 <= 0){
+		npc.say(\"&b&l憨神庇佑\")
+		npc.setHealth(npc.getHealth()+npc.getMaxHealth()*0.25)
+		npc.setTempData(\"lq4\",25)
+	}
+}
+	if(lq1 > 0){ lq1 -= 1;npc.setTempData(\"lq1\",lq1) }
+	if(lq2 > 0){ lq2 -= 1;npc.setTempData(\"lq2\",lq2) }
+	if(lq3 > 0){ lq3 -= 1;npc.setTempData(\"lq3\",lq3) }
+	if(lq4 > 0){ lq4 -= 1;npc.setTempData(\"lq4\",lq4) }
+	if(jz > 0){ jz -= 0.5;npc.setTempData(\"jz\",jz) }
+    if(hs > 0){ hs -= 0.5;npc.setTempData(\"hs\",hs) }
+var players = npc.getSurroundingEntities(20,1)
+for(a in players){
+	player = players[a]
+	var lx = player.getTempData(\"liuxue\")
+	if(lx > 0){
+		player.setHealth(player.getHealth()-player.getMaxHealth()*0.01)
+		lx -= 0.5
+		player.setTempData(\"liuxue\",lx)
+		player.sendMessage(\"&5&l你处于流血状态\")
+	}
+}
+var jm = 0
+if(jz > 0){ jm += 0.25 }
+if(hs > 0){ jm += 0.3 }
+var zzjm = 1+jm
+npc.setMeleeResistance(zzjm)
+function ball(r,particle){
+for(var x=1;x<360;x++){
+var r = r;
+var x0 = npc.getX(),y0 = npc.getY(),z0 = npc.getZ();
+var x1 = x0 + r * Math.sin(x * Math.PI / 180);
+var y1 = y0 + r * Math.cos(x * Math.PI / 180);
+var z1 = z0 + r * Math.cos(x * Math.PI / 180);
+var z2 = z0 + r * Math.sin(x * Math.PI / 180);
+world.spawnParticle(particle,x1,y1,z0,0,0,0,0,1);
+world.spawnParticle(particle,x1,y0,z1,0,0,0,0,1);
+world.spawnParticle(particle,x0,y1,z2,0,0,0,0,1);
+}
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "var player = event.getSource()
+var hszg = npc.getTempData(\"hszg\")
+if(hszg > 0){
+	hszg -= 1
+	player.setHealth(player.getHealth()-player.getMaxHealth()*0.3)
+	player.setTempData(\"liuxue\",10)
+	player.sendMessage(\"§b你被憨神之光所命中\")
+npc.setTempData(\"hszg\",0)
+}
+try{
+var name = player.getName()
+var xx = player.getTempData(\"吸血冷却\")
+if(xx <= 0){
+var Blood = world.getScoreboard().getPlayerScore(name,\"Blood\",\"dummy\")
+var bllld = Math.random()*100
+var health = player.getHealth()
+var damage = event.getDamage()*0.005
+if(Blood > bllld){
+player.sendMessage(\"&c你触发了吸血,吸取了 &a\"+damage+\" &c点血量\")
+player.setTempData(\"吸血冷却\",1)
+player.setHealth(health+damage)}}}catch(e){
+event.setDamage(0)}
+event.setDamage(event.getDamage()/100000000)
+npc.setMeleeStrength(1500000)",
+            "ScriptConsole": "",
+            "Type": 4,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "//死亡
+var player = event.getSource()
+if(event.getType()==\"player\"){
+	var level = world.getScoreboard().getPlayerScore(player.getName(),\"Soul_Level\",\"dummy\")
+	shengji(level,player)
+	if(level > 120 && level < 130){
+	level += 1
+	message(\"&4&l[公告]&a&l神祇\"+player.getName()+\"&b&l击败并吸收了来自&3&l二级神祇-憨憨&b&l的能量成功将魂力等级至\"+level+\"级\")
+}
+}
+npc.clearTempData()
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}
+
+function shengji(l,wj){
+	if(l < 121){
+    wj.sendMessage(\"§5还未到达准二级神祇，无法吸收来自憨憨死亡后带来的能量\")
+	}else{
+		var name = wj.getName()
+		if(l == 121){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了122级！\")
+			add(100000,2,2500,name)
+		}
+		if(l == 122){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了123级！\")
+			add(150000,2,2800,name)
+		}
+		if(l == 123){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了124级！\")
+			add(200000,2,3200,name)
+		}
+		if(l == 124){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了125级！\")
+			add(250000,2,3500,name)
+		}
+		if(l == 125){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了126级！\")
+			add(300000,2,3800,name)
+		}
+		if(l == 126){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了127级！\")
+			add(350000,2,4200,name)
+		}
+		if(l == 127){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了128级！\")
+			add(400000,2,4500,name)
+		}
+		if(l == 128){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了129级！\")
+			add(450000,2,4800,name)
+		}
+		if(l == 129){
+			npc.executeCommand(\"scoreboard players add \"+wj.getName()+\" Soul_Level 1\")
+			player.sendMessage(\"&r&l你升到了130级！\")
+			add(500000,2,5200,name)
+		}
+	}
+}
+function add(h,a,heal,name){
+	npc.executeCommand(\"scoreboard players add \"+name+\" maxHealth1 \"+h)
+	npc.executeCommand(\"scoreboard players add \"+name+\" maxHealth2 \"+a)
+	npc.executeCommand(\"scoreboard players add \"+name+\" Heal \"+heal)
+}",
+            "ScriptConsole": "",
+            "Type": 5,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "//攻击
+var hs = npc.getTempData(\"hs\")
+if(hs > 0){ event.setDamage(event.getDamage()+6000000) }",
+            "ScriptConsole": "",
+            "Type": 6,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 1,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 10s,
+    "items": [
+        {
+            "slot": 4b,
+            "id": 4122s,
+            "Count": 1b,
+            "tag": {
+                "armourersWorkshop": {
+                    "identifier": {
+                        "skinType": "armourers:wings",
+                        "globalId": 0,
+                        "localId": -1239403937
+                    },
+                    "dyeData": {
+                    },
+                    "lock": 0b
+                }
+            },
+            "Damage": 0s
+        }
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 6,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/enderman/Apparation.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 1b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 1396467336659644391L,
+    "Fire": 0s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 100.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 1500000.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "§3§l二级神祇-憨憨",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 5,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 89035,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 100,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 15,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+        {
+            "Integer": 100,
+            "Slot": 0
+        },
+        {
+            "Integer": 50,
+            "Slot": 1
+        },
+        {
+            "Integer": 10,
+            "Slot": 2
+        },
+        {
+            "Integer": 100,
+            "Slot": 3
+        },
+        {
+            "Integer": 100,
+            "Slot": 4
+        },
+        {
+            "Integer": 100,
+            "Slot": 5
+        },
+        {
+            "Integer": 100,
+            "Slot": 6
+        },
+        {
+            "Integer": 100,
+            "Slot": 7
+        },
+        {
+            "Integer": 100,
+            "Slot": 8
+        }
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 0b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+        {
+            "Slot": 0b,
+            "id": "armourersWorkshop:armourContainerHead",
+            "Count": 1b,
+            "tag": {
+                "armourersWorkshop": {
+                    "identifier": {
+                        "skinType": "armourers:head",
+                        "globalId": 0,
+                        "localId": 624601183
+                    },
+                    "dyeData": {
+                    },
+                    "lock": 0b
+                }
+            },
+            "Damage": 0s
+        },
+        {
+            "Slot": 1b,
+            "id": "armourersWorkshop:armourContainerChest",
+            "Count": 1b,
+            "tag": {
+                "armourersWorkshop": {
+                    "identifier": {
+                        "skinType": "armourers:chest",
+                        "globalId": 0,
+                        "localId": -1157996161
+                    },
+                    "dyeData": {
+                    },
+                    "lock": 0b
+                }
+            },
+            "Damage": 0s
+        },
+        {
+            "Slot": 2b,
+            "id": "armourersWorkshop:armourContainerLegs",
+            "Count": 1b,
+            "tag": {
+                "armourersWorkshop": {
+                    "identifier": {
+                        "skinType": "armourers:legs",
+                        "globalId": 0,
+                        "localId": 402460592
+                    },
+                    "dyeData": {
+                    },
+                    "lock": 0b
+                }
+            },
+            "Damage": 0s
+        },
+        {
+            "Slot": 3b,
+            "id": "armourersWorkshop:armourContainerFeet",
+            "Count": 1b,
+            "tag": {
+                "armourersWorkshop": {
+                    "identifier": {
+                        "skinType": "armourers:feet",
+                        "globalId": 0,
+                        "localId": -604991771
+                    },
+                    "dyeData": {
+                    },
+                    "lock": 0b
+                }
+            },
+            "Damage": 0s
+        }
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": -6940086682158100758L,
+    "Health": 98s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 1,
+    "Title": "§9§l神界憨神",
+    "TotalTicksAlive": 89015L,
+    "Rotation": [
+        -118.465576f,
+        -0.23785314f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

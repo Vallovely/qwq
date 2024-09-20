@@ -1,0 +1,91 @@
+---- Minecraft Crash Report ----
+// Why is it breaking :(
+
+Time: 20-8-14 下午7:16
+Description: Unexpected error
+
+java.lang.IllegalStateException: Keyboard must be created before you can read events
+	at org.lwjgl.input.Keyboard.next(Keyboard.java:475)
+	at net.minecraft.client.Minecraft.func_71407_l(Minecraft.java:1746)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:973)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:898)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at org.lwjgl.input.Keyboard.next(Keyboard.java:475)
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1074.42, y=5.62, z=-931.36]]
+	Chunk stats: MultiplayerChunkCache: 1089, 1089
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (1110,4,-926), Chunk: (at 6,0,2 in 69,-58; contains blocks 1104,0,-928 to 1119,255,-913), Region: (2,-2; contains chunks 64,-64 to 95,-33, blocks 1024,0,-1024 to 1535,255,-513)
+	Level time: 5074073 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 83 total; [EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1073.83, y=5.62, z=-927.53], EntitySheep['羊'/5, l='MpServer', x=1005.78, y=4.00, z=-923.38], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1089.29, y=5.62, z=-941.59], EntityCow['牛'/6, l='MpServer', x=998.72, y=4.00, z=-900.78], EntityPig['猪'/7, l='MpServer', x=1014.06, y=4.00, z=-917.13], EntityChicken['鸡'/8, l='MpServer', x=1020.63, y=4.00, z=-943.44], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1018.71, y=5.62, z=-949.19], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1073.64, y=5.62, z=-964.42], EntityHorse['马'/10, l='MpServer', x=1023.84, y=4.00, z=-864.25], EntitySheep['羊'/11, l='MpServer', x=1057.16, y=4.00, z=-987.84], EntitySheep['羊'/12, l='MpServer', x=1035.78, y=4.00, z=-917.88], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-140.79, z=1.30], EntityPig['猪'/13, l='MpServer', x=1048.63, y=4.00, z=-890.75], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1074.42, y=5.62, z=-931.36], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1084.14, y=5.62, z=-925.80], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=991.35, y=5.62, z=-998.28], EntityCow['牛'/21, l='MpServer', x=1055.03, y=4.00, z=-1002.03], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1163.13, y=5.62, z=-926.54], EntityCustomNpc['[虚弱I级]怨灵'/23, l='MpServer', x=1079.50, y=4.00, z=-945.50], EntityCustomNpc['[危险I级]残破的高级魂体'/24, l='MpServer', x=1079.50, y=4.00, z=-939.50], EntityCustomNpc['[普通I级]怨魂'/25, l='MpServer', x=1079.50, y=4.00, z=-942.50], EntityCustomNpc['强化机器人[通用脚本]'/26, l='MpServer', x=1087.50, y=4.00, z=-936.50], EntityCustomNpc['血量显示[通用脚本]'/27, l='MpServer', x=1087.50, y=4.00, z=-938.50], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-253.43, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-78.45, z=1.30], EntityCustomNpc['指令'/33, l='MpServer', x=1091.50, y=4.00, z=-936.50], EntityCustomNpc['聊天'/34, l='MpServer', x=1091.50, y=4.00, z=-937.50], EntityCustomNpc['队伍'/35, l='MpServer', x=1091.50, y=4.00, z=-938.50], EntityCustomNpc['粒子效果'/36, l='MpServer', x=1091.50, y=4.00, z=-939.50], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1108.51, y=5.62, z=-989.54], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1064.25, y=5.62, z=-925.54], EntityCustomNpc['攻击'/37, l='MpServer', x=1091.50, y=4.00, z=-940.50], EntityCustomNpc['测试'/38, l='MpServer', x=1091.50, y=4.00, z=-941.50], EntityCustomNpc['点爷回血'/39, l='MpServer', x=1091.50, y=4.00, z=-942.50], EntityCustomNpc['据点'/40, l='MpServer', x=1091.50, y=4.00, z=-943.50], EntityChicken['鸡'/42, l='MpServer', x=1093.59, y=4.00, z=-990.41], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=2.62, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1065.71, y=5.62, z=-911.90], EntitySheep['羊'/44, l='MpServer', x=1110.88, y=4.00, z=-857.06], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-41.45, z=1.30], EntityChicken['鸡'/50, l='MpServer', x=1148.47, y=4.00, z=-953.47], EntityPig['猪'/51, l='MpServer', x=1141.16, y=4.00, z=-940.28], EntityChicken['鸡'/54, l='MpServer', x=1143.56, y=4.00, z=-853.63], EntityChicken['鸡'/58, l='MpServer', x=1143.56, y=4.00, z=-972.59], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1062.26, y=5.62, z=-921.45], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1074.44, y=5.62, z=-944.13], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1076.78, y=5.62, z=-935.12], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-66.65, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-110.45, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-135.28, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1168.54, y=5.62, z=-957.25], EntityItem['item.item.egg'/85173370, l='MpServer', x=1022.34, y=4.13, z=-943.78], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1077.11, y=5.62, z=-922.78], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1073.95, y=5.62, z=-890.02], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1097.38, y=5.62, z=-900.05], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1076.37, y=5.62, z=-934.12], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-178.38, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1074.89, y=5.62, z=-941.41], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1075.12, y=5.62, z=-933.64], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1076.59, y=5.62, z=-933.21], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-96.66, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-245.26, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1077.59, y=5.62, z=-935.84], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1074.23, y=7.16, z=-939.26], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1086.13, y=5.62, z=-911.86], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1059.58, y=5.62, z=-955.17], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1000.59, y=5.62, z=-875.03], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1080.20, y=5.62, z=-902.82], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1.70, y=-38.93, z=1.30], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1089.36, y=5.62, z=-907.68], EntityItem['item.item.egg'/85201577, l='MpServer', x=1093.91, y=4.13, z=-988.81], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1044.26, y=5.62, z=-993.74], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1089.60, y=5.62, z=-965.97], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1078.68, y=7.16, z=-936.53], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1077.65, y=5.62, z=-944.99], EntityCustomNpc['[危险III级]湮灭之流'/63189517, l='MpServer', x=1075.50, y=4.00, z=-938.50], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1102.96, y=5.62, z=-876.54], EntityCustomNpc['[黑暗风暴本体]'/3170530, l='MpServer', x=1075.50, y=4.00, z=-934.50], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1084.00, y=5.62, z=-906.38], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1080.91, y=5.62, z=-951.92], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1075.08, y=5.62, z=-933.19], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1050.83, y=5.62, z=-893.80], EntityClientPlayerMP['GXW_SA'/79, l='MpServer', x=1093.62, y=5.62, z=-904.07]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.func_72914_a(WorldClient.java:373)
+	at net.minecraft.client.Minecraft.func_71396_d(Minecraft.java:2444)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:927)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_111, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 323126512 bytes (308 MB) / 815792128 bytes (778 MB) up to 8589934592 bytes (8192 MB)
+	JVM Flags: 5 total; -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xms128M -Xmx8192M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.99.99 Minecraft Forge 10.13.4.1614 6 mods loaded, 6 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{7.10.99.99} [Forge Mod Loader] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAA	Forge{10.13.4.1614} [Minecraft Forge] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAA	InputFix{1.7.10-v5} [InputFix] (minecraft.jar) 
+	UCHIJAAAA	customnpcs{1.7.10d} [CustomNpcs] (CustomNPCs_1.7.10d(19jun17).jar) 
+	UCHIJAAAA	alluwant{2.1} [背包物品编辑器] (背包编辑器.jar) 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Launched Version: 1.7.10-Forge10.13.4.1614-1.7.10
+	LWJGL: 2.9.1
+	OpenGL: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: 简体中文 (中国)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: Off (1)

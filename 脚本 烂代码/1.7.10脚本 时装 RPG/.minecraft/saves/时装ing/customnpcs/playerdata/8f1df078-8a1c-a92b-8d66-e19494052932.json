@@ -1,0 +1,25 @@
+{
+    "ItemGiverChained": [
+    ],
+    "TransportData": [
+    ],
+    "FactionData": [
+    ],
+    "BankData": [
+    ],
+    "ItemGiversList": [
+    ],
+    "MailData": [
+    ],
+    "PlayerName": "Vallovel",
+    "QuestData": {
+        "CompletedQuests": [
+        ],
+        "ActiveQuests": [
+        ]
+    },
+    "UUID": "8f1df078-8a1c-a92b-8d66-e19494052932",
+    "PlayerCompanionId": 0,
+    "DialogData": [
+    ]
+}

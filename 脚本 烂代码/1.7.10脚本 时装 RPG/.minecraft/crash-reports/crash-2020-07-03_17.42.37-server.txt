@@ -1,0 +1,129 @@
+---- Minecraft Crash Report ----
+// Sorry :(
+
+Time: 20-7-3 下午5:42
+Description: Ticking memory connection
+
+scala.reflect.internal.MissingRequirementError: object scala in compiler mirror not found.
+	at scala.reflect.internal.MissingRequirementError$.signal(MissingRequirementError.scala:17)
+	at scala.reflect.internal.MissingRequirementError$.notFound(MissingRequirementError.scala:18)
+	at scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:53)
+	at scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:66)
+	at scala.reflect.internal.Mirrors$RootsBase.getPackage(Mirrors.scala:173)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackage$lzycompute(Definitions.scala:161)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackage(Definitions.scala:161)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackageClass$lzycompute(Definitions.scala:162)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackageClass(Definitions.scala:162)
+	at scala.reflect.internal.Definitions$DefinitionsClass.init(Definitions.scala:1377)
+	at scala.tools.nsc.Global$Run.<init>(Global.scala:1278)
+	at scala.tools.nsc.interpreter.IMain.compileSourcesKeepingRun(IMain.scala:388)
+	at scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compileAndSaveRun(IMain.scala:807)
+	at scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compile(IMain.scala:766)
+	at scala.tools.nsc.interpreter.IMain.bind(IMain.scala:630)
+	at scala.tools.nsc.interpreter.IMain.bind(IMain.scala:667)
+	at scala.tools.nsc.interpreter.IMain$$anon$3.put(IMain.scala:1001)
+	at javax.script.AbstractScriptEngine.put(Unknown Source)
+	at noppes.npcs.DataScript.callScript(DataScript.java:111)
+	at noppes.npcs.entity.EntityNPCInterface.func_70085_c(EntityNPCInterface.java:408)
+	at net.minecraft.entity.EntityLiving.func_130002_c(EntityLiving.java:1191)
+	at net.minecraft.entity.player.EntityPlayer.func_70998_m(EntityPlayer.java:1126)
+	at net.minecraft.network.NetHandlerPlayServer.func_147340_a(NetHandlerPlayServer.java:810)
+	at net.minecraft.network.play.client.C02PacketUseEntity.func_148833_a(SourceFile:55)
+	at net.minecraft.network.play.client.C02PacketUseEntity.func_148833_a(SourceFile:10)
+	at net.minecraft.network.NetworkManager.func_74428_b(NetworkManager.java:212)
+	at net.minecraft.network.NetworkSystem.func_151269_c(NetworkSystem.java:165)
+	at net.minecraft.server.MinecraftServer.func_71190_q(MinecraftServer.java:659)
+	at net.minecraft.server.MinecraftServer.func_71217_p(MinecraftServer.java:547)
+	at net.minecraft.server.integrated.IntegratedServer.func_71217_p(IntegratedServer.java:186)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:427)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:685)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at scala.reflect.internal.MissingRequirementError$.signal(MissingRequirementError.scala:17)
+	at scala.reflect.internal.MissingRequirementError$.notFound(MissingRequirementError.scala:18)
+	at scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:53)
+	at scala.reflect.internal.Mirrors$RootsBase.getModuleOrClass(Mirrors.scala:66)
+	at scala.reflect.internal.Mirrors$RootsBase.getPackage(Mirrors.scala:173)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackage$lzycompute(Definitions.scala:161)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackage(Definitions.scala:161)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackageClass$lzycompute(Definitions.scala:162)
+	at scala.reflect.internal.Definitions$DefinitionsClass.ScalaPackageClass(Definitions.scala:162)
+	at scala.reflect.internal.Definitions$DefinitionsClass.init(Definitions.scala:1377)
+	at scala.tools.nsc.Global$Run.<init>(Global.scala:1278)
+	at scala.tools.nsc.interpreter.IMain.compileSourcesKeepingRun(IMain.scala:388)
+	at scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compileAndSaveRun(IMain.scala:807)
+	at scala.tools.nsc.interpreter.IMain$ReadEvalPrint.compile(IMain.scala:766)
+	at scala.tools.nsc.interpreter.IMain.bind(IMain.scala:630)
+	at scala.tools.nsc.interpreter.IMain.bind(IMain.scala:667)
+	at scala.tools.nsc.interpreter.IMain$$anon$3.put(IMain.scala:1001)
+	at javax.script.AbstractScriptEngine.put(Unknown Source)
+	at noppes.npcs.DataScript.callScript(DataScript.java:111)
+	at noppes.npcs.entity.EntityNPCInterface.func_70085_c(EntityNPCInterface.java:408)
+	at net.minecraft.entity.EntityLiving.func_130002_c(EntityLiving.java:1191)
+	at net.minecraft.entity.player.EntityPlayer.func_70998_m(EntityPlayer.java:1126)
+	at net.minecraft.network.NetHandlerPlayServer.func_147340_a(NetHandlerPlayServer.java:810)
+	at net.minecraft.network.play.client.C02PacketUseEntity.func_148833_a(SourceFile:55)
+	at net.minecraft.network.play.client.C02PacketUseEntity.func_148833_a(SourceFile:10)
+	at net.minecraft.network.NetworkManager.func_74428_b(NetworkManager.java:212)
+
+-- Ticking connection --
+Details:
+	Connection: net.minecraft.network.NetworkManager@111586a
+Stacktrace:
+	at net.minecraft.network.NetworkSystem.func_151269_c(NetworkSystem.java:165)
+	at net.minecraft.server.MinecraftServer.func_71190_q(MinecraftServer.java:659)
+	at net.minecraft.server.MinecraftServer.func_71217_p(MinecraftServer.java:547)
+	at net.minecraft.server.integrated.IntegratedServer.func_71217_p(IntegratedServer.java:186)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:427)
+	at net.minecraft.server.MinecraftServer$2.run(MinecraftServer.java:685)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (x86) version 6.1
+	Java Version: 1.8.0_102, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) Client VM (mixed mode), Oracle Corporation
+	Memory: 322964984 bytes (308 MB) / 585105408 bytes (558 MB) up to 1073741824 bytes (1024 MB)
+	JVM Flags: 5 total; -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xms128M -Xmx1024M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.99.99 Minecraft Forge 10.13.4.1614 Optifine OptiFine_1.7.10_HD_U_E3 9 mods loaded, 9 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{7.10.99.99} [Forge Mod Loader] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAA	Forge{10.13.4.1614} [Minecraft Forge] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAA	InputFix{1.7.10-v5} [InputFix] (minecraft.jar) 
+	UCHIJAAAA	worldedit{6.0-beta-01} [WorldEdit] (3DMGAME-wdsj-1.7.10创世神MOD.zip) 
+	UCHIJAAAA	craftguide{1.6.8.2} [CraftGuide] ([G键合成]CraftGuide-1.6.8.2-forge[hukk汉化].jar) 
+	UCHIJAAAA	customnpcs{1.7.10d} [CustomNpcs] (CustomNPCs_1.7.10d(19jun17).jar) 
+	UCHIJAAAA	armourersWorkshop{1.7.10-0.48.3} [Armourer's Workshop] (时装工坊1.7.10-0.48.3.jar) 
+	UCHIJAAAA	alluwant{2.1} [背包物品编辑器] (背包编辑器.jar) 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Armourer's Workshop: 
+		Render Type: MODEL_ATTACHMENT
+		Texture Render: false
+		Baking Queue: 0
+		Request Queue: 0
+		Texture Painting: true
+		Multipass Skin Rendering: true
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Player Count: 1 / 8; [EntityPlayerMP['GXW_SA'/64, l='脚本', x=1116.60, y=4.00, z=-936.18]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	OptiFine Version: OptiFine_1.7.10_HD_U_E3
+	Render Distance Chunks: 6
+	Mipmaps: 1
+	Anisotropic Filtering: 1
+	Antialiasing: 0
+	Multitexture: false
+	Shaders: null
+	OpenGlVersion: 3.1.0 - Build 9.17.10.4229
+	OpenGlRenderer: Intel(R) HD Graphics
+	OpenGlVendor: Intel
+	CpuCount: 2

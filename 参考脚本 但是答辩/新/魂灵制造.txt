@@ -1,0 +1,47 @@
+var 魂灵名字 = "666"
+var 品质 = "§e[SSR]"
+var 序列号 = 6666
+var 攻击力 = 10000
+var 生命值 = 10000
+var 环数 = 9
+item=world.createItem("customnpcs:npcWaterElement",0,1);
+item.setCustomName("§f§l"+魂灵名字+品质);
+addItemLore(item,"§c§l[魂灵]");
+addItemLore(item,"§6§l序列号："+序列号);
+addItemLore(item,"§4§l攻击力："+攻击力);
+addItemLore(item,"§a§l生命值："+生命值);
+addItemLore(item,"§7§l环数限制："+环数);
+item.setTag("ench",[]);
+魂灵(item,序列号,攻击力,生命值,环数);
+npc.giveItem(player,item);
+function 魂灵(物品,序列号,攻击力,生命值,环数){
+    物品.setTag("X",序列号);
+    物品.setTag("D",攻击力);
+    物品.setTag("H",生命值);
+    物品.setTag("huan",环数);
+}
+function addItemLore(item,lore){
+        var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound")
+    var NBTTagList=Java.type("net.minecraft.nbt.NBTTagList")
+    var NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+nbt=item.getMCItemStack().field_77990_d;
+if(nbt==null){
+nbt=new NBTTagCompound();
+}
+if(nbt.func_74775_l("display")=="{}"){
+displayTag=new NBTTagCompound();
+nbt.func_74782_a("display",displayTag);
+}
+if(nbt.func_74775_l("display").func_74781_a("Lore")==null){
+loreList=new NBTTagList();
+nbt.func_74775_l("display").func_74782_a("Lore",loreList);
+}
+item.getMCItemStack().field_77990_d=nbt;
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_74742_a(new NBTTagString(lore))
+//为物品增加lore
+/*
+*ScriptItemStack item:要增加lore的物品
+*String lore:要增加的lore
+*/
+}

@@ -1,0 +1,153 @@
+//更新钩子
+var player = world.getAllServerPlayers();
+for(x=0;x<players.length;x++){
+player=players[x]
+if(player.getInventory()[0]!=null){
+if(getLore(player.getHeldItem,0)!="§c持有者:"+player.getName()+""){
+if(score(player,"Soul_Level")>=1){
+player.sendMessage("§c请把武魂放在物品栏最左侧!")
+player.addPotionEffect(2,5,254,true);
+player.addPotionEffect(15,5,254,true);
+}
+}else{
+if(getLore(player.getInventory()[0],1)!="§4§l攻击伤害:+"+score(player,"attackDamage1")+""){
+setItemLore(player.getInventory()[0],1,"§4§l攻击伤害:+"+score(player,"attackDamage1")+"");
+}
+if(getLore(player.getInventory()[0],2)!="§c§l攻击加成:+"+score(player,"attackDamage2")+"%"){
+setItemLore(player.getInventory()[0],2,"§c§l攻击加成:+"+score(player,"attackDamage2")+"%");
+}
+if(getLore(player.getInventory()[0],3)!="§2§l最大生命:+"+score(player,"maxHealth1")+""){
+setItemLore(player.getInventory()[0],3,"§2§l最大生命:+"+score(player,"maxHealth1")+"");
+}
+if(getLore(player.getInventory()[0],4)!="§a§l生命加成:+"+score(player,"maxHealth2")+"%"){
+setItemLore(player.getInventory()[0],4,"§a§l生命加成:+"+score(player,"maxHealth2")+"%");
+}
+if(getLore(player.getInventory()[0],5)!="§e§l吸血概率:+"+score(player,"Blood")+"%"){
+setItemLore(player.getInventory()[0],5,"§e§l吸血概率:+"+score(player,"Blood")+"%");
+}
+if(getLore(player.getInventory()[0],6)!="§6§l暴击概率:+"+score(player,"Blast")+"%"){
+setItemLore(player.getInventory()[0],6,"§6§l暴击概率:+"+score(player,"Blast")+"%");
+}
+if(getLore(player.getInventory()[0],7)!="§b§l每秒回血:+"+score(player,"Heal")+""){
+setItemLore(player.getInventory()[0],7,"§b§l每秒回血:+"+score(player,"Heal")+"");
+}
+}
+}
+if(getLore(player.getHeldItem,0)!="§c持有者:"+player.getName()+""){
+player.sendMessage("§c请勿使用他人武魂!")
+player.addPotionEffect(2,5,254,true);
+player.addPotionEffect(15,5,254,true);
+player.setHealth(1)
+}
+if(player.getHeldItem()!=null){
+if(world.getScoreboard().getPlayerScore(player.getName(),"wh","dummy") == 0){
+if(player.getHeldItem().getDisplayName()=="§8§l黑暗圣龙"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 25");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 8");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 20");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 -5");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 2");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+if(player.getHeldItem().getDisplayName()=="§6§l昊天锤"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 30");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 6");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 15");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 -2");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 3");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+if(player.getHeldItem().getDisplayName()=="§7§l咸鱼"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 10");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 30");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 3");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+if(player.getHeldItem().getDisplayName()=="§a§l蓝银草"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 8");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 35");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 7");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 4");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+if(player.getHeldItem().getDisplayName()=="§c凤凰"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 15");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 3");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 15");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 5");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 2");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 2");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+if(player.getHeldItem().getDisplayName()=="§b§l冰碧帝皇蝎"){
+npc.executeCommand("scoreboard players set " + player.getName() + " jj 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage1 18");
+npc.executeCommand("scoreboard players set " + player.getName() + " attackDamage2 2");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth1 20");
+npc.executeCommand("scoreboard players set " + player.getName() + " maxHealth2 0");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blood 2");
+npc.executeCommand("scoreboard players set " + player.getName() + " Blast 1");
+npc.executeCommand("scoreboard players set " + player.getName() + " Heal 5");
+player.sendMessage("§e§l你觉醒了武魂，在接下来的冒险中请把武魂放在物品栏第一格")
+}
+}
+}
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+};
+function score(goal,object)
+{
+var fenshu=world.getScoreboard().getPlayerScore(""+goal.getName()+"",""+object+"",""+object+"");
+return fenshu;
+};
+function setItemLore(item,line,lore){
+try{
+NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}catch(err){print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)	}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+}

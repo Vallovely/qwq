@@ -1,0 +1,108 @@
+---- Minecraft Crash Report ----
+// Don't do that.
+
+Time: 21-7-4 œ¬ŒÁ1:34
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at person.mister.auw.GuiModifySlot.drawGuiContainerBackgroundLayer(GuiModifySlot.java:1314)
+	at person.mister.auw.GuiModifySlot.func_73863_a(GuiModifySlot.java:1354)
+	at net.minecraft.client.renderer.EntityRenderer.func_78480_b(EntityRenderer.java:1061)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1001)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:898)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at person.mister.auw.GuiModifySlot.drawGuiContainerBackgroundLayer(GuiModifySlot.java:1314)
+	at person.mister.auw.GuiModifySlot.func_73863_a(GuiModifySlot.java:1354)
+
+-- Screen render details --
+Details:
+	Screen name: ~~NULL~~
+	Mouse location: Scaled: (181, 170). Absolute: (363, 139)
+	Screen size: Scaled: (427, 240). Absolute: (854, 480). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['Vallovely'/915140, l='MpServer', x=1464.88, y=5.62, z=499.22]]
+	Chunk stats: MultiplayerChunkCache: 1088, 1088
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (1457,4,492), Chunk: (at 1,0,12 in 91,30; contains blocks 1456,0,480 to 1471,255,495), Region: (2,0; contains chunks 64,0 to 95,31, blocks 1024,0,0 to 1535,255,511)
+	Level time: 6212 game time, 6212 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: false
+	Forced entities: 90 total; [EntityPig['÷Ì'/915085, l='MpServer', x=1515.50, y=4.00, z=541.50], EntitySheep['—Ú'/915084, l='MpServer', x=1500.16, y=4.00, z=451.75], EntityPig['÷Ì'/915087, l='MpServer', x=1509.50, y=4.00, z=542.50], EntityHorse['¬ø'/914959, l='MpServer', x=1390.09, y=4.00, z=458.09], EntityPig['÷Ì'/915086, l='MpServer', x=1513.22, y=4.00, z=535.66], EntitySheep['—Ú'/915081, l='MpServer', x=1499.25, y=4.00, z=445.19], EntitySheep['—Ú'/915080, l='MpServer', x=1497.50, y=4.00, z=454.50], EntitySheep['—Ú'/915082, l='MpServer', x=1498.66, y=4.00, z=452.19], EntityPig['÷Ì'/915077, l='MpServer', x=1492.78, y=4.00, z=454.22], EntityPig['÷Ì'/915076, l='MpServer', x=1496.22, y=4.00, z=451.03], EntitySheep['—Ú'/915079, l='MpServer', x=1497.44, y=4.00, z=451.97], EntityPig['÷Ì'/915078, l='MpServer', x=1491.19, y=4.00, z=455.81], EntitySheep['—Ú'/915073, l='MpServer', x=1502.50, y=4.00, z=456.50], EntitySheep['—Ú'/915072, l='MpServer', x=1493.09, y=4.00, z=460.19], EntityPig['÷Ì'/915075, l='MpServer', x=1499.09, y=4.00, z=453.78], EntitySheep['—Ú'/915074, l='MpServer', x=1503.50, y=4.00, z=458.50], EntityPig['÷Ì'/915101, l='MpServer', x=1520.31, y=4.00, z=527.22], EntityCow['≈£'/914972, l='MpServer', x=1387.19, y=4.00, z=573.19], EntitySheep['—Ú'/915103, l='MpServer', x=1535.50, y=4.00, z=566.50], EntityPig['÷Ì'/915102, l='MpServer', x=1522.50, y=4.00, z=535.50], EntityCow['≈£'/914969, l='MpServer', x=1391.13, y=4.00, z=563.56], EntityPig['÷Ì'/914968, l='MpServer', x=1393.91, y=4.00, z=513.72], EntityPig['÷Ì'/914971, l='MpServer', x=1391.50, y=4.00, z=564.81], EntityPig['÷Ì'/914970, l='MpServer', x=1390.50, y=4.00, z=566.50], EntityPig['÷Ì'/915093, l='MpServer', x=1512.84, y=4.00, z=544.34], EntityPig['÷Ì'/914965, l='MpServer', x=1385.84, y=4.00, z=460.94], EntitySheep['—Ú'/915092, l='MpServer', x=1510.50, y=4.00, z=544.50], EntityChicken['º¶'/914964, l='MpServer', x=1390.50, y=4.00, z=448.50], EntityPig['÷Ì'/914967, l='MpServer', x=1386.69, y=4.00, z=517.78], EntityPig['÷Ì'/914966, l='MpServer', x=1391.50, y=4.00, z=456.50], EntityPig['÷Ì'/915089, l='MpServer', x=1517.22, y=4.00, z=543.16], EntityPig['÷Ì'/915088, l='MpServer', x=1506.13, y=4.00, z=534.72], EntitySheep['—Ú'/915091, l='MpServer', x=1514.50, y=4.00, z=546.16], EntityChicken['º¶'/914963, l='MpServer', x=1395.47, y=4.00, z=451.53], EntitySheep['—Ú'/915090, l='MpServer', x=1514.50, y=4.00, z=544.22], EntityPig['÷Ì'/914989, l='MpServer', x=1407.78, y=4.00, z=541.41], EntitySheep['—Ú'/915117, l='MpServer', x=1536.50, y=4.00, z=579.50], EntityPig['÷Ì'/914988, l='MpServer', x=1406.53, y=4.00, z=535.19], EntitySheep['—Ú'/915116, l='MpServer', x=1540.50, y=4.00, z=565.50], EntitySheep['—Ú'/914991, l='MpServer', x=1403.16, y=4.00, z=550.09], EntityPig['÷Ì'/914990, l='MpServer', x=1392.38, y=4.00, z=550.22], EntityPig['÷Ì'/914985, l='MpServer', x=1392.03, y=4.00, z=518.66], EntityCow['≈£'/914984, l='MpServer', x=1396.97, y=4.00, z=507.03], EntityPig['÷Ì'/914987, l='MpServer', x=1405.44, y=4.00, z=539.31], EntitySheep['—Ú'/915115, l='MpServer', x=1540.50, y=4.00, z=568.50], EntityChicken['º¶'/914986, l='MpServer', x=1406.47, y=4.00, z=541.69], EntityPig['÷Ì'/914981, l='MpServer', x=1398.78, y=4.00, z=510.72], EntitySheep['—Ú'/915109, l='MpServer', x=1535.41, y=4.00, z=581.41], EntityCow['≈£'/914980, l='MpServer', x=1395.72, y=4.00, z=508.16], EntitySheep['—Ú'/915108, l='MpServer', x=1540.09, y=4.00, z=578.09], EntityCow['≈£'/914983, l='MpServer', x=1398.69, y=4.00, z=512.47], EntitySheep['—Ú'/914982, l='MpServer', x=1394.81, y=4.00, z=515.66], EntityCow['≈£'/915110, l='MpServer', x=1521.97, y=4.00, z=579.91], EntityCow['≈£'/915105, l='MpServer', x=1529.78, y=4.00, z=573.78], EntitySheep['—Ú'/914977, l='MpServer', x=1394.22, y=4.00, z=511.69], EntityCow['≈£'/915104, l='MpServer', x=1532.50, y=4.00, z=572.50], EntityChicken['º¶'/914976, l='MpServer', x=1392.47, y=4.00, z=446.53], EntitySheep['—Ú'/915107, l='MpServer', x=1531.31, y=4.00, z=565.19], EntitySheep['—Ú'/914979, l='MpServer', x=1394.50, y=4.00, z=508.91], EntityCow['≈£'/915106, l='MpServer', x=1532.50, y=4.00, z=575.50], EntitySheep['—Ú'/914978, l='MpServer', x=1389.22, y=4.00, z=510.34], EntityPig['÷Ì'/914997, l='MpServer', x=1389.78, y=4.00, z=561.22], EntityCow['≈£'/914996, l='MpServer', x=1393.50, y=4.00, z=570.50], EntityPig['÷Ì'/914998, l='MpServer', x=1391.19, y=4.00, z=560.03], EntityPig['÷Ì'/914993, l='MpServer', x=1406.28, y=4.00, z=544.66], EntitySheep['—Ú'/914992, l='MpServer', x=1401.88, y=4.00, z=549.97], EntityCow['≈£'/914995, l='MpServer', x=1394.78, y=4.00, z=566.78], EntityPig['÷Ì'/914994, l='MpServer', x=1394.44, y=4.00, z=557.13], EntityChicken['º¶'/915021, l='MpServer', x=1438.56, y=4.00, z=579.47], EntityChicken['º¶'/915020, l='MpServer', x=1449.53, y=4.00, z=576.53], EntityCow['≈£'/915023, l='MpServer', x=1449.22, y=4.00, z=577.72], EntityCow['≈£'/915022, l='MpServer', x=1448.31, y=4.00, z=574.22], EntityCow['≈£'/915016, l='MpServer', x=1454.75, y=4.00, z=573.75], EntityChicken['º¶'/915018, l='MpServer', x=1445.78, y=4.00, z=580.31], EntityClientPlayerMP['Vallovely'/915140, l='MpServer', x=1464.88, y=5.62, z=499.22], EntityPig['÷Ì'/915013, l='MpServer', x=1444.16, y=4.00, z=564.09], EntitySheep['—Ú'/915012, l='MpServer', x=1404.97, y=4.00, z=542.09], EntityPig['÷Ì'/915015, l='MpServer', x=1445.31, y=4.00, z=566.22], EntityCow['≈£'/915014, l='MpServer', x=1446.22, y=4.00, z=575.22], EntityChicken['º¶'/915009, l='MpServer', x=1398.56, y=4.00, z=539.53], EntitySheep['—Ú'/915008, l='MpServer', x=1408.50, y=4.00, z=537.50], EntityChicken['º¶'/915011, l='MpServer', x=1420.41, y=4.00, z=540.56], EntityChicken['º¶'/915010, l='MpServer', x=1409.50, y=4.00, z=548.50], EntitySheep['—Ú'/915037, l='MpServer', x=1471.81, y=4.00, z=578.66], EntitySheep['—Ú'/915036, l='MpServer', x=1475.75, y=4.00, z=577.50], EntityCustomNpc['Div'/915033, l='MpServer', x=1463.50, y=4.00, z=498.50], EntitySheep['—Ú'/915035, l='MpServer', x=1466.50, y=4.00, z=581.50], EntitySheep['—Ú'/915034, l='MpServer', x=1466.44, y=4.00, z=571.25], EntityPig['÷Ì'/915025, l='MpServer', x=1444.50, y=4.00, z=576.50], EntityPig['÷Ì'/915024, l='MpServer', x=1446.66, y=4.00, z=579.72]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.func_72914_a(WorldClient.java:373)
+	at net.minecraft.client.Minecraft.func_71396_d(Minecraft.java:2444)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:919)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_111, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 256598976 bytes (244 MB) / 775946240 bytes (740 MB) up to 10737418240 bytes (10240 MB)
+	JVM Flags: 5 total; -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xms128M -Xmx10240M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.99.99 Minecraft Forge 10.13.4.1614 8 mods loaded, 8 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAAAAAAAAAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAAAAAAAAAAAA	FML{7.10.99.99} [Forge Mod Loader] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAAAAAAAAAAAA	Forge{10.13.4.1614} [Minecraft Forge] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAAAAAAAAAAAA	InputFix{1.7.10-v5} [InputFix] (minecraft.jar) 
+	UCHIJAAAAAAAAAAAAAA	YoHern{2.1.0} [YoHern] ([Ã˘Õº]YoHern's RPG items.jar) 
+	UCHIJAAAAAAAAAAAAAA	customnpcs{1.7.10d} [CustomNpcs] (CustomNPCs_1.7.10d(19jun17).jar) 
+	UCHIJAAAAAAAAAAAAAA	armourersWorkshop{1.7.10-0.48.1} [Armourer's Workshop] ( ±◊∞π§∑ª-1.7.10-0.48.1.jar) 
+	UCHIJAAAAAAAAAAAAAA	alluwant{2.1} [±≥∞¸ŒÔ∆∑±‡º≠∆˜] (±≥∞¸±‡º≠∆˜.jar) 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 390.65' Renderer: 'GeForce GTX 1060 3GB/PCIe/SSE2'
+	Armourer's Workshop: 
+		Render Type: MODEL_ATTACHMENT
+		Texture Render: false
+		Baking Queue: 0
+		Request Queue: 42
+		Texture Painting: true
+		Multipass Skin Rendering: true
+	Launched Version: 1.7.10-Forge10.13.4.1614-1.7.10
+	LWJGL: 2.9.1
+	OpenGL: GeForce GTX 1060 3GB/PCIe/SSE2 GL version 4.6.0 NVIDIA 390.65, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: ºÚÃÂ÷–Œƒ (÷–π˙)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: On (16)

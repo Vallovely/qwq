@@ -1,0 +1,8 @@
+var ad = Score(player,"attackDamage1");
+if(ad >= 1){
+ player.setPosition(x,y,z);
+}
+function Score(Substance,objective){
+var Points=world.getScoreboard().getPlayerScore(""+Substance.getName()+"",""+objective+"",""+objective+"");
+return Points;
+};

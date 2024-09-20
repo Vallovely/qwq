@@ -1,0 +1,656 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "//运行
+function Command(name,usage){
+ this.getCommandName=function(){
+  /*String getCommandName()
+  *应返回指令的名字
+  *如:ppes 则返回noppes
+  */
+ };
+ this.getCommandUsage=function(sender){
+  /*String getCommandUsage(ICommandSender sender)
+  *应返回指令的用法
+  *当玩家输入\"/help 你的指令名\" 的时候就会出现
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  */
+ };
+ this.processCommand=function(sender,args){
+  /*void processCommand(ICommandSender sender, String[] args)
+  *在玩家使用该指令时会调用本函数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.addTabCompletionOptions=function(sender,args){
+  return null;
+  /*List addTabCompletionOptions(ICommandSender sender, String[] args)
+  *用于tab自动补全
+  *应返回补全后的参数
+  *sender:指令发送者 可能是玩家 控制台 命令方块 或者其他什么
+  *args:指令的参数
+  */
+ };
+ this.getRequiredPermissionLevel=function(){
+  return 0;
+  /*int getRequiredPermissionLevel
+  *指令所需的权限 0表示所有人可用 4表示OP可用
+  *应返回权限等级
+  */
+ }
+ this.canCommandSenderUseCommand=function(){
+	 return true;
+}
+ //上方函数以1.7.10的方法为准
+ //1.12.2修改函数时补全参数后通用。
+ this.getMCCommand=function(){
+  var CommandBase=Java.type(\"net.minecraft.command.CommandBase\");
+  var MCCommand=Java.extend(CommandBase,{
+   func_71517_b:this.getCommandName,
+   func_71518_a:this.getCommandUsage,
+   func_71515_b:this.processCommand,
+   func_71516_a:this.addTabCompletionOptions,
+   func_82362_a:this.getRequiredPermissionLevel,
+   func_71519_b:this.canCommandSenderUseCommand,
+   /*下方是对1.12.2的兼容*/
+   func_184881_a:this.processCommand,
+   func_184883_a:this.addTabCompletionOptions
+  });
+  return new MCCommand();
+ }
+}
+function registerCommand(command){
+ var MinecraftServer=Java.type(\"net.minecraft.server.MinecraftServer\");
+ var server=MinecraftServer.func_71276_C();
+     if(!(command instanceof Command)){
+     return;
+    }
+    server.func_71187_D().func_71560_a(command.getMCCommand())
+}
+var EntityPlayerMP=Java.type(\"net.minecraft.entity.player.EntityPlayerMP\");
+var command=new Command();
+command.getCommandName=function(){
+ return \"题字\"
+}
+command.getCommandUsage=function(sender){
+ return \"/.s\";
+}
+command.getRequiredPermissionLevel=function(){
+ return 0;//0是全部人可用4是仅OP可用
+}
+command.canCommandSenderUseCommand=function(sender){
+	return true;//是否允许使用true允许false不允许只有OP能用
+}
+command.addTabCompletionOptions=function(sender,args){
+ return [\"sss\",\"aaa\"]
+}
+command.processCommand=function(sender,args){
+ var ScriptPlayer=Java.type(\"noppes.npcs.scripted.ScriptPlayer\");
+    if(!(sender instanceof EntityPlayerMP)){
+     return;
+    }
+ var player=new ScriptPlayer(sender);
+ if(args.length == 1){
+ var 字 = args[0]
+ if(字 !== \"%\" && 字.length == 1){
+ var wp = player.getInventory()[1];
+ var dk = player.getHeldItem()
+ if(wp !== null && dk !== null){
+ var wpname = wp.getDisplayName()
+ var heldname = dk.getDisplayName()
+ if(heldname == \"§9§l无字斗铠\" && wpname == \"§e§l题字信物\"){
+ dk.setCustomName(\"§6§l斗铠§f§l-§c§l『\"+字+\"』\")
+ message(\"&4&l[公告]&a&l魂师\"+player.getName()+\"成功给自己的无字斗铠题字\"+字+\"。\")
+ setItemLore(dk,1,\"§3§l斗凯题字:§a§l生命加成+25%\")
+ add(\"maxHealth\",0.25,1,dk)
+ if(wp.getStackSize()>1){
+ wp.setStackSize(wp.getStackSize()-1)}else{
+ player.getMCEntity().field_71071_by.field_70462_a[1] = null
+ }}else{
+ player.sendMessage(\"&e&l[题字]&6&l第二位放信物，手里拿着无字斗铠\")}}else{
+ player.sendMessage(\"&e&l[题字]&6&l手中或者第二位物品有可能是空的\")}}else{
+ player.sendMessage(\"&e&l[题字]&6&l字的格式错误，不能为禁忌符号，最多只能题一个字\")}}else{
+ player.sendMessage(\"&e&l[题字]&6&l参数错误\")}
+ return;
+}
+registerCommand(command); 
+function addItemLore(item,lore){
+			var NBTTagCompound=Java.type(\"net.minecraft.nbt.NBTTagCompound\")
+	var NBTTagList=Java.type(\"net.minecraft.nbt.NBTTagList\")
+	var NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+nbt=item.getMCItemStack().field_77990_d;
+if(nbt==null){
+nbt=new NBTTagCompound();
+}
+if(nbt.func_74775_l(\"display\")==\"{}\"){
+displayTag=new NBTTagCompound();
+nbt.func_74782_a(\"display\",displayTag);
+}
+if(nbt.func_74775_l(\"display\").func_74781_a(\"Lore\")==null){
+loreList=new NBTTagList();
+nbt.func_74775_l(\"display\").func_74782_a(\"Lore\",loreList);
+}
+item.getMCItemStack().field_77990_d=nbt;
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_74742_a(new NBTTagString(lore))
+//为物品增加lore
+/*
+*ScriptItemStack item:要增加lore的物品
+*String lore:要增加的lore
+*/
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}
+function setItemLore(item,line,lore)
+{
+var NBTTagString=Java.type(\"net.minecraft.nbt.NBTTagString\")
+try
+{
+loreList=item.getMCItemStack().field_77990_d.func_74775_l(\"display\").func_74781_a(\"Lore\")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}
+catch(err)
+{
+print(\"在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:\"+err)
+}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+};
+function attr(attrName,attrAmount,attrOperation)
+{
+var Item=player.getHeldItem()
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\")
+var itemStack = Item.getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null)
+{
+root = new NBTTagCompound();
+}
+var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+var attrList=attributeModifiers.func_74745_c();
+for(var n=0;n<attrList;n++)
+{
+var test=attributeModifiers.func_150305_b(n);
+if(test.func_74779_i(\"AttributeName\")==attrName&&test.func_74762_e(\"Operation\")==attrOperation)
+{
+var amount=test.func_74769_h(\"Amount\");
+amount=amount+attrAmount;
+test.func_74780_a(\"Amount\",amount);
+break
+}
+if(n==attrList-1)
+{
+add(attrName,attrAmount,attrOperation);
+break
+}
+}
+};
+function judgeLore(item,content)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l(\"display\")!==null)
+{
+var loreLength=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_74745_c();
+for(var i=0;i<loreLength;i++)
+{
+var lore=nbt.func_74775_l(\"display\").func_150295_c(\"Lore\",8).func_150307_f(i)
+if(lore.indexOf(content)!=-1)
+{
+return i
+}
+if(lore.indexOf(content)==-1&&i==loreLength-1)
+{
+return -1
+}
+}
+}
+else
+{
+return -1
+}
+}
+function getNumber(string){
+ var string1 = string.replace(/§[0-9]/g,\"\")
+ return Number(string1.replace(/[^0-9]/ig,\"\"))
+}
+function add(attribute,amount,operation,upitem)
+{
+var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+var UUID = Java.type(\"java.util.UUID\");
+var itemStack = upitem.getMCItemStack();
+var root = itemStack.field_77990_d;
+if (root == null) 
+{
+    root = new NBTTagCompound();
+    }
+    var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+    var attributeModifier = new NBTTagCompound();
+    var uuid = UUID.randomUUID();
+    attributeModifier.func_74778_a(\"AttributeName\", \"generic.\"+attribute);
+    attributeModifier.func_74778_a(\"Name\",\"My Modifier\");
+    attributeModifier.func_74780_a(\"Amount\", amount);
+    attributeModifier.func_74768_a(\"Operation\", operation);
+    attributeModifier.func_74772_a(\"UUIDMost\", uuid.getMostSignificantBits());
+    attributeModifier.func_74772_a(\"UUIDLeast\", uuid.getLeastSignificantBits());
+    attributeModifiers.func_74742_a(attributeModifier);
+    root.func_74782_a(\"AttributeModifiers\", attributeModifiers);
+    itemStack.field_77990_d = root;
+}
+
+function invremoveitem(item,slot){
+	if(item.field_77994_a<=1){
+		var inv=player.getMCEntity().field_71071_by;
+		inv.field_70462_a[slot]=null;
+	}else{
+		item.field_77994_a=(item.field_77994_a)-1
+	}
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}",
+            "ScriptConsole": "",
+            "Type": 0,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "TraderSold": {
+        "NpcMiscInv": [
+            {
+                "Slot": 1b,
+                "id": "customnpcs:npcCoinEmerald",
+                "Count": 1b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§a§l绿宝石"
+                    }
+                },
+                "Damage": 0s
+            },
+            {
+                "Slot": 4b,
+                "id": "customnpcs:npcPlans",
+                "Count": 1b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Lore": [
+                            "§a可使自身四个部位任意一个部位题字"
+                        ],
+                        "Name": "§e§l题字信物"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "TraderIgnoreDamage": 0b,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/1yase/edsz.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 1,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -6675402061121828286L,
+    "TraderMarket": "",
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "TraderCurrency": {
+        "NpcMiscInv": [
+            {
+                "Slot": 1b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§b魂斗罗升华材料"
+                    }
+                },
+                "Damage": 3s
+            },
+            {
+                "Slot": 19b,
+                "id": "customnpcs:npcBrokenOrb",
+                "Count": 64b,
+                "tag": {
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§4封号斗罗升华材料"
+                    }
+                },
+                "Damage": 14s
+            },
+            {
+                "Slot": 4b,
+                "id": "customnpcs:npcCoinEmerald",
+                "Count": 5b,
+                "tag": {
+                    "ench": [
+                    ],
+                    "Unbreakable": 1b,
+                    "display": {
+                        "Name": "§a§l绿宝石"
+                    }
+                },
+                "Damage": 0s
+            }
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "斗铠题字",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 55570314,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "TraderIgnoreNBT": 0b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 1,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": 1812619131619547201L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 55570068L,
+    "Rotation": [
+        16.017746f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

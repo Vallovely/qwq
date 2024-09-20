@@ -1,0 +1,457 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 1,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "Bukkit.updateLevel": 2,
+    "FindShelter": 2,
+    "ScriptsContainers": [
+        {
+            "Script": "var players = world.getAllServerPlayers()
+for(a in players){
+	player = players[a]
+	var held = player.getHeldItem()
+	var sk = world.getScoreboard().getPlayerScore(player.getName(),\"sk\",\"dummy\")
+	var dy1 = world.getScoreboard().getPlayerScore(player.getName(),\"dy1\",\"dummy\")
+	var dy2 = world.getScoreboard().getPlayerScore(player.getName(),\"dy2\",\"dummy\")
+	var dy3 = world.getScoreboard().getPlayerScore(player.getName(),\"dy3\",\"dummy\")
+	var lw = world.getScoreboard().getPlayerScore(player.getName(),\"lw\",\"dummy\")
+	var money = world.getScoreboard().getPlayerScore(player.getName(),\"money\",\"dummy\")
+	var die = world.getScoreboard().getPlayerScore(player.getName(),\"death\",\"stat.deaths\")
+	if(held !== null){
+		if(held.getDisplayName() == \"§4§l杀戮之心\" && player.isSneaking() == true){
+			if(sk == 1){
+				player.setHeldItem(null)
+                message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"吸收了§4§l杀戮之心§r§l，由于杀戮之心内涵杀戮过于壮大，该神祇被影响后杀了许多魂师而被关押于天牢\")
+                world.getScoreboard().setPlayerScore(player.getName(),\"sk\",2,\"dummy\")
+                world.getScoreboard().setPlayerScore(player.getName(),\"罪恶点\",5,\"dummy\")
+			}else{
+				player.sendMessage(\"&r&l你没有在进行这项神考\")
+			}
+		}
+		if(held.getDisplayName() == \"§a§l异§4§l人§b§l晶§c§l体\" && player.isSneaking() == true){
+			if(sk == 3){
+				var size = held.getStackSize()
+				if(size >= 20){
+				world.getScoreboard().setPlayerScore(player.getName(),\"sk\",4,\"dummy\")
+				held.setStackSize(size-20)
+				player.sendMessage(\"§r§l你已吸收异人晶体，获取了来自于异人的力量\")
+				}else{
+					player.sendMessage(\"&r&l数量不足20个 你这是在糊弄我？\")
+				}
+			}else{
+				player.sendMessage(\"&r&l你没有在进行这项神考\")
+			}
+		}
+		if(held.getDisplayName() == \"§e§l黄金龙枪\" && player.isSneaking() == true){
+			if(sk == 9){
+				player.setHeldItem(null)
+				player.sendMessage(\"§r§l龙枪能量已被你完全吸收，第九考消散！\")
+				world.getScoreboard().setPlayerScore(player.getName(),\"sk\",10,\"dummy\")
+			}else{
+				player.sendMessage(\"&r&l你没有在进行这项神考\")
+			}
+		}
+	}
+	if(sk == 10){
+    world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",140,\"dummy\")
+    add(1400000,6,14000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界神考已全部完成！\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",11,\"dummy\")
+	}
+	if(sk == 8 && lw >= 2){
+    world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",138,\"dummy\")
+    add(1200000,3,12000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第七考完成！\")
+    player.sendMessage(\"§e§l第八考：§r§l你虽然已经吸收了龙枪带来的能量，但并不完全，需要重新吸收龙枪\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",9,\"dummy\")
+	}
+	if(sk == 7 && money >= 10000000){
+	world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",137,\"dummy\")
+    add(2100000,6,21000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第五考完成！\")
+    player.sendMessage(\"§e§l第六考：§r§l由于你的出色，本次考核直接完成\")
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第六考完成！\")
+    player.sendMessage(\"§e§l第七考：§r§l深渊一日不除神界终难安，击杀深渊主宰-老王2次\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",8,\"dummy\")
+	}
+	if(sk == 6 && die >= 100){
+	world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",135,\"dummy\")
+    add(900000,3,9000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第四考完成！\")
+    player.sendMessage(\"§e§l第五考：§r§l在斗罗大陆生活了如此久，你的财富想必有千万资产了\")
+    player.sendMessage(\"&e&l要求：银行余额大于一千万\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",7,\"dummy\")
+	}
+	if(sk == 5 && dy1 >= 5 && dy2 >= 5 && dy3 >= 5){
+	world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",134,\"dummy\")
+    add(800000,3,8000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第三考完成！\")
+    player.sendMessage(\"§e§l第四考 ：§r§l在斗罗大陆呆了这么久，回想起你的点点滴滴，你的死亡次数是否超过了100次？\")
+    player.sendMessage(\"&e&l要求：死亡次数超过或等于100次\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",6,\"dummy\")
+	}
+	if(sk == 4){
+	world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",133,\"dummy\")
+    add(700000,3,7000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第二考完成！\")
+    player.sendMessage(\"§e§l第三考 :&r&l击杀斗罗凡界毒液三种形态各5次，毒液三种形态的名字:毒液 失去理智的毒液 彻底失控的毒液\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",5,\"dummy\")
+	}
+    if(sk == 2){
+    world.getScoreboard().setPlayerScore(player.getName(),\"Soul_Level\",132,\"dummy\")
+    add(600000,3,6000,player.getName())
+    message(\"§4§l[公告]§r§l神祇\"+player.getName()+\"神界第一考完成！\")
+    player.sendMessage(\"§e§l第二考：§r§l了解异人为何出现在斗罗凡界，究竟有什么目的，获取他们的异人能源20个\")
+    world.getScoreboard().setPlayerScore(player.getName(),\"sk\",3,\"dummy\")
+    }
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}
+function add(h,a,heal,name){
+	npc.executeCommand(\"scoreboard players add \"+name+\" maxHealth1 \"+h)
+	npc.executeCommand(\"scoreboard players add \"+name+\" maxHealth2 \"+a)
+	npc.executeCommand(\"scoreboard players add \"+name+\" Heal \"+heal)
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "var soul = world.getScoreboard().getPlayerScore(player.getName(),\"Soul_Level\",\"dummy\")
+var sk = world.getScoreboard().getPlayerScore(player.getName(),\"sk\",\"dummy\")
+if(sk == 0 && soul == 131){
+	world.getScoreboard().setPlayerScore(player.getName(),\"sk\",1,\"dummy\")
+	player.sendMessage(\"&r&l你已成功开启神考 第一考：吸收§4§l杀戮之心\")
+}else{
+	player.sendMessage(\"&r&l你已经开启过神考或没有到达131级\")
+}",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WorldUUIDLeast": -9169935864246070037L,
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/HumanNew/11.png",
+    "NpcJob": 8,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": 3882493508298740268L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "神祇考核",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "WorldUUIDMost": 3098141490883674479L,
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "Spigot.ticksLived": 1592319,
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 0b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+        {
+            "Integer": 100,
+            "Slot": 0
+        },
+        {
+            "Integer": 100,
+            "Slot": 1
+        },
+        {
+            "Integer": 100,
+            "Slot": 2
+        },
+        {
+            "Integer": 100,
+            "Slot": 3
+        },
+        {
+            "Integer": 100,
+            "Slot": 4
+        },
+        {
+            "Integer": 100,
+            "Slot": 5
+        },
+        {
+            "Integer": 100,
+            "Slot": 6
+        },
+        {
+            "Integer": 100,
+            "Slot": 7
+        },
+        {
+            "Integer": 100,
+            "Slot": 8
+        }
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": -7477868816146365670L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 1586228L,
+    "Rotation": [
+        188.25014f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "ChunkPlayerLastSeen": 1620532374135L,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}

@@ -1,0 +1,75 @@
+//母体
+//伤害Hook[第5个]
+var num=Math.random()
+var get=npc.getHealth()
+
+var max=npc.getMaxHealth()
+
+var entity=npc.getSurroundingEntities(25,1)
+var kangxing=npc.getMeleeResistance()
+if(num>=0.35)
+{
+npc.getJob().spawnEntity(1)
+}
+
+
+for(i in entity)
+
+{
+if(get<=max*0.1)
+{
+if(kangxing==1)
+{
+npc.setMeleeResistance(1.94)
+npc.setKnockbackResistance(2)
+entity[i].sendMessage("§b§l["+npc.getName()+"]§f§l燃烧了自我生命!量产了§c§l15只§f§l爆炸生物!");
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.getJob().spawnEntity(1);
+npc.setHealth(max*0.3)
+}
+else
+{
+entity[i].sendMessage("§b§l["+npc.getName()+"]§f§l能量不足...无法再次释放大量爆炸生物...")
+}
+}
+if(kangxing!==1)
+{
+entity[i].sendMessage("§b§l["+npc.getName()+"]§f§l处于金身状态!")
+}
+}
+
+//死亡Hook[第6个]
+npc.setMeleeResistance(1)
+npc.setKnockbackResistance(1.4)
+
+
+
+//召唤体
+//攻击Hook[第7个]
+var entity=npc.getSurroundingEntities(8,1)
+var num=entity.length
+for(i in entity)
+{
+var get=entity[i].getHealth()
+var max=entity[i].getMaxHealth()
+var damage=(0.02*max+800)*num
+entity[i].setHealth(get-damage);
+npc.setHealth(0);
+world.explode(entity[i].x,entity[i].y+1,entity[i].z,2,false,false)
+entity[i].sendMessage("§b§l["+npc.getName()+"]§f§l自爆了！对你造成§c§l"+damage+"§f§l点真实伤害!")
+}
+
+

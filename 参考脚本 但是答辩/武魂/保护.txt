@@ -1,0 +1,64 @@
+var held = player.getHeldItem()
+var shu = player.getInventory()[1]
+if(held !== null && shu !== null){
+var name = held.getDisplayName()
+var lore = "§6§l斗铠所属者:"+player.getName()
+if(getLore(held,0)==lore && shu.getDisplayName()=="§7§l深渊保护书"){
+if(held.isEnchanted()==false){
+var Max = 6
+var Min = 6
+var i = Math.floor(Math.random() * (Max - Min) + Min)
+if(shu.getStackSize()>1){
+shu.setStackSize(shu.getStackSize()-1)}else{
+player.getMCEntity().field_71071_by.field_70462_a[1] = null
+}
+message("&4&l[公告]&c&l玩家&a&l"+player.getName()+"&c&l成功将自己的"+name+"附魔了&a&l "+i+" &c&l级保护!")
+Enchantment(held,0,i)
+}else{
+player.sendMessage("&c你已经附魔过了")}}else{
+player.sendMessage("&c你手里拿的不是斗铠")}}else{
+player.sendMessage("&c第二格放保护书,手里拿着斗铠")}
+function Enchantment(item,id,lvl){
+	var NBTTagCompound=Java.type("net.minecraft.nbt.NBTTagCompound");
+	var nbt=item.getMCItemStack().field_77990_d;
+	if(nbt == null){
+		nbt=new NBTTagCompound();
+	}
+	nbtlist=nbt.func_150295_c("ench",10);
+	npc.say(nbtlist)
+	Enchantments=new NBTTagCompound();
+	Enchantments.func_74777_a("lvl",lvl);
+	Enchantments.func_74777_a("id",id);
+	nbtlist.func_74742_a(Enchantments);
+	nbt.func_74782_a("ench",nbtlist);
+	item.getMCItemStack().field_77990_d=nbt
+}
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}
+function message(information){
+var players = world.getAllServerPlayers()
+for(a in players){
+players[a].sendMessage(information)
+}
+}

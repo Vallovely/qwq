@@ -1,0 +1,111 @@
+---- Minecraft Crash Report ----
+// Sorry :(
+
+Time: 22-3-13 上午11:33
+Description: Rendering screen
+
+java.lang.NullPointerException: Rendering screen
+	at person.mister.auw.GuiModifySlot.drawGuiContainerBackgroundLayer(GuiModifySlot.java:1314)
+	at person.mister.auw.GuiModifySlot.func_73863_a(GuiModifySlot.java:1354)
+	at net.minecraft.client.renderer.EntityRenderer.func_78480_b(EntityRenderer.java:1061)
+	at net.minecraft.client.Minecraft.func_71411_J(Minecraft.java:1001)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:898)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Stacktrace:
+	at person.mister.auw.GuiModifySlot.drawGuiContainerBackgroundLayer(GuiModifySlot.java:1314)
+	at person.mister.auw.GuiModifySlot.func_73863_a(GuiModifySlot.java:1354)
+
+-- Screen render details --
+Details:
+	Screen name: ~~NULL~~
+	Mouse location: Scaled: (463, 193). Absolute: (927, 630)
+	Screen size: Scaled: (960, 509). Absolute: (1920, 1018). Scale factor of 2
+
+-- Affected level --
+Details:
+	Level name: MpServer
+	All players: 1 total; [EntityClientPlayerMP['Vallovel'/6827401, l='MpServer', x=-882.18, y=5.62, z=1348.16]]
+	Chunk stats: MultiplayerChunkCache: 1056, 1056
+	Level seed: 0
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 
+	Level spawn location: World: (-900,4,1350), Chunk: (at 12,0,6 in -57,84; contains blocks -912,0,1344 to -897,255,1359), Region: (-2,2; contains chunks -64,64 to -33,95, blocks -1024,0,1024 to -513,255,1535)
+	Level time: 4055272 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x00000 - Unknown?
+	Level weather: Rain time: 0 (now: false), thunder time: 0 (now: false)
+	Level game mode: Game mode: survival (ID 0). Hardcore: false. Cheats: false
+	Forced entities: 101 total; [EntityPig['猪'/6827368, l='MpServer', x=-831.03, y=4.00, z=1372.88], EntityItem['item.item.egg'/7556467, l='MpServer', x=-908.72, y=4.13, z=1389.84], EntityChicken['鸡'/6827369, l='MpServer', x=-827.53, y=4.00, z=1363.53], EntitySheep['羊'/6827370, l='MpServer', x=-826.03, y=4.00, z=1375.03], EntityCow['牛'/6827371, l='MpServer', x=-821.78, y=4.00, z=1368.66], EntityPig['猪'/6827372, l='MpServer', x=-822.31, y=4.00, z=1390.84], EntityHorse['马'/6827373, l='MpServer', x=-820.19, y=4.00, z=1405.47], EntitySheep['羊'/6827374, l='MpServer', x=-829.78, y=4.00, z=1397.66], EntityChicken['鸡'/6827365, l='MpServer', x=-823.41, y=4.00, z=1279.38], EntitySheep['羊'/6827366, l='MpServer', x=-828.22, y=4.00, z=1291.19], EntityCow['牛'/6827367, l='MpServer', x=-824.31, y=4.00, z=1346.63], EntityHorse['驴'/6827384, l='MpServer', x=-814.25, y=4.00, z=1426.53], EntitySheep['羊'/6827377, l='MpServer', x=-818.25, y=4.00, z=1282.16], EntitySheep['羊'/6827379, l='MpServer', x=-821.09, y=4.00, z=1347.09], EntitySheep['羊'/6827380, l='MpServer', x=-813.31, y=4.00, z=1363.19], EntitySheep['羊'/6827381, l='MpServer', x=-809.78, y=4.00, z=1362.16], EntitySheep['羊'/6827382, l='MpServer', x=-811.81, y=4.00, z=1383.88], EntityPig['猪'/6827383, l='MpServer', x=-806.75, y=4.00, z=1409.22], EntityPig['猪'/6827336, l='MpServer', x=-874.91, y=4.00, z=1411.94], EntityPig['猪'/6827337, l='MpServer', x=-868.97, y=4.00, z=1408.94], EntityPig['猪'/6827338, l='MpServer', x=-868.06, y=4.00, z=1424.25], EntityItem['item.item.egg'/7624784, l='MpServer', x=-882.63, y=4.13, z=1401.44], EntitySheep['羊'/6827331, l='MpServer', x=-865.09, y=4.00, z=1288.16], EntityCustomNpc['Eldamore'/6827332, l='MpServer', x=-869.50, y=4.00, z=1348.50], EntityChicken['鸡'/6827333, l='MpServer', x=-870.59, y=4.00, z=1403.47], EntityPig['猪'/6827334, l='MpServer', x=-872.47, y=4.00, z=1387.19], EntityCow['牛'/6827335, l='MpServer', x=-873.38, y=4.00, z=1415.69], EntityChicken['鸡'/6827352, l='MpServer', x=-837.41, y=4.00, z=1311.63], EntitySheep['羊'/6827353, l='MpServer', x=-838.28, y=4.00, z=1331.16], EntitySheep['羊'/6827354, l='MpServer', x=-840.41, y=4.00, z=1347.81], EntityCow['牛'/6827355, l='MpServer', x=-836.66, y=4.00, z=1345.72], EntityPig['猪'/6827356, l='MpServer', x=-843.38, y=4.00, z=1385.84], EntityChicken['鸡'/6827357, l='MpServer', x=-833.47, y=4.00, z=1377.47], EntityChicken['鸡'/6827358, l='MpServer', x=-839.34, y=4.00, z=1404.44], EntityCow['牛'/6827344, l='MpServer', x=-859.72, y=4.00, z=1399.53], EntityChicken['鸡'/6827345, l='MpServer', x=-848.47, y=4.00, z=1395.41], EntityPig['猪'/6827346, l='MpServer', x=-857.16, y=4.00, z=1410.34], EntitySheep['羊'/6827348, l='MpServer', x=-841.72, y=4.00, z=1284.22], EntitySheep['羊'/6827349, l='MpServer', x=-844.91, y=4.00, z=1289.81], EntityPig['猪'/6827350, l='MpServer', x=-838.06, y=4.00, z=1314.97], EntityChicken['鸡'/6827351, l='MpServer', x=-841.44, y=4.00, z=1320.38], EntitySheep['羊'/6827306, l='MpServer', x=-885.44, y=4.00, z=1271.22], EntityCow['牛'/6827307, l='MpServer', x=-889.16, y=4.00, z=1279.84], EntityHorse['马'/6827308, l='MpServer', x=-890.59, y=4.00, z=1289.06], EntityCustomNpc['1'/6827309, l='MpServer', x=-890.50, y=5.00, z=1333.50], EntityCustomNpc['神骸复合仓'/6827310, l='MpServer', x=-892.50, y=4.50, z=1333.50], EntityCustomNpc['使用说明'/6827311, l='MpServer', x=-894.50, y=4.00, z=1335.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827297, l='MpServer', x=-904.50, y=4.00, z=1361.50], EntityChicken['鸡'/6827299, l='MpServer', x=-911.47, y=4.00, z=1388.56], EntitySheep['羊'/6827300, l='MpServer', x=-894.81, y=4.00, z=1394.13], EntityHorse['驴'/6827320, l='MpServer', x=-877.22, y=4.00, z=1371.81], EntityChicken['鸡'/6827321, l='MpServer', x=-882.44, y=4.00, z=1400.56], EntitySheep['羊'/6827322, l='MpServer', x=-888.16, y=4.00, z=1404.66], EntitySheep['羊'/6827323, l='MpServer', x=-887.09, y=4.00, z=1413.91], EntityCow['牛'/6827324, l='MpServer', x=-884.84, y=4.00, z=1409.09], EntitySheep['羊'/6827325, l='MpServer', x=-896.06, y=4.00, z=1419.97], EntityCustomNpc['穿甲算法注册'/6827313, l='MpServer', x=-885.50, y=3.00, z=1354.50], EntityCustomNpc['死亡机制注册'/6827314, l='MpServer', x=-885.50, y=3.00, z=1352.50], EntityCustomNpc['属性清零'/6827315, l='MpServer', x=-885.50, y=3.00, z=1348.50], EntityCustomNpc['属性给予'/6827316, l='MpServer', x=-885.50, y=3.00, z=1346.50], EntityCustomNpc['属性值获取'/6827317, l='MpServer', x=-885.50, y=3.00, z=1350.50], EntityCustomNpc['Claire'/6827318, l='MpServer', x=-885.50, y=3.00, z=1356.50], EntityCustomNpc['Kyoukan'/6827319, l='MpServer', x=-883.50, y=4.00, z=1358.50], EntityCustomNpc['Tia'kim'/6843959, l='MpServer', x=-881.50, y=4.00, z=1346.50], EntityHorse['马'/6827272, l='MpServer', x=-917.94, y=4.00, z=1413.84], EntityHorse['马'/6827277, l='MpServer', x=-905.81, y=4.00, z=1273.91], EntitySheep['羊'/6827278, l='MpServer', x=-896.81, y=4.00, z=1281.38], EntitySheep['羊'/6827279, l='MpServer', x=-901.13, y=4.00, z=1291.09], EntityChicken['鸡'/6827264, l='MpServer', x=-914.53, y=4.00, z=1301.47], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827265, l='MpServer', x=-912.50, y=4.00, z=1353.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827267, l='MpServer', x=-912.50, y=4.00, z=1357.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827269, l='MpServer', x=-912.50, y=4.00, z=1361.50], EntityChicken['鸡'/6827271, l='MpServer', x=-906.59, y=4.00, z=1390.56], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827289, l='MpServer', x=-904.50, y=4.00, z=1353.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827291, l='MpServer', x=-904.50, y=4.00, z=1357.50], EntityCustomNpc['§d§l[虚弱危险神]刺突形神祇'/6827293, l='MpServer', x=-904.50, y=4.00, z=1348.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827295, l='MpServer', x=-908.50, y=4.00, z=1361.50], EntityChicken['鸡'/6827280, l='MpServer', x=-901.63, y=4.00, z=1314.53], EntityCustomNpc['Carter'/6827282, l='MpServer', x=-898.50, y=4.00, z=1337.50], EntityCustomNpc['Tymen'/6827283, l='MpServer', x=-901.50, y=4.00, z=1335.50], EntityCustomNpc['神祇护甲赋值'/6827284, l='MpServer', x=-902.50, y=4.00, z=1345.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827285, l='MpServer', x=-908.50, y=4.00, z=1353.50], EntityCustomNpc['§d§l[虚弱常规神]球形神祇'/6827287, l='MpServer', x=-908.50, y=4.00, z=1357.50], EntitySheep['羊'/6827240, l='MpServer', x=-960.81, y=4.00, z=1295.34], EntitySheep['羊'/6827244, l='MpServer', x=-961.56, y=4.00, z=1389.19], EntitySheep['羊'/6827238, l='MpServer', x=-962.13, y=4.00, z=1273.13], EntityHorse['马'/6827256, l='MpServer', x=-941.22, y=4.00, z=1293.50], EntityCow['牛'/6827257, l='MpServer', x=-933.69, y=4.00, z=1303.78], EntitySheep['羊'/6827258, l='MpServer', x=-935.19, y=4.00, z=1315.09], EntityCow['牛'/6827259, l='MpServer', x=-938.22, y=4.00, z=1326.19], EntityChicken['鸡'/6827263, l='MpServer', x=-912.56, y=4.00, z=1280.47], EntitySheep['羊'/6827248, l='MpServer', x=-953.16, y=4.00, z=1295.88], EntitySheep['羊'/6827249, l='MpServer', x=-946.84, y=4.00, z=1286.09], EntityChicken['鸡'/6827250, l='MpServer', x=-950.63, y=4.00, z=1309.47], EntityChicken['鸡'/6827251, l='MpServer', x=-950.44, y=4.00, z=1296.59], EntitySheep['羊'/6827252, l='MpServer', x=-957.88, y=4.00, z=1310.81], EntitySheep['羊'/6827253, l='MpServer', x=-948.84, y=4.00, z=1312.22], EntitySheep['羊'/6827254, l='MpServer', x=-950.91, y=4.00, z=1405.97], EntityItem['item.item.egg'/7494878, l='MpServer', x=-902.69, y=4.13, z=1314.59], EntityClientPlayerMP['Vallovel'/6827401, l='MpServer', x=-882.18, y=5.62, z=1348.16], EntityItem['item.item.egg'/7638686, l='MpServer', x=-827.16, y=4.13, z=1364.41]]
+	Retry entities: 0 total; []
+	Server brand: fml,forge
+	Server type: Integrated singleplayer server
+Stacktrace:
+	at net.minecraft.client.multiplayer.WorldClient.func_72914_a(WorldClient.java:373)
+	at net.minecraft.client.Minecraft.func_71396_d(Minecraft.java:2444)
+	at net.minecraft.client.Minecraft.func_99999_d(Minecraft.java:919)
+	at net.minecraft.client.main.Main.main(SourceFile:148)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135)
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.7.10
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_251, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 132478624 bytes (126 MB) / 654311424 bytes (624 MB) up to 10737418240 bytes (10240 MB)
+	JVM Flags: 5 total; -XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Xms128M -Xmx10240M
+	AABB Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP v9.05 FML v7.10.99.99 Minecraft Forge 10.13.4.1614 11 mods loaded, 11 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAAAAAAAAAAAA	mcp{9.05} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAAAAAAAAAAAA	FML{7.10.99.99} [Forge Mod Loader] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAAAAAAAAAAAA	Forge{10.13.4.1614} [Minecraft Forge] (forge-1.7.10-10.13.4.1614-1.7.10.jar) 
+	UCHIJAAAAAAAAAAAAAA	InputFix{1.7.10-v5} [InputFix] (minecraft.jar) 
+	UCHIJAAAAAAAAAAAAAA	DamageIndicatorsMod{3.2.0} [Damage Indicators] ([1.7.10]-伤害显示-DamageIndicators-3.2.0-CLIENT.jar) 
+	UCHIJAAAAAAAAAAAAAA	YoHern{2.1.0} [YoHern] ([贴图]YoHern's RPG items.jar) 
+	UCHIJAAAAAAAAAAAAAA	worldedit{6.0-beta-01} [WorldEdit] ([附属]1.7.10创世神MOD.zip) 
+	UCHIJAAAAAAAAAAAAAA	customnpcs{1.7.10d} [CustomNpcs] (CustomNPCs_1.7.10d(19jun17).jar) 
+	UCHIJAAAAAAAAAAAAAA	scalehealth{1.0} [ScaleHealth] (固定玩家血条.jar) 
+	UCHIJAAAAAAAAAAAAAA	armourersWorkshop{1.7.10-0.48.1} [Armourer's Workshop] (时装工坊-1.7.10-0.48.1.jar) 
+	UCHIJAAAAAAAAAAAAAA	alluwant{2.1} [背包物品编辑器] (背包编辑器.jar) 
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 390.65' Renderer: 'GeForce GTX 1060 3GB/PCIe/SSE2'
+	Armourer's Workshop: 
+		Render Type: MODEL_ATTACHMENT
+		Texture Render: false
+		Baking Queue: 0
+		Request Queue: 0
+		Texture Painting: true
+		Multipass Skin Rendering: true
+	Launched Version: 1.7.10-Forge10.13.4.1614-1.7.10
+	LWJGL: 2.9.1
+	OpenGL: GeForce GTX 1060 3GB/PCIe/SSE2 GL version 4.6.0 NVIDIA 390.65, NVIDIA Corporation
+	GL Caps: Using GL 1.3 multitexturing.
+Using framebuffer objects because OpenGL 3.0 is supported and separate blending is supported.
+Anisotropic filtering is supported and maximum anisotropy is 16.
+Shaders are available because OpenGL 2.1 is supported.
+
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
+	Type: Client (map_client.txt)
+	Resource Packs: []
+	Current Language: 简体中文 (中国)
+	Profiler Position: N/A (disabled)
+	Vec3 Pool Size: 0 (0 bytes; 0 MB) allocated, 0 (0 bytes; 0 MB) used
+	Anisotropic Filtering: On (16)

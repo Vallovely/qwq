@@ -1,0 +1,60 @@
+//更新钩子,早期脚本,简单易懂
+/*
+*@Rimuru Tempest
+*著作权属于Rimuru,改版权一经发现追究责任
+*/
+var players = world.getAllServerPlayers();
+for(x=0;x<players.length;x++)
+{
+if(players[x].isSneaking()==true)
+{
+if(players[x].getHeldItem()!=null)
+{
+if(players[x].getHeldItem().getDisplayName()=="§f§l魂力修为")
+{
+var hl=players[x].getHeldItem();
+if(Score(players[x],"Soul_Level")>=Number(getLore(hl,0).slice(getLore(hl,0).indexOf(":")+1)))
+{
+var sl=hl.getStackSize();
+var jy=Number(getLore(hl,1).slice(getLore(hl,1).indexOf(":")+1));
+var z=sl*jy;
+players[x].sendMessage("§a§l成功吸收"+z+"点魂力")
+npc.executeCommand("xp "+z+" "+players[x].getName()+"");
+players[x].setHeldItem(null)
+}
+else
+{
+players[x].sendMessage("§c§l你还无法吸收这么庞大的魂力呢！")
+}
+}
+}
+}
+}
+function Score(Substance,objective)
+{
+var Points=world.getScoreboard().getPlayerScore(""+Substance.getName()+"",""+objective+"",""+objective+"");
+return Points;
+};
+function getLore(item,line)
+{
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+Item=item.getMCItemStack();
+var nbt=Item.field_77990_d;
+if(nbt==null)
+{
+return -1
+};
+if(nbt.func_74775_l("display")!==null)
+{
+var loreLength=nbt.func_74775_l("display").func_150295_c("Lore",8).func_74745_c();
+if(line<=loreLength)
+{
+var lore=nbt.func_74775_l("display").func_150295_c("Lore",8).func_150307_f(line)
+return lore
+}
+}
+else
+{
+return -1
+}
+}

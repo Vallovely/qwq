@@ -1,0 +1,267 @@
+﻿function setItemLore(item,line,lore){
+try{
+NBTTagString=Java.type("net.minecraft.nbt.NBTTagString")
+loreList=item.getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore")
+loreList.func_150304_a(line,new NBTTagString(lore))
+}catch(err){print("在操作lore发生异常,可能是因为没有lore 请将报错提供给作者:"+err)	}
+//修改物品lore某一行
+/*
+*ScriptItemStack item:要修改lore的物品
+*int line:要修改lore的行数
+*String lore:替换原来lore的lore
+*/
+}
+var NBTTagCompound = Java.type("net.minecraft.nbt.NBTTagCompound");
+var UUID = Java.type("java.util.UUID");
+
+function addAttributeModifier(Item, attribute, name, amount, operation) {
+    var itemStack = Item.getMCItemStack();
+    var root = itemStack.field_77990_d;
+    if (root == null) {
+          root = new NBTTagCompound();
+    }
+
+    var attributeModifiers = root.func_150295_c("AttributeModifiers", 10);
+    var attributeModifier = new NBTTagCompound();
+    var uuid = UUID.randomUUID();
+    attributeModifier.func_74778_a("AttributeName", attribute);
+	attributeModifier.func_74778_a("DisplayName", "123");
+    attributeModifier.func_74778_a("Name", name);
+	attributeModifier.func_74780_a("Name", name);
+    attributeModifier.func_74780_a("Amount", amount);
+    attributeModifier.func_74768_a("Operation", operation);
+    attributeModifier.func_74772_a("UUIDMost", uuid.getMostSignificantBits());
+    attributeModifier.func_74772_a("UUIDLeast", uuid.getLeastSignificantBits());
+    attributeModifiers.func_74742_a(attributeModifier);
+    root.func_74782_a("AttributeModifiers", attributeModifiers);
+    itemStack.field_77990_d = root;
+}
+if(player.getHeldItem() != null){
+if(player.getHeldItem().getDisplayName() == "§3[千年魂骨]§c[†]§a[八蛛矛]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§3[千年魂骨]§a[八蛛矛]");
+if(chaZhao != -1){
+var a = (a==null)?1:a;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的帽子没有对应的魂骨镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§8[万年魂骨]§c[❤]§a[智慧头骨]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§8[万年魂骨]§a[智慧头骨]");
+if(chaZhao != -1){
+var c = (c==null)?1:c;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的物品没有镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§4[十万年魂骨]§c[❤]§a[冰碧帝王蝎]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§4[十万年魂骨]§a[冰碧帝王蝎]");
+if(chaZhao != -1){
+var d = (d==null)?1:d;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的物品没有镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§4[十万年魂骨]§c[†]§a[蓝银皇]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§4[十万年魂骨]§a[蓝银皇]");
+if(chaZhao != -1){
+var e = (e==null)?1:e;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的物品没有镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§8[万年魂骨]§c[†]§a[三眼金猊]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§8[万年魂骨]§a[三眼金猊]");
+if(chaZhao != -1){
+var f = (f==null)?1:f;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的物品没有镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§8[万年魂骨]§c[†]§a[美杜莎]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§8[万年魂骨]§a[美杜莎]");
+if(chaZhao != -1){
+var g = (g==null)?1:g;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的物品没有镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{
+if(player.getHeldItem().getDisplayName() == "§3[千年魂骨]§c[❤]§a[暗金恐爪熊]"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§e[可镶嵌]§3[千年魂骨]§a[暗金恐爪熊]");
+if(chaZhao != -1){
+var h = (h==null)?1:h;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的帽子没有对应的魂骨镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+if(player.getHeldItem() != null){
+if(player.getHeldItem().getDisplayName() == "§c§l[八蛛矛]§a§n进阶一"){
+if(player.getArmor(3) != null){
+var nbt = player.getArmor(3).getTag("display");
+var nbt1 = nbt+"";
+var chaZhao = nbt1.indexOf("§4[已镶嵌]§c[†]§3千年魂骨§f·§e八蛛矛");
+if(chaZhao != -1){
+var b = (b==null)?1:b;
+player.removeItem(player.getHeldItem().getName(),0,1)
+}else{player.sendMessage("§a您的帽子没有对应的魂骨镶嵌孔")}
+}else{player.sendMessage("§a您没有穿上精神力帽子")}
+}else{player.sendMessage("§B此物品不是魂骨，请手拿魂骨右键我")}
+}
+}
+}
+}
+}
+}
+}
+}
+}else{player.sendMessage("§a您的手中没有东西")}
+
+if(a == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&a==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§3[千年魂骨]§a[八蛛矛]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[†]§3千年魂骨§f·§e八蛛矛");
+addAttributeModifier(player.getArmor(3), "generic.attackDamage", "Weapon modifier", 10000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§3[千年魂骨]·§e八蛛矛-§4力量[†]§5 +10000")
+}
+a = null;
+}
+}
+}
+
+
+if(f == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&f==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§8[万年魂骨]§a[三眼金猊]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[†]§8万年魂骨§f·§e三眼金猊");
+addAttributeModifier(player.getArmor(3), "generic.attackDamage", "Weapon modifier", 30000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§8[万年魂骨]·§e三眼金猊-§4力量[†]§5 +30000")
+}
+f = null;
+}
+}
+}
+
+if(c == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&c==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§8[万年魂骨]§a[智慧头骨]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[❤]§8万年魂骨§f·§e智慧头骨");
+addAttributeModifier(player.getArmor(3), "generic.maxHealth", "Weapon modifier",20000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§8[万年魂骨]·§e智慧头骨-§4生命[❤]§5 +20000")
+}
+c = null;
+}
+}
+}
+
+if(g == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&g==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§8[万年魂骨]§a[美杜莎]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[†]§8万年魂骨§f·§e美杜莎");
+addAttributeModifier(player.getArmor(3), "generic.attackDamage", "Weapon modifier", 40000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§8[万年魂骨]·§e美杜莎-§4力量[†]§5 +40000")
+}
+g = null;
+}
+}
+}
+
+if(h == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&h==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§3[千年魂骨]§a[暗金恐爪熊]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[❤]§3千年魂骨§f·§e暗金恐爪熊");
+addAttributeModifier(player.getArmor(3), "generic.maxHealth", "Weapon modifier",10000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§3[千年魂骨]·§e暗金恐爪熊-§4生命[❤]§5 +10000")
+}
+h = null;
+}
+}
+}
+
+if(d == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&d==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§4[十万年魂骨]§a[冰碧帝王蝎]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[❤]§4十万年魂骨§f·§e冰碧帝王蝎");
+addAttributeModifier(player.getArmor(3), "generic.maxHealth", "Weapon modifier",60000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§4[十万年魂骨]·§e冰碧帝王蝎-§4生命[❤]§5 +60000")
+}
+d = null;
+}
+}
+}
+
+if(e == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&e==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§e[可镶嵌]§4[十万年魂骨]§a[蓝银皇]"){
+setItemLore(player.getArmor(3),x,"§4[已镶嵌]§c[†]§4十万年魂骨§f·§e蓝银皇");
+addAttributeModifier(player.getArmor(3), "generic.attackDamage", "Weapon modifier",70000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功镶嵌§4[十万年魂骨]·§e蓝银皇-§4生命[†]§5 +70000")
+}
+e = null;
+}
+}
+}
+
+if(b == 1){
+var hangShu = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_74745_c();
+for(x=0;x<hangShu&&b==1;x++){
+var panDuan = player.getArmor(3).getMCItemStack().field_77990_d.func_74775_l("display").func_74781_a("Lore").func_150307_f(x);
+if(panDuan == "§4[已镶嵌]§c[†]§3千年魂骨§f·§e八蛛矛"){
+setItemLore(player.getArmor(3),x,"§4[已进阶]§c[†]§c§l[八蛛矛]§a§m进阶一");
+addAttributeModifier(player.getArmor(3), "generic.attackDamage", "Weapon modifier", 2000, 0);
+var i=world.getAllServerPlayers();
+for (var x in i){
+i[x].sendMessage("§c玩家§a"+player.getName()+"§c成功进阶魂骨§c[†]§c§l[八蛛矛]§a§m进阶一")
+}
+b = null;
+}
+}
+}
+
+//addAttributeModifier(player.getArmor(3), "generic.movementSpeed", "Weapon modifier",1, 0);

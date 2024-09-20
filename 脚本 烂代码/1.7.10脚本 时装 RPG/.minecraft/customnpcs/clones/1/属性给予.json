@@ -1,0 +1,545 @@
+{
+    "ReturnToStart": 1b,
+    "NpcInv": [
+    ],
+    "PotionEffect": 0,
+    "Size": 5,
+    "stopAndInteract": 1b,
+    "Resistances": {
+        "Arrow": 1.0f,
+        "Explosion": 1.0f,
+        "Knockback": 1.0f,
+        "Melee": 1.0f
+    },
+    "BossBar": 0b,
+    "RespawnTime": 20,
+    "NpcAngrySound": "",
+    "ReactsToFire": 0b,
+    "IgnoreCobweb": 0b,
+    "PositionOffsetZ": 5.0f,
+    "PositionOffsetY": 5.0f,
+    "PositionOffsetX": 5.0f,
+    "LootMode": 0,
+    "TransformHasAI": 0b,
+    "AttackStrenght": 5,
+    "PersistenceRequired": 0b,
+    "id": "customnpcs.CustomNpc",
+    "HealF": 20.0f,
+    "MovingPatern": 0,
+    "NpcLines": {
+        "Lines": [
+        ]
+    },
+    "DefendFaction": 0b,
+    "FireIndirect": 0,
+    "NpcVisible": 0,
+    "LinkedNpcName": "",
+    "FindShelter": 2,
+    "SkinUsername": {
+        "Id": "1aa95b71-48fc-4636-962b-e95de5071da6",
+        "Properties": {
+            "textures": [
+                {
+                    "Value": "ewogICJ0aW1lc3RhbXAiIDogMTY0MzExMjYyNDcwNSwKICAicHJvZmlsZUlkIiA6ICIxYWE5NWI3MTQ4ZmM0NjM2OTYyYmU5NWRlNTA3MWRhNiIsCiAgInByb2ZpbGVOYW1lIiA6ICJaaV9NaW4iLAogICJ0ZXh0dXJlcyIgOiB7CiAgICAiU0tJTiIgOiB7CiAgICAgICJ1cmwiIDogImh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDY2M2YxNjRjNDNhZGFmNDFhMzA1ZDg1NTc2YTAyNDViYTkwMzA3MTZjZDY0YWE0OGJlOTBkYTRjMjMxZDZjNyIKICAgIH0KICB9Cn0="
+                }
+            ]
+        },
+        "Name": "Zi_Min"
+    },
+    "ScriptsContainers": [
+        {
+            "Script": "var aP=world.getAllServerPlayers()
+for(i in aP){
+	for(var X=1;X<=100;X++){
+		upLevel(aP[i],X,X,10,4,1,1,5);
+	}
+	for(var X=101;X<=300;X++){
+		upLevel(aP[i],X,X,30,8,2,2,8);
+	}
+	/*upLevel(aP[i],1,1,10,4,1,1,5)
+	upLevel(aP[i],2,2,10,4,1,1,5)
+	upLevel(aP[i],3,3,10,4,1,1,5)
+	upLevel(aP[i],4,4,10,4,1,1,5)
+	upLevel(aP[i],5,5,10,4,1,1,5)
+	upLevel(aP[i],6,6,10,4,1,1,5)
+	upLevel(aP[i],7,7,10,4,1,1,5)
+	upLevel(aP[i],8,8,10,4,1,1,5)
+	upLevel(aP[i],9,9,10,4,1,1,5)
+	upLevel(aP[i],10,10,10,4,1,1,5)
+	upLevel(aP[i],11,11,10,4,1,1,5)
+	upLevel(aP[i],12,12,10,4,1,1,5)
+	upLevel(aP[i],13,13,10,4,1,1,5)
+	upLevel(aP[i],14,14,10,4,1,1,5)
+	upLevel(aP[i],15,15,10,4,1,1,5)
+	upLevel(aP[i],16,16,10,4,1,1,5)
+	upLevel(aP[i],17,17,10,4,1,1,5)
+	upLevel(aP[i],18,18,10,4,1,1,5)
+	upLevel(aP[i],19,19,10,4,1,1,5)
+	upLevel(aP[i],20,20,10,4,1,1,5)
+	upLevel(aP[i],21,21,10,4,1,1,5)
+	upLevel(aP[i],22,22,10,4,1,1,5)
+	upLevel(aP[i],23,23,10,4,1,1,5)
+	upLevel(aP[i],24,24,10,4,1,1,5)
+	upLevel(aP[i],25,25,10,4,1,1,5)
+	upLevel(aP[i],26,26,10,4,1,1,5)
+	upLevel(aP[i],27,27,10,4,1,1,5)
+	upLevel(aP[i],28,28,10,4,1,1,5)
+	upLevel(aP[i],29,29,10,4,1,1,5)
+	upLevel(aP[i],30,30,10,4,1,1,5)
+	upLevel(aP[i],31,31,10,4,1,1,5)
+	upLevel(aP[i],32,32,10,4,1,1,5)
+	upLevel(aP[i],33,33,10,4,1,1,5)
+	upLevel(aP[i],34,34,10,4,1,1,5)
+	upLevel(aP[i],35,35,10,4,1,1,5)
+	upLevel(aP[i],36,36,10,4,1,1,5)
+	upLevel(aP[i],37,37,10,4,1,1,5)
+	upLevel(aP[i],38,38,10,4,1,1,5)
+	upLevel(aP[i],39,39,10,4,1,1,5)
+	upLevel(aP[i],40,40,10,4,1,1,5)
+	upLevel(aP[i],41,41,10,4,1,1,5)
+	upLevel(aP[i],42,42,10,4,1,1,5)
+	upLevel(aP[i],43,43,10,4,1,1,5)
+	upLevel(aP[i],44,44,10,4,1,1,5)
+	upLevel(aP[i],45,45,10,4,1,1,5)
+	upLevel(aP[i],46,46,10,4,1,1,5)
+	upLevel(aP[i],47,47,10,4,1,1,5)
+	upLevel(aP[i],48,48,10,4,1,1,5)
+	upLevel(aP[i],49,49,10,4,1,1,5)
+	upLevel(aP[i],50,50,10,4,1,1,5)
+	upLevel(aP[i],51,51,10,4,1,1,5)
+	upLevel(aP[i],52,52,10,4,1,1,5)
+	upLevel(aP[i],53,53,10,4,1,1,5)
+	upLevel(aP[i],54,54,10,4,1,1,5)
+	upLevel(aP[i],55,55,10,4,1,1,5)
+	upLevel(aP[i],56,56,10,4,1,1,5)
+	upLevel(aP[i],57,57,10,4,1,1,5)
+	upLevel(aP[i],58,58,10,4,1,1,5)
+	upLevel(aP[i],59,59,10,4,1,1,5)
+	upLevel(aP[i],60,60,10,4,1,1,5)
+	upLevel(aP[i],61,61,10,4,1,1,5)
+	upLevel(aP[i],62,62,10,4,1,1,5)
+	upLevel(aP[i],63,63,10,4,1,1,5)
+	upLevel(aP[i],64,64,10,4,1,1,5)
+	upLevel(aP[i],65,65,10,4,1,1,5)
+	upLevel(aP[i],66,66,10,4,1,1,5)
+	upLevel(aP[i],67,67,10,4,1,1,5)
+	upLevel(aP[i],68,68,10,4,1,1,5)
+	upLevel(aP[i],69,69,10,4,1,1,5)
+	upLevel(aP[i],70,70,10,4,1,1,5)
+	upLevel(aP[i],71,71,10,4,1,1,5)
+	upLevel(aP[i],72,72,10,4,1,1,5)
+	upLevel(aP[i],73,73,10,4,1,1,5)
+	upLevel(aP[i],74,74,10,4,1,1,5)
+	upLevel(aP[i],75,75,10,4,1,1,5)
+	upLevel(aP[i],76,76,10,4,1,1,5)
+	upLevel(aP[i],77,77,10,4,1,1,5)
+	upLevel(aP[i],78,78,10,4,1,1,5)
+	upLevel(aP[i],79,79,10,4,1,1,5)
+	upLevel(aP[i],80,80,10,4,1,1,5)
+	upLevel(aP[i],81,81,10,4,1,1,5)
+	upLevel(aP[i],82,82,10,4,1,1,5)
+	upLevel(aP[i],83,83,10,4,1,1,5)
+	upLevel(aP[i],84,84,10,4,1,1,5)
+	upLevel(aP[i],85,85,10,4,1,1,5)
+	upLevel(aP[i],86,86,10,4,1,1,5)
+	upLevel(aP[i],87,87,10,4,1,1,5)
+	upLevel(aP[i],88,88,10,4,1,1,5)
+	upLevel(aP[i],89,89,10,4,1,1,5)
+	upLevel(aP[i],90,90,10,4,1,1,5)
+	upLevel(aP[i],91,91,10,4,1,1,5)
+	upLevel(aP[i],92,92,10,4,1,1,5)
+	upLevel(aP[i],93,93,10,4,1,1,5)
+	upLevel(aP[i],94,94,10,4,1,1,5)
+	upLevel(aP[i],95,95,10,4,1,1,5)
+	upLevel(aP[i],96,96,10,4,1,1,5)
+	upLevel(aP[i],97,97,10,4,1,1,5)
+	upLevel(aP[i],98,98,10,4,1,1,5)
+	upLevel(aP[i],99,99,10,4,1,1,5)
+	upLevel(aP[i],100,100,10,4,1,1,5)*/
+}
+function upLevel(entity,minecraftExperienceLevel,definedLevel,upAttack,upHealth,upDefence,upDefencePenetration,upPoints){
+	if(entity.getExpLevel()>=minecraftExperienceLevel&&Number(entity.getStoredData(\"DLVL\"))==definedLevel-1){
+		if(entity.getArmor(3)!=null){
+			if(entity.getArmor(3).getDisplayName()==\"还没想好\"){
+			    updateAttr(entity.getArmor(3),1,upHealth,0);//生命给予
+				updateAttr(entity.getArmor(3),2,upAttack,0);//攻击给予    
+			    entity.setStoredData(\"DPP\",Number(entity.getStoredData(\"DPP\"))+upDefencePenetration);//护甲给予
+				entity.setStoredData(\"PDEF\",Number(entity.getStoredData(\"PDEF\"))+upDefence);//穿甲给予	    		    
+				entity.setStoredData(\"DLVL\",Number(entity.getStoredData(\"DLVL\"))+1);//计分等级设置
+		     	entity.sendMessage(\"§d§m§l-----]§r§m§l------------------§b§l[系统信息]§r§m§l------------------§d§m§l[-----\")
+				entity.sendMessage(\"§7§l[§e§l♔§7§l]§e§l等级提升§r§l[§e§l\"+(Number(entity.getStoredData(\"DLVL\"))-1)+\"§r§l]§7§l>>>>>>>>>>§r§l[§e§l\"+Number(entity.getStoredData(\"DLVL\"))+\"§r§l]\");
+				entity.sendMessage(\"§7§l[§a§lღ§7§l]§a§l基础生命§r§l[§a§l\"+Number(healthCalculator(definedLevel-1))+\"§r§l]§7§l>>>>>>>>>>§r§l[§a§l\"+Number(healthCalculator(definedLevel))+\"§r§l]\");
+				entity.sendMessage(\"§7§l[§c§l†§7§l]§c§l基础攻击§r§l[§c§l\"+Number(attackCalculator(definedLevel-1))+\"§r§l]§7§l>>>>>>>>>>§r§l[§c§l\"+Number(attackCalculator(definedLevel))+\"§r§l]\");
+				entity.sendMessage(\"§7§l[§b§l♒§7§l]§b§l基础护甲§r§l[§b§l\"+Number(defenceCalculator(definedLevel-1))+\"§r§l]§7§l>>>>>>>>>>§r§l[§b§l\"+Number(defenceCalculator(definedLevel))+\"§r§l]\");
+				entity.sendMessage(\"§7§l[§d§l☈§7§l]§d§l基础穿甲§r§l[§d§l\"+Number(defencePenetrationCalculator(definedLevel-1))+\"§r§l]§7§l>>>>>>>>>>§r§l[§d§l\"+Number(defencePenetrationCalculator(definedLevel))+\"§r§l]\");
+				entity.sendMessage(\"§7§l[§6§l*§7§l]§6§l属性点数§r§l[§6§l\"+Number(entity.getStoredData(\"POINTS\"))+\"§r§l]§7§l>>>>>>>>>>§r§l[§6§l\"+(Number(entity.getStoredData(\"POINTS\"))+pointsCalculator(definedLevel))+\"§r§l]\");
+				entity.setStoredData(\"POINTS\",Number(entity.getStoredData(\"POINTS\"))+upPoints);//点数增加
+				entity.setHealth(entity.getMaxHealth());//回满血
+		    }else{
+			    entity.sendMessage(\"§b§l[系统]§r§l你已满足升级条件，请将§d§l还没想好§r§l穿戴于盔甲栏中\");
+		    }//必要条件3
+		}else{
+			entity.sendMessage(\"§b§l[系统]§r§l你已满足升级条件，请将§d§l还没想好§r§l穿戴于盔甲栏中\");
+		}//必要条件2
+	}//必要条件1
+}
+function updateAttr(item, type, value, operation)
+{
+	if (value == 0) { return; }
+	if (type == 1) { type = \"generic.attackDamage\"; }
+	else if (type == 2) { type = \"generic.maxHealth\"; }
+	else if (type == 3) { type = \"generic.movementSpeed\"; }
+	else if (type == 4) { type = \"generic.knockbackResistance\"; }
+	var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+	var itemStack = item.getMCItemStack();
+	var root = itemStack.field_77990_d;
+	if (root == null) { root = new NBTTagCompound(); }
+	var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+	var tagCompound = attributeModifiers.func_74745_c();
+	for (var i = 0; i <= tagCompound; i++)
+	{
+		s = attributeModifiers.func_150305_b(i);
+		if (i == tagCompound)
+		{
+			add(item, type, value, operation);
+			break;
+		}
+		if (s.func_74779_i(\"AttributeName\") == type && s.func_74762_e(\"Operation\") == operation)
+		{
+			var newvalue = s.func_74769_h(\"Amount\") + Number(value);
+			s.func_74780_a(\"Amount\", newvalue);
+			break;
+		}
+	}
+	return;
+}
+function add(item, attribute, amount, operation)
+{
+	var NBTTagCompound = Java.type(\"net.minecraft.nbt.NBTTagCompound\");
+	var UUID = Java.type(\"java.util.UUID\");
+	var itemStack = item.getMCItemStack();
+	var root = itemStack.field_77990_d;
+	if (root == null)
+	{
+		root = new NBTTagCompound();
+	}
+	var attributeModifiers = root.func_150295_c(\"AttributeModifiers\", 10);
+	var attributeModifier = new NBTTagCompound();
+	var uuid = UUID.randomUUID();
+	attributeModifier.func_74778_a(\"AttributeName\", attribute);
+	attributeModifier.func_74778_a(\"Name\", \"My Modifier\");
+	attributeModifier.func_74780_a(\"Amount\", amount);
+	attributeModifier.func_74768_a(\"Operation\", operation);
+	attributeModifier.func_74772_a(\"UUIDMost\", uuid.getMostSignificantBits());
+	attributeModifier.func_74772_a(\"UUIDLeast\", uuid.getLeastSignificantBits());
+	attributeModifiers.func_74742_a(attributeModifier);
+	root.func_74782_a(\"AttributeModifiers\", attributeModifiers);
+	itemStack.field_77990_d = root;
+	return;
+}
+//在玩家中,0为靴子,1为裤子,2为胸甲,3为头盔
+
+function healthCalculator(definedLevel){
+	if(Number(definedLevel)<=100){
+		return definedLevel*10;
+	}//1-100级 +10[1000]
+	else if(Number(definedLevel)<=300){
+		return (definedLevel-100)*30+1000;
+	}//101-300级 +30[1000/7000]
+}
+//生命计算器
+function attackCalculator(definedLevel){
+	if(Number(definedLevel)<=100){
+		return definedLevel*4;
+	}//1-100级 +4[400]
+	else if(Number(definedLevel)<=300){
+		return (definedLevel-100)*8+400;
+	}//101-300级 +8[1600/2000]
+}
+//攻击计算器
+function defenceCalculator(definedLevel){
+	if(Number(definedLevel)<=100){
+		return definedLevel*1;
+	}//1-100级 +1[100]
+	else if(Number(definedLevel)<=300){
+		return (definedLevel-100)*2+100;
+	}//101-300级 +2[400/500]
+}
+//护甲计算器
+function defencePenetrationCalculator(definedLevel){
+	if(Number(definedLevel)<=100){
+		return definedLevel*1;
+	}//1-100级 +1[100]
+	else if(Number(definedLevel)<=300){
+		return (definedLevel-100)*2+100;
+	}//101-300级 +2[400/500]
+}
+//穿甲计算器
+function pointsCalculator(definedLevel){
+	if(Number(definedLevel)<=100){
+		return 5;
+	}
+	else if(Number(definedLevel)<=300){
+		return 8;
+	}
+}",
+            "ScriptConsole": "",
+            "Type": 1,
+            "ScriptList": [
+            ]
+        },
+        {
+            "Script": "npc.say(1)",
+            "ScriptConsole": "",
+            "Type": 2,
+            "ScriptList": [
+            ]
+        }
+    ],
+    "Air": 300s,
+    "TacticalVariant": 0,
+    "Orientation": 0,
+    "ScriptLanguage": "ECMAScript",
+    "KnockBack": 0,
+    "TransformHasJob": 0b,
+    "CustomName": "",
+    "CanDespawn": 0b,
+    "BurnInSun": 0b,
+    "StandingState": 0,
+    "AttackInvisible": 0b,
+    "HurtTime": 0s,
+    "items": [
+    ],
+    "WalkingRange": 10,
+    "CustomNameVisible": 0b,
+    "ShotCount": 1,
+    "pDur": 5,
+    "AttackRange": 2,
+    "NpcKillLines": {
+        "Lines": [
+        ]
+    },
+    "PotionImmune": 0b,
+    "AvoidsSun": 0b,
+    "Texture": "customnpcs:textures/entity/humanmale/Steve.png",
+    "NpcJob": 0,
+    "BurstCount": 1,
+    "NpcAttackLines": {
+        "Lines": [
+        ]
+    },
+    "pSpeed": 10,
+    "pArea": 0,
+    "DeathTime": 0s,
+    "pImpact": 0,
+    "DropChances": [
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f,
+        0.085f
+    ],
+    "MoveState": 0,
+    "RangeAndMelee": 0,
+    "pRender3D": 0b,
+    "Motion": [
+        0.0d,
+        -0.0784000015258789d,
+        0.0d
+    ],
+    "CombatRegen": 0,
+    "pEffect": 0,
+    "DistanceToMelee": 4,
+    "NpcStepSound": "",
+    "FireRate": 5,
+    "pEffAmp": 0,
+    "OnGround": 1b,
+    "Dimension": 0,
+    "ImmuneToFire": 0b,
+    "NpcKilledLines": {
+        "Lines": [
+        ]
+    },
+    "UUIDMost": -356193927385888266L,
+    "Fire": -1s,
+    "DisablePitch": 0b,
+    "pPhysics": 1b,
+    "TransformHasInv": 0b,
+    "NpcInteractLines": {
+        "Lines": [
+        ]
+    },
+    "pSpin": 0b,
+    "NpcHurtSound": "minecraft:game.player.hurt",
+    "pTrail": 0,
+    "CreatureType": 0,
+    "Attributes": [
+        {
+            "Base": 20.0d,
+            "Name": "generic.maxHealth"
+        },
+        {
+            "Base": 0.0d,
+            "Name": "generic.knockbackResistance"
+        },
+        {
+            "Base": 0.25d,
+            "Name": "generic.movementSpeed"
+        },
+        {
+            "Base": 32.0d,
+            "Name": "generic.followRange"
+        },
+        {
+            "Base": 5.0d,
+            "Name": "generic.attackDamage"
+        }
+    ],
+    "Invulnerable": 0b,
+    "TransformHasDisplay": 0b,
+    "NoFallDamage": 0b,
+    "AbsorptionAmount": 0.0f,
+    "TransformHasRole": 0b,
+    "Name": "属性给予",
+    "FallDistance": 0.0f,
+    "NpcIdleSound": "",
+    "Weapons": [
+    ],
+    "NPCDialogOptions": [
+    ],
+    "AggroRange": 16,
+    "DirectLOS": 1b,
+    "HealthRegen": 1,
+    "NpcModelData": {
+        "LegsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "BodyConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "LegParts": {
+            "Type": 0b,
+            "PlayerTexture": 1b,
+            "Color": 16777215
+        },
+        "Parts": [
+        ],
+        "Breasts": 0b,
+        "Headwear": 2b,
+        "ArmsConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        },
+        "ExtraData": {
+        },
+        "HeadConfig": {
+            "ScaleZ": 1.0f,
+            "TransZ": 0.0f,
+            "TransY": 0.0f,
+            "TransX": 0.0f,
+            "ScaleY": 1.0f,
+            "ScaleX": 1.0f
+        }
+    },
+    "minDelay": 20,
+    "DoorInteract": 2,
+    "MoveSpeed": 5,
+    "TransformEditingModus": 0b,
+    "UsingSkinUrl": 1b,
+    "Leashed": 0b,
+    "SkinUrl": "",
+    "CanSwim": 1b,
+    "MaxHealth": 20,
+    "HideBodyWhenKilled": 0b,
+    "AttackSpeed": 20,
+    "PotionDuration": 5,
+    "maxDelay": 40,
+    "ScriptEnabled": 1b,
+    "Role": 0,
+    "DropChance": [
+    ],
+    "FactionPoints": {
+        "DecreaseFaction1Points": 0b,
+        "OptionFaction2Points": 100,
+        "OptionFactions1": -1,
+        "OptionFactions2": -1,
+        "OptionFaction1Points": 100,
+        "DecreaseFaction2Points": 0b
+    },
+    "pDamage": 4,
+    "KilledTime": 0L,
+    "AimWhileShooting": 0b,
+    "CanPickUpLoot": 0b,
+    "AttackOtherFactions": 0b,
+    "CanDrown": 1b,
+    "AttackTime": 0s,
+    "pSize": 5,
+    "CanSprint": 0b,
+    "CanLeap": 0b,
+    "TransformIsActive": 0b,
+    "MovingState": 0,
+    "MovingPos": 0,
+    "PotionAmp": 0,
+    "OnAttack": 0,
+    "TacticalRadius": 8,
+    "MaxExp": 0,
+    "OrderedLines": 0b,
+    "PortalCooldown": 0,
+    "pGlows": 0b,
+    "TransformHasAdvanced": 0b,
+    "TransformHasStats": 0b,
+    "FiringSound": "random.bow",
+    "ModRev": 16,
+    "Accuracy": 60,
+    "MinExp": 0,
+    "Armor": [
+    ],
+    "CloakTexture": "",
+    "GlowTexture": "",
+    "MaxFiringRange": 15,
+    "pXlr8": 0b,
+    "UUIDLeast": -7858038410530509098L,
+    "Health": 20s,
+    "pExplode": 0b,
+    "pStick": 0b,
+    "MovingPause": 1b,
+    "NpcDeathSound": "minecraft:game.player.hurt",
+    "FactionID": 0,
+    "Title": "",
+    "TotalTicksAlive": 1689327L,
+    "Rotation": [
+        104.16791f,
+        0.0f
+    ],
+    "ShowName": 0,
+    "npcInteracting": 1b,
+    "AvoidsWater": 0b,
+    "Equipment": [
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        },
+        {
+        }
+    ],
+    "NoLivingAnimation": 0b,
+    "SpawnCycle": 0
+}
